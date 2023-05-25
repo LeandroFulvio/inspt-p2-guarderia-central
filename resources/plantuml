@@ -1,0 +1,88 @@
+@startuml
+Class05 o-- Class06
+Class07 .. Class08
+Class09 -- Class10
+
+class Vehiculo {
+  matricula : String
+  nombre : String
+  tipo : Enum<TipoVehiculo>
+  dimensiones : Dimensiones
+  fechaAsignacion : Date
+}
+
+Vehiculo *-- TipoVehiculo
+Vehiculo *-- Dimensiones
+
+enum      TipoVehiculo {
+  MOTORHOME
+  CASARODANTE
+  ARRASTRE
+  CARAVANA
+  TRAILER
+}
+
+class     Dimensiones {
+  alto : Integer
+  largo : Integer
+  ancho : Integer
+}
+
+class     Garage {
+  numero : Integer
+  contadorLuz : Integer
+  mantenimiento : Boolean
+  fechaCompra : Date
+  zona : Zona
+  vehiculo : Vehiculo
+
+  Boolean aptoTamanio(Dimensiones, Dimensiones)
+}
+
+Garage *-- Vehiculo
+Garage *-- Zona
+
+abstract class Usuario {
+  nombre : String
+  password : String
+  direccion : String
+  telefono : String
+}
+
+class     Socio {
+  vehiculos : List<Vehiculo>
+  garages : List<Garage>
+
+}
+class     Empleado {
+  codigo : Integer
+  especialidad : String
+
+  asignacion : List<Zona>
+
+}
+class     Administrador {}
+
+class     Guarderia {
+  usuario : Usuario
+  garages : List<Garage>
+
+}
+
+class     Zona {
+  letra : String
+  vehiculosAdminitos : List<TipoVehiculo>
+  dimensionGarages : Dimensiones
+  capacidad : Integer
+  cantidadVehiculos : Integer
+}
+
+Zona *-- Dimensiones
+Zona *-- TipoVehiculo
+
+
+Usuario <|-- Administrador
+Usuario <|-- Empleado
+Usuario <|-- Socio
+
+@enduml
