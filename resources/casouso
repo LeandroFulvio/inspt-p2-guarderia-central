@@ -1,0 +1,69 @@
+@startuml
+skinparam backgroundColor transparent
+left to right direction
+
+rectangle Guarderia {
+/'
+**** ADMINISTRADOR ****
+'/
+  usecase "Ingresar" as ADM1
+  usecase "Consultar" as consultar
+  usecase "Disponibilidad" as ADM2
+  usecase "fecha de compra" as ADM3
+  usecase "Asignaciones de Zona" as ADM4
+  usecase "Cantidad de Vehiculos asignados" as ADM5
+  
+  usecase "Vender Garage" as ADM6
+  usecase "Asignar Zona" as ADM7
+  usecase "Cerrar sesión" as ADM8
+  
+/'
+**** EMPLEADO ****
+'/
+    usecase "Ingresar" as EMP1
+  usecase "Consultar Asignaciones de Zona" as EMP2
+  usecase "Consultar Cantidad de Vehiculos asignados" as EMP3
+  usecase "Cerrar sesión" as EMP4
+
+/'
+**** SOCIO ****
+'/
+
+    usecase "Ingresar" as SOC1
+  usecase "Consultar Disponibilidad" as SOC2
+  usecase "Consultar fecha de compra" as SOC3
+  usecase "Cerrar sesión" as SOC4
+  
+}
+
+actor "Administrador" as adm
+adm --> ADM1
+adm --> consultar
+consultar --> ADM2
+consultar --> ADM3
+consultar --> ADM4
+consultar --> ADM5
+
+adm --> ADM6
+adm --> ADM7
+adm --> ADM8
+
+
+actor "Socio" as soc
+
+
+soc --> SOC1
+soc --> SOC2
+soc --> SOC3
+soc --> SOC4
+
+
+actor "Empleado" as emp
+emp --> EMP1
+emp --> EMP2
+emp --> EMP3
+emp --> EMP4
+
+emp --> SOC4
+
+@enduml
