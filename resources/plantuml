@@ -1,4 +1,11 @@
 @startuml
+
+hide circle
+skinparam classAttributeIconSize 0
+skinparam backgroundColor transparent
+skinparam monochrome true
+skinparam shadowing false
+
 Class05 o-- Class06
 Class07 .. Class08
 Class09 -- Class10
@@ -47,11 +54,16 @@ abstract class Usuario {
   password : String
   direccion : String
   telefono : String
+  
+  
 }
 
 class     Socio {
   vehiculos : List<Vehiculo>
   garages : List<Garage>
+  
+  - consultarDisponibilidad(Vehiculo v) : Boolean
+  
 
 }
 class     Empleado {
@@ -61,13 +73,21 @@ class     Empleado {
   asignacion : List<Zona>
 
 }
-class     Administrador {}
+
+class     Administrador {
+
+  
+
+}
 
 class     Guarderia {
   usuario : Usuario
   garages : List<Garage>
 
+  
 }
+
+Guarderia *--> Garage : garages
 
 class     Zona {
   letra : String
@@ -84,5 +104,15 @@ Zona *-- TipoVehiculo
 Usuario <|-- Administrador
 Usuario <|-- Empleado
 Usuario <|-- Socio
+
+
+Class EntradaSalida {
+  +leerCadena(textoDelMensaje : String) : String
+  +leerDouble(textoDelMensaje : String) : Float
+  +leerInt(textoDelMensaje : String) : Integer
+  +mostrarMensaje(textoDelMensaje : String)
+  +leerPassword(textoDelMensaje : String)
+}
+
 
 @enduml
