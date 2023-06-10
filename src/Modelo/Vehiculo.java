@@ -10,6 +10,15 @@ public class Vehiculo {
     private Date fechaAsignacion;
     private Dimensiones dimensiones;
 
+    public Vehiculo(String matricula, String nombre, TipoVehiculo tipoVehiculo, Dimensiones dimensiones) {
+        this.matricula = matricula;
+        this.nombre = nombre;
+        this.tipoVehiculo = tipoVehiculo;
+        this.dimensiones = dimensiones;
+    }
 
+    public void setFechaAsignacion(Date fechaAsignacion) {
+        this.fechaAsignacion = fechaAsignacion;
+    }
 
 }

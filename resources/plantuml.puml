@@ -9,12 +9,6 @@ Class05 o-- Class06
 Class07 .. Class08
 Class09 -- Class10
 
-class Vehiculo {
-  matricula : String
-  nombre : String
-  fechaAsignacion : Date
-}
-
 enum      TipoVehiculo {
   MOTORHOME
   CASARODANTE
@@ -28,13 +22,21 @@ class     Dimensiones {
   largo : Integer
   ancho : Integer
 }
-
 /'
 **** Vehiculo Composicion con Dimensiones ****
 **** Vehiculo Agregacion con TipoVehiculo ****
 '/
 Vehiculo o-- TipoVehiculo : tipo
 Vehiculo *-- Dimensiones : dimensiones
+
+class Vehiculo {
+  matricula : String
+  nombre : String
+  fechaAsignacion : Date
+
+    + setFechaAsignacion(Date)
+}
+
 Vehiculo "*" <-- "1" Socio : vehiculos
 
 class     Garage {
@@ -43,7 +45,9 @@ class     Garage {
   mantenimiento : Boolean
   fechaCompra : Date
 
-  Boolean aptoTamanio(Dimensiones, Dimensiones)
+    + dimensionesAptas(Dimensiones) : Boolean
+    + comprar(Socio)
+    + leerContadorLuz : Integer
 }
 /'
 **** Garage Composicion con Vehiculo ****
@@ -51,13 +55,18 @@ class     Garage {
 '/
 Garage o-- Vehiculo : vehiculo
 Garage o-- Zona : zona
-
+Garage o-- Socio : socio
+/'
+**** Garage Agregacion con Socio **** ?? No se si es ideal...
+'/
 
 class     Guarderia {
   usuario : Usuario
   garages : List<Garage>
 
-
+    + venderGarage(Garage, Socio)
+    + leerContadorLuz() : Integer
+    + contratarMantenimiento()
 }
 
 Guarderia *--> Garage : garages
@@ -67,10 +76,12 @@ class     Zona {
   letra : String
   capacidad : Integer
   cantidadVehiculos : Integer
+  empleadosAsignados : List<Empleado>
 }
 
 Zona o-- Dimensiones : dimensionGarages
 Zona "1" *-- "many" TipoVehiculo : vehiculosAdminitos
+Zona "1" *-- "many" Empleado : empleadosAsignados
 
 
 abstract class Usuario {
@@ -81,9 +92,9 @@ abstract class Usuario {
 }
 
 class     Socio {
+  fechaIngreso : Date
   vehiculos : List<Vehiculo>
-  garages : List<Garage>
-  
+
   - consultarDisponibilidad(Vehiculo v) : Boolean
 
 }

@@ -1,4 +1,4 @@
-import Modelo.Garage;
+import Modelo.*;
 
 import java.util.List;
 
@@ -22,8 +22,11 @@ public class Guarderia {
     }
 
     private List<Garage> garageList;
+    private List<Zona> zonaList;
 
-
+    public void venderGarage(Garage garage, Socio socio){
+        garage.comprar(socio);
+    }
 
 
 }
