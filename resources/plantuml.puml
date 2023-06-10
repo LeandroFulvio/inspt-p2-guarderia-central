@@ -1,5 +1,4 @@
 @startuml
-
 hide circle
 skinparam classAttributeIconSize 0
 skinparam backgroundColor transparent
@@ -13,13 +12,8 @@ Class09 -- Class10
 class Vehiculo {
   matricula : String
   nombre : String
-  tipo : Enum<TipoVehiculo>
-  dimensiones : Dimensiones
   fechaAsignacion : Date
 }
-
-Vehiculo *-- TipoVehiculo
-Vehiculo *-- Dimensiones
 
 enum      TipoVehiculo {
   MOTORHOME
@@ -35,27 +29,55 @@ class     Dimensiones {
   ancho : Integer
 }
 
+/'
+**** Vehiculo Composicion con Dimensiones ****
+**** Vehiculo Agregacion con TipoVehiculo ****
+'/
+Vehiculo o-- TipoVehiculo : tipo
+Vehiculo *-- Dimensiones : dimensiones
+Vehiculo "*" <-- "1" Socio : vehiculos
+
 class     Garage {
   numero : Integer
   contadorLuz : Integer
   mantenimiento : Boolean
   fechaCompra : Date
-  zona : Zona
-  vehiculo : Vehiculo
 
   Boolean aptoTamanio(Dimensiones, Dimensiones)
 }
+/'
+**** Garage Composicion con Vehiculo ****
+**** Garage Agregacion con Zona ****
+'/
+Garage o-- Vehiculo : vehiculo
+Garage o-- Zona : zona
 
-Garage *-- Vehiculo
-Garage *-- Zona
+
+class     Guarderia {
+  usuario : Usuario
+  garages : List<Garage>
+
+
+}
+
+Guarderia *--> Garage : garages
+Guarderia --> Usuario : usuario
+
+class     Zona {
+  letra : String
+  capacidad : Integer
+  cantidadVehiculos : Integer
+}
+
+Zona o-- Dimensiones : dimensionGarages
+Zona "1" *-- "many" TipoVehiculo : vehiculosAdminitos
+
 
 abstract class Usuario {
   nombre : String
   password : String
   direccion : String
   telefono : String
-  
-  
 }
 
 class     Socio {
@@ -63,9 +85,9 @@ class     Socio {
   garages : List<Garage>
   
   - consultarDisponibilidad(Vehiculo v) : Boolean
-  
 
 }
+
 class     Empleado {
   codigo : Integer
   especialidad : String
@@ -76,30 +98,8 @@ class     Empleado {
 
 class     Administrador {
 
-  
 
 }
-
-class     Guarderia {
-  usuario : Usuario
-  garages : List<Garage>
-
-  
-}
-
-Guarderia *--> Garage : garages
-
-class     Zona {
-  letra : String
-  vehiculosAdminitos : List<TipoVehiculo>
-  dimensionGarages : Dimensiones
-  capacidad : Integer
-  cantidadVehiculos : Integer
-}
-
-Zona *-- Dimensiones
-Zona *-- TipoVehiculo
-
 
 Usuario <|-- Administrador
 Usuario <|-- Empleado
