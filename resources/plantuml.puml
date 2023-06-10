@@ -34,6 +34,7 @@ class Vehiculo {
   nombre : String
   fechaAsignacion : Date
 
+    + Vehiculo(matricula:String, nombre:String, tipo:TipoVehiculo, dimensiones:Dimensiones)
     + setFechaAsignacion(Date)
 }
 
@@ -45,6 +46,7 @@ class     Garage {
   mantenimiento : Boolean
   fechaCompra : Date
 
+    + Garage(numero:Integer,dimensiones:Dimensiones, Zona zona)
     + dimensionesAptas(Dimensiones) : Boolean
     + comprar(Socio)
     + leerContadorLuz : Integer
@@ -77,6 +79,8 @@ class     Zona {
   capacidad : Integer
   cantidadVehiculos : Integer
   empleadosAsignados : List<Empleado>
+
+  + Zona (letra:String, capacidad:Integer, cantidadVehiculos:Integer)
 }
 
 Zona o-- Dimensiones : dimensionGarages

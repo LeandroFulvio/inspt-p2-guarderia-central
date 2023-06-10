@@ -1,5 +1,6 @@
 import Modelo.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,7 +12,8 @@ public class Guarderia {
     private static Guarderia instance = null;
 
     private Guarderia(){
-
+        garageList = new ArrayList<>();
+        zonaList = new ArrayList<>();
     }
 
     public static Guarderia getIntance(){

@@ -7,6 +7,7 @@ public class Zona {
     private int capacidad;
     private int cantidadVehiculos;
 
+    //Asignacion de Empleados?
 
     public Zona(String letra, int capacidad, int cantidadVehiculos) {
         this.letra = letra;
