@@ -20,5 +20,16 @@ public class Vehiculo {
     public void setFechaAsignacion(Date fechaAsignacion) {
         this.fechaAsignacion = fechaAsignacion;
     }
+    public Date getFechaAsignacion() {
+        return fechaAsignacion;
+    }
+
+    public TipoVehiculo getTipoVehiculo() {
+        return tipoVehiculo;
+    }
+
+    public void conDimensiones(int alto, int largo, int ancho){
+
+    }
 
 }

@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Garage {
 
-    private int numero; //Identificador local del Garage
+    private final int numero; //Identificador local del Garage
     private int contadorLuz;
     private boolean mantenimientoContratado;
     private Date fechaCompra;
@@ -15,6 +15,7 @@ public class Garage {
     private Dimensiones dimensionGarage;
 
     private Socio socio;
+    private Vehiculo vehiculoGuardado;
     private Zona zona;
 
 
@@ -47,5 +48,30 @@ public class Garage {
         this.mantenimientoContratado = Boolean.TRUE;
     }
 
+    public int getNumero() {
+        return numero;
+    }
+
+    public boolean isMantenimientoContratado() {
+        return mantenimientoContratado;
+    }
+
+    public Date getFechaCompra() {
+        return fechaCompra;
+    }
+
+    public List<TipoVehiculo> getVehiculosAdminitidos() {
+        return vehiculosAdminitidos;
+    }
+
+    public boolean estaLibre(){
+        return vehiculoGuardado==null;
+    }
+
+    public void guardarVehiculo(Vehiculo v){
+        //TODO: Validar vehiculo es del cliente
+        vehiculoGuardado = v ;
+
+    }
 
 }

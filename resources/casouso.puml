@@ -5,6 +5,7 @@ left to right direction
 rectangle Guarderia {
   usecase "Ingresar" as ingresar
   usecase "Consultar Disponibilidad" as consultarDisponibilidad
+  usecase "Asignar Vehiculo a Garage" as asignarVehiculoAGarage
   usecase "Consultar Fecha de compra" as consultarFechas
   usecase "Consultar Asignaciones de Zona" as consultarZonas
   usecase "Consultar Vehiculos asignados" as consultarVehiculos
@@ -22,6 +23,7 @@ rectangle Guarderia {
   adm --> venderGarage
   adm --> asignarZona
   adm --> cerrar
+  adm --> asignarVehiculoAGarage
   
   actor "Socio" as soc
   ingresar <-- soc

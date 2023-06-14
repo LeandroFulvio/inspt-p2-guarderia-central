@@ -5,9 +5,7 @@ skinparam backgroundColor transparent
 skinparam monochrome true
 skinparam shadowing false
 
-Class05 o-- Class06
 Class07 .. Class08
-Class09 -- Class10
 
 enum      TipoVehiculo {
   MOTORHOME
@@ -35,10 +33,11 @@ class Vehiculo {
   fechaAsignacion : Date
 
     + Vehiculo(matricula:String, nombre:String, tipo:TipoVehiculo, dimensiones:Dimensiones)
-    + setFechaAsignacion(Date)
+    + setFechaAsignacion(fechaAsignacion:Date)
+
 }
 
-Vehiculo "*" <-- "1" Socio : vehiculos
+Vehiculo "*" <-- "1" Socio : vehiculosList
 
 class     Garage {
   numero : Integer
@@ -50,6 +49,10 @@ class     Garage {
     + dimensionesAptas(Dimensiones) : Boolean
     + comprar(Socio)
     + leerContadorLuz : Integer
+    + contratarMantenimiento()
+    + guardarVehiculo(Vehiculo v)
+    + estaLibre() : Boolean
+
 }
 /'
 **** Garage Composicion con Vehiculo ****
@@ -66,9 +69,12 @@ class     Guarderia {
   usuario : Usuario
   garages : List<Garage>
 
-    + venderGarage(Garage, Socio)
-    + leerContadorLuz() : Integer
-    + contratarMantenimiento()
+    -Guarderia()
+    +getInstance():Guarderia
+
+    + venderGarage(Garage g, Socio s)
+    + leerContadorLuz(Garage g) : Integer
+
 }
 
 Guarderia *--> Garage : garages
@@ -81,6 +87,9 @@ class     Zona {
   empleadosAsignados : List<Empleado>
 
   + Zona (letra:String, capacidad:Integer, cantidadVehiculos:Integer)
+    + getCantidadVehiculos() : Integer
+
+
 }
 
 Zona o-- Dimensiones : dimensionGarages
@@ -97,9 +106,10 @@ abstract class Usuario {
 
 class     Socio {
   fechaIngreso : Date
-  vehiculos : List<Vehiculo>
+  dni : Long
 
-  - consultarDisponibilidad(Vehiculo v) : Boolean
+    + consultarDisponibilidad(Vehiculo v) : Boolean
+    + agregarVehiculo(Vehiculo v)
 
 }
 
@@ -107,7 +117,11 @@ class     Empleado {
   codigo : Integer
   especialidad : String
 
-  asignacion : List<Zona>
+  asignaciones : List<Zona>
+
+    + getAsignaciones() : List<Zona>
+
+
 
 }
 
@@ -127,6 +141,11 @@ Class EntradaSalida {
   +leerInt(textoDelMensaje : String) : Integer
   +mostrarMensaje(textoDelMensaje : String)
   +leerPassword(textoDelMensaje : String)
+}
+
+Class Menu {
+
+
 }
 
 
