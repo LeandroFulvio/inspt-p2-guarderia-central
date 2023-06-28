@@ -1,6 +1,8 @@
 package Modelo;
 
-public class Dimensiones {
+import java.io.Serializable;
+
+public class Dimensiones implements Serializable {
 
     private int alto;
     private int largo;

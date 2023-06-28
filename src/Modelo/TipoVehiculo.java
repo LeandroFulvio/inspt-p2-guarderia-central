@@ -1,6 +1,8 @@
 package Modelo;
 
-public enum TipoVehiculo {
+import java.io.Serializable;
+
+public enum TipoVehiculo implements Serializable {
 
     MOTORHOME,
     CASARODANTE,

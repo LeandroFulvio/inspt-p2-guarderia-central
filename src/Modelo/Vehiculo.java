@@ -1,8 +1,9 @@
 package Modelo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Vehiculo {
+public class Vehiculo implements Serializable {
 
     private String matricula;
     private String nombre;

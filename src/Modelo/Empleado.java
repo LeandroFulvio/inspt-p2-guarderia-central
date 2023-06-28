@@ -1,6 +1,8 @@
 package Modelo;
 
-public class Empleado extends User{
+import java.io.Serializable;
+
+public class Empleado extends User implements Serializable {
 
     private String codigo;
     private String especialidad;

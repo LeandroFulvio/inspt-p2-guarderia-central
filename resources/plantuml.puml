@@ -5,7 +5,8 @@ skinparam backgroundColor transparent
 skinparam monochrome true
 skinparam shadowing false
 
-Class07 .. Class08
+/'Class07 .. Class08'/
+
 
 enum      TipoVehiculo {
   MOTORHOME
@@ -72,12 +73,14 @@ class     Guarderia {
     -Guarderia()
     +getInstance():Guarderia
 
+    + inicializarDatosGuarderia(Guarderia guarderia)
     + venderGarage(Garage g, Socio s)
     + leerContadorLuz(Garage g) : Integer
 
 }
 
-Guarderia *--> Garage : garages
+Guarderia --> Guarderia
+Guarderia *--> Garage : garages[]
 Guarderia --> Usuario : usuario
 
 class     Zona {

@@ -1,10 +1,11 @@
 package Modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Garage {
+public class Garage implements Serializable {
 
     private final int numero; //Identificador local del Garage
     private int contadorLuz;
@@ -73,5 +74,7 @@ public class Garage {
         vehiculoGuardado = v ;
 
     }
+
+    //liberar garage (remover vehiculo)
 
 }

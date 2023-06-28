@@ -1,6 +1,8 @@
 package Modelo;
 
-public class Zona {
+import java.io.Serializable;
+
+public class Zona implements Serializable {
 
     private String letra; //Identificador local de la Zona
 
@@ -14,6 +16,10 @@ public class Zona {
         this.capacidad = capacidad;
         this.cantidadVehiculos = cantidadVehiculos;
     }
+
+    //Registrar vehiculo en capacidad
+
+    //Quitar vehiculo de capacidad
 
 
 }

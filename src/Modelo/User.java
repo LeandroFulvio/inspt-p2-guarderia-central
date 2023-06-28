@@ -1,6 +1,8 @@
 package Modelo;
 
-public abstract class User {
+import java.io.Serializable;
+
+public abstract class User implements Serializable {
 
     private String nombre;
     private String password;
@@ -15,6 +17,18 @@ public abstract class User {
     }
 
     //    public abstract void ingresar();
-//    public abstract void salir();
+    //    public abstract void salir();
+
+    //Proceder - Ingresar - Abstracto con implementacion en cada user
+    //TODO: ahi acceden a su logica cada tipo de user
+
+    //Actualizar password con verificacion de password anterior
+    public void actualizarPassword(String oldPass, String newPass){
+        //TODO: Implementacion
+
+    }
+
+    //Mostrar Menu con opciones como metodo abstracto? Depende de imple de quien llama su menu
+
 
 }
