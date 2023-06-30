@@ -1,4 +1,8 @@
-import Modelo.*;
+package main.modelo;
+
+import main.ConsoleText;
+import main.EntradaSalida;
+import main.FileManager;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,9 +20,9 @@ public class Guarderia implements Serializable {
         garageList = new ArrayList<>();
         zonaList = new ArrayList<>();
         usuarioList = new ArrayList<>();
-        //Manejo de archivo - Excepciones manejadas por el FileManager
+        //Manejo de archivo - Excepciones manejadas por el java.FileManager
         FileManager fileManager = new FileManager();
-        instance = fileManager.deserealizarGuarderia("Guarderia-central.txt");
+        instance = fileManager.deserealizarGuarderia("java.Guarderia-central.txt");
         if(instance!=null) cargarData(instance);
     }
 
@@ -42,9 +46,10 @@ public class Guarderia implements Serializable {
 
     private void save(){
         loggedUser=null;
+        instance=this;
         //Serializar
         FileManager fileManager = new FileManager();
-        fileManager.serializarGuaderia("Guarderia-central.txt", this);
+        fileManager.serializarGuaderia("java.Guarderia-central.txt", this);
     }
 
     public void run(){
@@ -83,7 +88,7 @@ public class Guarderia implements Serializable {
 
             User u = getUserByName(nombre);
             //validar
-            if(u.validar(password)){
+            if(u!=null && u.validar(password)){
                 //marcar como usuario loggeado
                 loggedUser=u;
                 EntradaSalida.mostrarString(ConsoleText.LOGGED_AS + nombre);

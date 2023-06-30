@@ -1,5 +1,8 @@
-package Modelo;
+package main.modelo;
 
+import java.Socio;
+import java.TipoVehiculo;
+import java.Zona;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;

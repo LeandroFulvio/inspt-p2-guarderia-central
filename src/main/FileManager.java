@@ -1,3 +1,7 @@
+package main;
+
+import main.modelo.Guarderia;
+
 import java.io.*;
 
 public class FileManager {
