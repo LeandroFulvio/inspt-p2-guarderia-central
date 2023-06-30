@@ -9,7 +9,7 @@ public class Socio extends User implements Serializable {
 
     private List<Vehiculo> vehiculoList; //Vehiculos propios del Socio
 
-    private Date fechaIngreso; //Fecha de Ingreso a la java.Guarderia
+    private Date fechaIngreso; //Fecha de Ingreso a la Guarderia
 
     public Socio(String nombre, String password, String direccion, String telefono) {
         super(nombre,password,direccion,telefono);

@@ -1,5 +1,7 @@
 package main;
 
+import main.modelo.User;
+
 import java.util.Scanner;
 
 /**

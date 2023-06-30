@@ -1,5 +1,8 @@
 package main.modelo;
 
+import main.ConsoleText;
+import main.EntradaSalida;
+
 import java.io.Serializable;
 
 public abstract class User implements Serializable {
@@ -24,9 +27,14 @@ public abstract class User implements Serializable {
     }
 
     //Actualizar password con verificacion de password anterior
-    public void actualizarPassword(String oldPass, String newPass){
-        //TODO: Implementacion
-
+    /**
+     * Devuelve true si el password es actualizado correctamente
+     * Devuelve false si el password anterior ingresado es incorrecto
+    */
+    public boolean actualizarPassword(String oldPass, String newPass){
+        if(this.password.equals(oldPass)) this.password = newPass;
+        else return false;
+        return true;
     }
 
     public String getNombre() {

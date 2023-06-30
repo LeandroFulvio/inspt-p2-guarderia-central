@@ -11,8 +11,10 @@ public abstract class ConsoleText {
     public static final String CREACION_PASSWORD = "Ingrese password: ";
     public static final String CREACION_DIRECCION = "Ingrese direccion: ";
     public static final String CREACION_TELEFONO = "Ingrese telefono: ";
+    public static final String CREACION_CODIGO = "Indique el codigo";
+    public static final String CREACION_ESPECIALIDAD = "Indique la especialidad";
 
-    public static final String BIENVENIDA = "Bienvenido al sistema de java.Guarderia Central.";
+    public static final String BIENVENIDA = "Bienvenido al sistema de Guarderia Central.";
     public static final String LOGGED_AS = "Log exitoso. Bienvenido ";
     public static final String BAD_CREDENTIALS = "Las credenciales no son validas. Intente nuevamente.";
 
@@ -30,6 +32,11 @@ public abstract class ConsoleText {
     public static final String EMPLEADO_MENU_PRINCIPAL = "";
 
     //Crear cosas
+    public static final String MENU_CREACION_VEHICULO = "¿Desea registrar un vehiculo? \n" +
+            " 1.- Agregar Vehiculo\n" +
+            "  2.- Finalizar";
+
+    public static final String VEHICULO_REGISTRADO = "Vehiculo Registrado!";
 
     //Consultar cosas
 

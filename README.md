@@ -1,4 +1,4 @@
-# java.Guarderia Central
+# Guarderia Central
 
 ## Projecto Primer Parcial - Informatica Aplicada - Programacion II
 

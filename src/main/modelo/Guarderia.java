@@ -22,7 +22,7 @@ public class Guarderia implements Serializable {
         usuarioList = new ArrayList<>();
         //Manejo de archivo - Excepciones manejadas por el java.FileManager
         FileManager fileManager = new FileManager();
-        instance = fileManager.deserealizarGuarderia("java.Guarderia-central.txt");
+        instance = fileManager.deserealizarGuarderia("Guarderia-central.txt");
         if(instance!=null) cargarData(instance);
     }
 
@@ -49,7 +49,7 @@ public class Guarderia implements Serializable {
         instance=this;
         //Serializar
         FileManager fileManager = new FileManager();
-        fileManager.serializarGuaderia("java.Guarderia-central.txt", this);
+        fileManager.serializarGuaderia("Guarderia-central.txt", this);
     }
 
     public void run(){
@@ -120,6 +120,10 @@ public class Guarderia implements Serializable {
         return usuarioList.stream()
                 .filter(x-> x.getNombre().equals(nombre))
                 .findFirst().orElse(null);
+    }
+
+    public void registrarUsuario(User usuario){
+        this.usuarioList.add(usuario);
     }
 
 }
