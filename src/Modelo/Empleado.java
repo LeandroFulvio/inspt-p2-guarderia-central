@@ -15,6 +15,14 @@ public class Empleado extends User implements Serializable {
         this.especialidad=especialidad;
     }
 
+    @Override
+    public void ingresar() {
 
+    }
+
+    @Override
+    public void mostrarMenuPrincipal() {
+
+    }
 
 }

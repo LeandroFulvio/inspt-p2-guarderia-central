@@ -16,11 +16,12 @@ public abstract class User implements Serializable {
         this.telefono = telefono;
     }
 
-    //    public abstract void ingresar();
-    //    public abstract void salir();
+    public abstract void ingresar(); // Abstracto con implementacion en cada user
+    public abstract void mostrarMenuPrincipal();
 
-    //Proceder - Ingresar - Abstracto con implementacion en cada user
-    //TODO: ahi acceden a su logica cada tipo de user
+    public boolean validar(String pass){
+        return this.password.equals(pass);
+    }
 
     //Actualizar password con verificacion de password anterior
     public void actualizarPassword(String oldPass, String newPass){
@@ -28,7 +29,8 @@ public abstract class User implements Serializable {
 
     }
 
-    //Mostrar Menu con opciones como metodo abstracto? Depende de imple de quien llama su menu
-
+    public String getNombre() {
+        return nombre;
+    }
 
 }

@@ -17,6 +17,16 @@ public class Socio extends User implements Serializable {
         vehiculoList = new ArrayList<>();
     }
 
+    @Override
+    public void ingresar() {
+
+    }
+
+    @Override
+    public void mostrarMenuPrincipal() {
+
+    }
+
     public Date getFechaIngreso() {
         return fechaIngreso;
     }
