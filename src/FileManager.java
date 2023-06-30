@@ -9,16 +9,14 @@ public class FileManager {
     public Guarderia deserealizarGuarderia(String nomArch){
         try {
             ObjectInputStream o = new ObjectInputStream(new BufferedInputStream(new FileInputStream(nomArch)));
-
             Guarderia guarderia = (Guarderia) o.readObject();
-
             o.close();
-
+            System.out.println("Se cargo exitosamente el archivo: "+ nomArch);
             return guarderia;
         }catch (IOException | ClassNotFoundException e){
             System.out.println("No fue posible deserealizar el achivo: " + nomArch);
         }
-        return Guarderia.getIntance();
+        return null;
     }
 
     public void serializarGuaderia(String nomArch, Guarderia guarderia) {
@@ -26,6 +24,7 @@ public class FileManager {
             ObjectOutputStream o = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(nomArch)));
             o.writeObject(guarderia);
             o.close();
+            System.out.println("El Sistema Serializo Exitosamente.");
         }catch (IOException e) {
             System.out.println("No fue posible serealizar el achivo: " + nomArch);
         }

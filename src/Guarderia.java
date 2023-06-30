@@ -15,6 +15,10 @@ public class Guarderia implements Serializable {
     private Guarderia(){
         garageList = new ArrayList<>();
         zonaList = new ArrayList<>();
+        usuarioList = new ArrayList<>();
+        //Manejo de archivo - Excepciones manejadas por el FileManager
+        FileManager fileManager = new FileManager();
+        instance = fileManager.deserealizarGuarderia("Guarderia-central.txt");
     }
 
     public static Guarderia getIntance(){
@@ -30,17 +34,25 @@ public class Guarderia implements Serializable {
     private List<User> usuarioList;
     private User loggedUser;
 
+    private void save(){
+        //Serializar
+        FileManager fileManager = new FileManager();
+        fileManager.serializarGuaderia("Guarderia-central.txt", this);
+    }
+
     public void run(){
         //Loggear usuario
-
+        if (usuarioList.isEmpty()) loggin();
+        else primerLoggin();
 
         //Usuario proceder -> Va a la imple del usuario correspondiente
+
+
+
+        //Salvar datos sistema
+        save();
     }
 
-    //Para serializacion con archivos
-    public void inicializarDatosGuarderia(Guarderia guarderia){
-        instance = guarderia;
-    }
 
     public void venderGarage(Garage garage, Socio socio){
         garage.comprar(socio);
@@ -54,5 +66,18 @@ public class Guarderia implements Serializable {
 
 
 
+    private void loggin(){
+        //Pedir credenciales
+
+        //validar
+
+        //marcar como usuario loggeado
+    }
+
+    private void primerLoggin(){
+        //Crear administrador
+
+        //marcar como usuario loggeado
+    }
 
 }
