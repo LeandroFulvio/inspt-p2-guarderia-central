@@ -13,16 +13,14 @@ public class Garage implements Serializable {
     private Date fechaCompra;
 
     private List<TipoVehiculo> vehiculosAdminitidos;
-    private Dimensiones dimensionGarage;
 
     private Socio socio;
     private Vehiculo vehiculoGuardado;
     private Zona zona;
 
 
-    public Garage(int numero, Dimensiones dimensiones, Zona zona) {
+    public Garage(int numero, Zona zona) {
         this.numero = numero;
-        this.dimensionGarage = dimensiones;
         vehiculosAdminitidos = new ArrayList<>();
         this.zona = zona;
     }
@@ -36,7 +34,7 @@ public class Garage implements Serializable {
     /**
      * Compara las dimensiones del vehiculo con las propias
      */
-    public boolean dimensionesAptas(Dimensiones dimensionVehiculo){
+    public boolean dimensionesAptas(){
         //TODO:
         return false;
     }

@@ -111,7 +111,7 @@ public class Administrador extends User implements Serializable {
 
          */
         EntradaSalida.mostrarString(ConsoleText.VEHICULO_REGISTRADO);
-        return new Vehiculo("abc", "Modelo X", TipoVehiculo.MOTORHOME, new Dimensiones(3,3,1));
+        return new Vehiculo("abc", "Modelo X", TipoVehiculo.MOTORHOME);
     }
 
 
