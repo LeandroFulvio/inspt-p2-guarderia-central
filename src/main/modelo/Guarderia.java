@@ -126,4 +126,8 @@ public class Guarderia implements Serializable {
         this.usuarioList.add(usuario);
     }
 
+    public void registrarZona(Zona zona){
+        this.zonaList.add(zona);
+    }
+
 }

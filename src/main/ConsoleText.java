@@ -16,6 +16,11 @@ public abstract class ConsoleText {
     public static final String CREACION_MATRICULA = "Indique la matricula";
     public static final String CREACION_MODELO_NOMBRE = "Indique el nombre del vehiculo";
     public static final String CREACION_TIPO_VEHICULO = "Indique cual es el Tipo de Vehiculo";
+    public static final String CREACION_ZONA_LETRA = "Ingresa la Letra Identificable para la Zona";
+    public static final String CREACION_ZONA_CAPACIDAD = "Ingrese la capacidad";
+    public static final String CREACION_ZONA_TIPO_VEHICULO_ADMITIDO = "Seleccione el tipo de vehiculo adminitido en la Zona";
+    public static final String CREACION_ZONA_MENU_TIPO_VEHICULO= "1.- Ingresar otro \n " + "2.- Salir.";
+
 
     public static final String BIENVENIDA = "Bienvenido al sistema de Guarderia Central.";
     public static final String LOGGED_AS = "Log exitoso. Bienvenido ";
@@ -48,5 +53,6 @@ public abstract class ConsoleText {
     //asignar Zona / Empleado / AutoGarage
 
 
+    public static final String ERROR_INT_EXPECTED_RETRY = "El valor ingresado no es un entero. Intente nuevamente.";
 
 }

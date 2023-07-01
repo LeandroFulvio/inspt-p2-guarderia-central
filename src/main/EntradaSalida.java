@@ -21,7 +21,16 @@ public class EntradaSalida {
 
     //Leer Entero
     public static int leerEntero(){
-        return ENTRADA.nextInt();
+        int i;
+        try {
+            i = ENTRADA.nextInt();
+        }catch (Exception e){
+            //El valor ingresado no es un entero. Intente nuevamente.
+            mostrarString(ConsoleText.ERROR_INT_EXPECTED_RETRY);
+            i = leerEntero();
+        }
+        leerString();
+        return i;
     }
 
     public static void mostrarString(String s){

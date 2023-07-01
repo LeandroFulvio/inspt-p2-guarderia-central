@@ -28,12 +28,15 @@ public class Administrador extends User implements Serializable {
         //Leer opciones y redirigir
         switch (EntradaSalida.leerEntero()) {
             case 1: // 1.- Registrar Socio
-                EntradaSalida.leerString();
+//                EntradaSalida.leerString();
                 registrarSocio();
                 break;
             case 2: //2.- Registrar Empleado
+//                EntradaSalida.leerString();
+                registrarEmpleado();
                 break;
             case 3: //3.- Registrar Zona
+                registrarZona();
                 break;
             case 4: //4.- Registrar Garage
                 break;
@@ -54,11 +57,14 @@ public class Administrador extends User implements Serializable {
     private void registrarSocio(){
         //datos socio
         Socio newSocio = generarSocio();
-
         //Opcional crear vehiculos
         registrarVehiculos(newSocio);
-
         Guarderia.getIntance().registrarUsuario(newSocio);
+    }
+
+    private void registrarEmpleado(){
+        Empleado newEmpleado = generarEmpleado();
+        Guarderia.getIntance().registrarUsuario(newEmpleado);
     }
 
     private Socio generarSocio(){
@@ -97,9 +103,9 @@ public class Administrador extends User implements Serializable {
 
         EntradaSalida.mostrarString(ConsoleText.MENU_CREACION_VEHICULO);
         while (EntradaSalida.leerEntero()==1){ // 1.- Agregar Vehiculo
-            EntradaSalida.leerString();
+//            EntradaSalida.leerString();
             socio.agregarVehiculo(crearVehiculo());
-            EntradaSalida.leerString();
+//            EntradaSalida.leerString();
             EntradaSalida.mostrarString(ConsoleText.VEHICULO_REGISTRADO);
             EntradaSalida.mostrarString(ConsoleText.MENU_CREACION_VEHICULO);
         }
@@ -112,18 +118,40 @@ public class Administrador extends User implements Serializable {
         EntradaSalida.mostrarString(ConsoleText.CREACION_MODELO_NOMBRE);
         String nombre = EntradaSalida.leerString();
         EntradaSalida.mostrarString(ConsoleText.CREACION_TIPO_VEHICULO);
-        /*
-        Elija el tipo -> Enum
-         */
-        TipoVehiculo[] tipos = TipoVehiculo.values();
-        for (int i=0; i < tipos.length; i++) {
-            EntradaSalida.mostrarString(i + ".- " + tipos[i].name());
-        }
 
-        return new Vehiculo(matricula, nombre, tipos[EntradaSalida.leerEntero()]);
+        menuTiposVehiculo();
+
+        return new Vehiculo(matricula, nombre, TipoVehiculo.values()[EntradaSalida.leerEntero()]);
     }
 
+    private void registrarZona(){
+        Zona newZona = generarZona();
+        Guarderia.getIntance().registrarZona(newZona);
+    }
 
+    private Zona generarZona(){
+        EntradaSalida.mostrarString(ConsoleText.CREACION_ZONA_LETRA);
+        String letra = EntradaSalida.leerString();
+        EntradaSalida.mostrarString(ConsoleText.CREACION_ZONA_CAPACIDAD);
+        int capacidad = EntradaSalida.leerEntero();
 
+        Zona zona = new Zona(letra, capacidad);
+
+        EntradaSalida.mostrarString(ConsoleText.CREACION_ZONA_TIPO_VEHICULO_ADMITIDO);
+        do {
+            menuTiposVehiculo();
+            zona.conTipoVehiculo(TipoVehiculo.values()[EntradaSalida.leerEntero()]);
+
+            EntradaSalida.mostrarString(ConsoleText.CREACION_ZONA_MENU_TIPO_VEHICULO);
+        }while (EntradaSalida.leerEntero()!=2);
+
+        return zona;
+    }
+
+    private void menuTiposVehiculo(){
+        for (int i=0; i < TipoVehiculo.values().length; i++) {
+            EntradaSalida.mostrarString(i + ".- " + TipoVehiculo.values()[i].name());
+        }
+    }
 
 }
