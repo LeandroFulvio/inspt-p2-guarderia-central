@@ -13,6 +13,9 @@ public abstract class ConsoleText {
     public static final String CREACION_TELEFONO = "Ingrese telefono: ";
     public static final String CREACION_CODIGO = "Indique el codigo";
     public static final String CREACION_ESPECIALIDAD = "Indique la especialidad";
+    public static final String CREACION_MATRICULA = "Indique la matricula";
+    public static final String CREACION_MODELO_NOMBRE = "Indique el nombre del vehiculo";
+    public static final String CREACION_TIPO_VEHICULO = "Indique cual es el Tipo de Vehiculo";
 
     public static final String BIENVENIDA = "Bienvenido al sistema de Guarderia Central.";
     public static final String LOGGED_AS = "Log exitoso. Bienvenido ";
@@ -33,8 +36,8 @@ public abstract class ConsoleText {
 
     //Crear cosas
     public static final String MENU_CREACION_VEHICULO = "¿Desea registrar un vehiculo? \n" +
-            " 1.- Agregar Vehiculo\n" +
-            "  2.- Finalizar";
+            "1.- Agregar Vehiculo\n" +
+            "2.- Finalizar";
 
     public static final String VEHICULO_REGISTRADO = "Vehiculo Registrado!";
 

@@ -28,6 +28,7 @@ public class Administrador extends User implements Serializable {
         //Leer opciones y redirigir
         switch (EntradaSalida.leerEntero()) {
             case 1: // 1.- Registrar Socio
+                EntradaSalida.leerString();
                 registrarSocio();
                 break;
             case 2: //2.- Registrar Empleado
@@ -95,24 +96,33 @@ public class Administrador extends User implements Serializable {
         //TODO: Try catch para valir inesperado como un string
 
         EntradaSalida.mostrarString(ConsoleText.MENU_CREACION_VEHICULO);
-        while (EntradaSalida.leerEntero()==1){
-            // 1.- Agregar Vehiculo
+        while (EntradaSalida.leerEntero()==1){ // 1.- Agregar Vehiculo
+            EntradaSalida.leerString();
             socio.agregarVehiculo(crearVehiculo());
+            EntradaSalida.leerString();
+            EntradaSalida.mostrarString(ConsoleText.VEHICULO_REGISTRADO);
             EntradaSalida.mostrarString(ConsoleText.MENU_CREACION_VEHICULO);
         }
 
     }
 
     private Vehiculo crearVehiculo(){
+        EntradaSalida.mostrarString(ConsoleText.CREACION_MATRICULA);
+        String matricula = EntradaSalida.leerString();
+        EntradaSalida.mostrarString(ConsoleText.CREACION_MODELO_NOMBRE);
+        String nombre = EntradaSalida.leerString();
+        EntradaSalida.mostrarString(ConsoleText.CREACION_TIPO_VEHICULO);
         /*
-        Ingrese Matricula
-        Ingrese nombre del vehiculo
         Elija el tipo -> Enum
-
          */
-        EntradaSalida.mostrarString(ConsoleText.VEHICULO_REGISTRADO);
-        return new Vehiculo("abc", "Modelo X", TipoVehiculo.MOTORHOME);
+        TipoVehiculo[] tipos = TipoVehiculo.values();
+        for (int i=0; i < tipos.length; i++) {
+            EntradaSalida.mostrarString(i + ".- " + tipos[i].name());
+        }
+
+        return new Vehiculo(matricula, nombre, tipos[EntradaSalida.leerEntero()]);
     }
+
 
 
 
