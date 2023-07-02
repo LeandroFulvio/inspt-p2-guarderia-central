@@ -41,4 +41,12 @@ public abstract class User implements Serializable {
         return nombre;
     }
 
+    public void mostrar(){
+        EntradaSalida.mostrarString("nombre:'" + nombre + '\'' +
+                ", password:'" + password + '\'' +
+                ", direccion:'" + direccion + '\'' +
+                ", telefono:'" + telefono + '\''
+                );
+    }
+
 }

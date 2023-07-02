@@ -1,5 +1,7 @@
 package main.modelo;
 
+import main.EntradaSalida;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -39,6 +41,11 @@ public class Socio extends User implements Serializable {
         vehiculoList.add(vehiculo);
     }
 
-
-
+    public void mostrar() {
+        EntradaSalida.mostrarString("Datos Socio: {");
+        super.mostrar();
+        EntradaSalida.mostrarString( ", \n vehiculos: { " );
+        vehiculoList.forEach(Vehiculo::mostrar);
+        EntradaSalida.mostrarString("}, fechaIngreso=" + fechaIngreso +'}');
+    }
 }

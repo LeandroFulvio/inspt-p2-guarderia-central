@@ -30,28 +30,39 @@ public class Administrador extends User implements Serializable {
             case 1: // 1.- Registrar Socio
 //                EntradaSalida.leerString();
                 registrarSocio();
+                mostrarMenuPrincipal();
                 break;
             case 2: //2.- Registrar Empleado
 //                EntradaSalida.leerString();
                 registrarEmpleado();
+                mostrarMenuPrincipal();
                 break;
             case 3: //3.- Registrar Zona
                 registrarZona();
+                mostrarMenuPrincipal();
                 break;
             case 4: //4.- Registrar Garage
                 registrarGarage();
+                mostrarMenuPrincipal();
                 break;
             case 5: //5.- Vender Garage a Socio
+
+                mostrarMenuPrincipal();
                 break;
             case 6: //6.- Asignar Vehiculo a Garage
+
+                mostrarMenuPrincipal();
                 break;
             case 7: //7.- Realizar Consulta
+                Guarderia.getIntance().mostrarTodo();
+                mostrarMenuPrincipal();
                 break;
             case 0: // Salir ?
                 break;
+            default:
+                //No valido
+                break;
         }
-
-
 
     }
 

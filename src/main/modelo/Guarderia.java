@@ -140,4 +140,20 @@ public class Guarderia implements Serializable {
         this.garageList.add(garage);
     }
 
+
+    public void mostrarTodo(){
+        EntradaSalida.mostrarString("Guarderia { ");
+
+        //Zonas
+
+        //Garages
+
+        //Usuarios? Solo Socios y Empleados -> Armar listas separadas para estos?
+
+        //Usuario loggeado?
+
+
+        EntradaSalida.mostrarString("}");
+    }
+
 }

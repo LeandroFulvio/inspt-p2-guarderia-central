@@ -1,5 +1,7 @@
 package main.modelo;
 
+import main.EntradaSalida;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -27,5 +29,15 @@ public class Vehiculo implements Serializable {
         return tipoVehiculo;
     }
 
+    public void mostrar() {
+        EntradaSalida.mostrarString(
+                "vehiculo: { \n" +
+                    "matricula:'" + matricula + '\'' +
+                    ", nombre:'" + nombre + '\'' +
+                    ", tipoVehiculo:" + tipoVehiculo.name() +
+                    ", fechaAsignacion:" + fechaAsignacion +
+                "\n }"
+        );
+    }
 
 }

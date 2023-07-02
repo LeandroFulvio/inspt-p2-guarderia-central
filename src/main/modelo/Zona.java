@@ -1,5 +1,7 @@
 package main.modelo;
 
+import main.EntradaSalida;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -38,4 +40,15 @@ public class Zona implements Serializable {
     public int getCapacidad() {
         return capacidad;
     }
+
+    public void mostrar(){
+        EntradaSalida.mostrarString("Zona{" +
+                " Letra:'" + letra + '\'' +
+                ", Capacidad:" + capacidad +
+                ", Cantidad de vehiculos:" + cantidadVehiculos +
+                ", Tipo Vehiculo Admitidos { ");
+        tipoVehiculoSet.forEach(tp -> EntradaSalida.mostrarString(tp.name() + " ") );
+        EntradaSalida.mostrarString("}");
+    }
+
 }

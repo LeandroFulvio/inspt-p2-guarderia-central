@@ -79,4 +79,9 @@ public class Garage implements Serializable {
 
     //liberar garage (remover vehiculo)
 
+
+    public void mostrar(){
+        //TODO
+    }
+
 }
