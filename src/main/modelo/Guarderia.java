@@ -7,6 +7,7 @@ import main.FileManager;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *   FACADE ** Se usa para instanciar el resto de los elementos del sistema
@@ -20,7 +21,11 @@ public class Guarderia implements Serializable {
         garageList = new ArrayList<>();
         zonaList = new ArrayList<>();
         usuarioList = new ArrayList<>();
-        //Manejo de archivo - Excepciones manejadas por el java.FileManager
+
+        socioList = new ArrayList<>();
+        empleadoList = new ArrayList<>();
+
+        //Manejo de archivo - Excepciones manejadas por el FileManager
         FileManager fileManager = new FileManager();
         instance = fileManager.deserealizarGuarderia("Guarderia-central.txt");
         if(instance!=null) cargarData(instance);
@@ -44,6 +49,9 @@ public class Guarderia implements Serializable {
     private List<User> usuarioList;
     private User loggedUser;
 
+    private List<Socio> socioList;
+    private List<Empleado> empleadoList;
+
     private void save(){
         loggedUser=null;
         instance=this;
@@ -66,10 +74,18 @@ public class Guarderia implements Serializable {
 
 
     public void venderGarage(Garage garage, Socio socio){
+        //TODO: Que la venta se registre en la listas
         garage.comprar(socio);
     }
 
-    //Obtener garages libres
+    public void guardarVehiculoEnGarage(Garage garage, Vehiculo vehiculo){
+        //TODO: updates? Necesario?
+        garageList.stream()
+                .filter(g->g.getNumero()== garage.getNumero())
+                .peek(g -> g.guardarVehiculo(vehiculo))
+                .collect(Collectors.toList());
+
+    }
 
     //obtener garages de un socio
 
@@ -126,6 +142,14 @@ public class Guarderia implements Serializable {
         this.usuarioList.add(usuario);
     }
 
+    public void registrarSocio(Socio s){
+        this.socioList.add(s);
+    }
+
+    public void registrarEmpleado(Empleado e){
+        this.empleadoList.add(e);
+    }
+
     public void registrarZona(Zona zona){
         this.zonaList.add(zona);
     }
@@ -140,20 +164,60 @@ public class Guarderia implements Serializable {
         this.garageList.add(garage);
     }
 
+    public List<String> getSocioNameList(){
+        return this.socioList.stream()
+                .map(User::getNombre)
+                .collect(Collectors.toList());
+    }
+
+    public Socio getSocioByName(String name){
+        return this.socioList.stream()
+                .filter(x-> (name).equals(x.getNombre()))
+                .findFirst().orElse(null);
+    }
+
+    public List<Garage> getGaragesLibres(){
+        return this.garageList.stream()
+                .filter(Garage::isComprable)
+                .collect(Collectors.toList());
+    }
+
+    public List<Socio> getSociosConVehiculoSinGuardar(){
+        return this.socioList.stream()
+                .filter(Socio::tieneVehiculoSinGarage)
+                .collect(Collectors.toList());
+    }
+
+    public List<Garage> getGaragesLibreBySocio(Socio socio){
+        return this.garageList.stream()
+                .filter(g -> g.isVacio() && g.isOwner(socio))
+                .collect(Collectors.toList());
+    }
 
     public void mostrarTodo(){
-        EntradaSalida.mostrarString("Guarderia { ");
+        EntradaSalida.mostrarString("Guarderia { \n");
 
         //Zonas
+        EntradaSalida.mostrarString("Zonas {\n ");
+        this.zonaList.forEach(Zona::mostrar);
+        EntradaSalida.mostrarString("\n}");
 
         //Garages
+        EntradaSalida.mostrarString("Garages { \n");
+        this.garageList.forEach(Garage::mostrar);
+        EntradaSalida.mostrarString("\n}");
 
-        //Usuarios? Solo Socios y Empleados -> Armar listas separadas para estos?
+        //Empleados
+        EntradaSalida.mostrarString("Empleados { \n");
+        this.empleadoList.forEach(Empleado::mostrar);
+        EntradaSalida.mostrarString("\n}");
 
-        //Usuario loggeado?
+        //Socios
+        EntradaSalida.mostrarString("Socios { \n");
+        this.socioList.forEach(Socio::mostrar);
+        EntradaSalida.mostrarString("\n}");
 
-
-        EntradaSalida.mostrarString("}");
+        EntradaSalida.mostrarString("\n}");
     }
 
 }

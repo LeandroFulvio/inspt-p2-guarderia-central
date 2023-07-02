@@ -5,6 +5,9 @@ import main.ConsoleText;
 import main.EntradaSalida;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Administrador extends User implements Serializable {
 
@@ -46,14 +49,18 @@ public class Administrador extends User implements Serializable {
                 mostrarMenuPrincipal();
                 break;
             case 5: //5.- Vender Garage a Socio
-
+                mostrarMenuVentaGarage();
                 mostrarMenuPrincipal();
                 break;
             case 6: //6.- Asignar Vehiculo a Garage
-
+                mostrarMenuAsignarVehiculoGarage();
                 mostrarMenuPrincipal();
                 break;
-            case 7: //7.- Realizar Consulta
+            case 7: //7.- Asignar Empleado a Zona
+                //TODO:
+                mostrarMenuPrincipal();
+                break;
+            case 8: //8.- Realizar Consulta
                 Guarderia.getIntance().mostrarTodo();
                 mostrarMenuPrincipal();
                 break;
@@ -72,11 +79,13 @@ public class Administrador extends User implements Serializable {
         //Opcional crear vehiculos
         registrarVehiculos(newSocio);
         Guarderia.getIntance().registrarUsuario(newSocio);
+        Guarderia.getIntance().registrarSocio(newSocio);
     }
 
     private void registrarEmpleado(){
         Empleado newEmpleado = generarEmpleado();
         Guarderia.getIntance().registrarUsuario(newEmpleado);
+        Guarderia.getIntance().registrarEmpleado(newEmpleado);
     }
 
     private void registrarGarage(){
@@ -198,5 +207,112 @@ public class Administrador extends User implements Serializable {
             EntradaSalida.mostrarString(i + ".- " + TipoVehiculo.values()[i].name());
         }
     }
+
+    private void menuListaDeSocios(List<String> socioNames){
+        for (int i=0; i < socioNames.size(); i++) {
+            EntradaSalida.mostrarString(i + ".- " + socioNames.get(i));
+        }
+    }
+
+    private void menuListaDeGarages(List<Garage> garages){
+        garages.forEach(Garage::mostrarNombreZona);
+    }
+
+    private void menuListaDeVehiculos(List<Vehiculo> vehiculos){
+        for (int i=0; i < vehiculos.size(); i++) {
+            EntradaSalida.mostrarString(i + ".- "); //Indice para elegir
+            vehiculos.get(i).mostrar(); //datos del vehiculo
+        }
+    }
+
+    private void mostrarMenuVentaGarage(){
+        //Seleccionar Socio
+        Socio socio = menuSeleccionSocio(Guarderia.getIntance().getSocioNameList());
+
+        //Seleccionar Garage ->             obtener garages libres
+        Garage garage = menuSeleccionGarage(Guarderia.getIntance().getGaragesLibres());
+
+        //Registrar venta
+        Guarderia.getIntance().venderGarage(garage, socio);
+    }
+
+    private Socio menuSeleccionSocio(List<String> socioNames){
+        //Muestra lista de nombres de los socios
+        EntradaSalida.mostrarString(ConsoleText.MENU_SELECCION_SOCIO);
+        menuListaDeSocios(socioNames);
+        String nombreSeleccionado = null;
+        while (nombreSeleccionado==null) {
+            try {
+                nombreSeleccionado = socioNames.get(EntradaSalida.leerEntero());
+            } catch (Exception e) {
+                EntradaSalida.mostrarString(ConsoleText.NOMBRE_SOCIO_FUERA_RANGO);
+            }
+        }
+        return Guarderia.getIntance().getSocioByName(nombreSeleccionado);
+    }
+
+    private Garage menuSeleccionGarage(List<Garage> garages){
+        //mostrarlos
+        EntradaSalida.mostrarString(ConsoleText.MENU_SELECCION_GARAGE);
+        menuListaDeGarages(garages);
+
+        //Leer ID
+        Garage garage = null;
+        while (garage==null){
+            int seleccion = EntradaSalida.leerEntero();
+            garage = garages.stream()
+                    .filter(g-> g.getNumero()==seleccion)
+                    .findFirst().orElse(null);
+            if (garage==null) EntradaSalida.mostrarString(ConsoleText.ID_NO_EXISTE);
+        }
+        return garage;
+    }
+
+    private Vehiculo menuSeleccionVehiculo(List<Vehiculo> vehiculos){
+        //mostrar los vehiculos
+        EntradaSalida.mostrarString(ConsoleText.MENU_SELECCION_VEHICULO);
+        menuListaDeVehiculos(vehiculos);
+
+        //Leer id de la lista
+        Vehiculo vehiculoSeleccionado = null;
+        while (vehiculoSeleccionado==null){
+            int seleccion = EntradaSalida.leerEntero();
+            try {
+                vehiculoSeleccionado = vehiculos.get(seleccion);
+            }catch (Exception e){
+                EntradaSalida.mostrarString(ConsoleText.ID_NO_EXISTE);
+            }
+        }
+        return vehiculoSeleccionado;
+    }
+
+    private void mostrarMenuAsignarVehiculoGarage(){
+        //Elegir Socio con al menos 1 Vehiculo sin Guardar
+        List<Socio> sociosConVehiculoSinGuardar = Guarderia.getIntance().getSociosConVehiculoSinGuardar();
+        //TODO: Si vacio, saltear?
+
+        //Mostrar socios y que elija
+        Socio socioSeleccionado = menuSeleccionSocio( sociosConVehiculoSinGuardar.stream()
+                                                                .map(Socio::getNombre)
+                                                                .collect(Collectors.toList()) );
+
+        //Buscar Garages del Socio y se elije
+        Garage garageSeleccionado = menuSeleccionGarage(Guarderia.getIntance().getGaragesLibreBySocio(socioSeleccionado));
+
+        //Buscar Vehiculos del socio y Guardarlo
+        List<Vehiculo> vehiculosSinCochera = socioSeleccionado.getVehiculoList()
+                                                            .stream()
+                                                            .filter(x->!x.tieneCochera())
+                                                            .collect(Collectors.toList());
+        Vehiculo vehiculoAGuardar = menuSeleccionVehiculo(vehiculosSinCochera);
+
+        //Updates
+        vehiculoAGuardar.setFechaAsignacion(new Date());
+        garageSeleccionado.guardarVehiculo(vehiculoAGuardar);
+
+        //Guardar Vehiculo en Garage para actualizar en instancia?
+        Guarderia.getIntance().guardarVehiculoEnGarage(garageSeleccionado, vehiculoAGuardar);
+    }
+
 
 }

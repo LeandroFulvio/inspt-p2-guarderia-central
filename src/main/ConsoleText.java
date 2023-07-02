@@ -2,10 +2,7 @@ package main;
 
 public abstract class ConsoleText {
 
-    public static final String MENU_PRIMER_LOGGIN_1 = "No se encontraron usuarios. Se creará el usuario ADMINISTRADOR: \n"
-            + "Ingrese nombre " ;
-
-
+    public static final String MENU_PRIMER_LOGGIN_1 = "No se encontraron usuarios. Se creará el usuario ADMINISTRADOR: \n Ingrese nombre: " ;
 
     public static final String CREACION_NOMBRE = "Ingrese nombre: ";
     public static final String CREACION_PASSWORD = "Ingrese password: ";
@@ -26,6 +23,11 @@ public abstract class ConsoleText {
     public static final String CREACION_GARAGE_MENU_TIPO_ADMITIDO = "Seleccione el tipo de vehiculo adminitido en la Zona";
     public static final String CREACION_GARAGE_MENU_AGREGAR_TIPO_ADMITIDO = "1.- Agregar Tipo Vehiculo admitido en el Garage. \n 2.- Completar creacion.";
 
+    public static final String MENU_SELECCION_SOCIO = "Elija el Numero correspondiente al Socio que desea seleccionar";
+    public static final String NOMBRE_SOCIO_FUERA_RANGO = "El valor ingresado no es valida. Intente nuevamente.";
+    public static final String MENU_SELECCION_GARAGE = "Elija el ID del Garage a comprar.";
+    public static final String ID_NO_EXISTE = "El ID ingresado no es valido. Intente nuevamente.";
+    public static final String MENU_SELECCION_VEHICULO = "Elija el ID del Vehiculo a guardar en cochera.";
 
     public static final String BIENVENIDA = "Bienvenido al sistema de Guarderia Central.";
     public static final String LOGGED_AS = "Log exitoso. Bienvenido ";
@@ -39,6 +41,7 @@ public abstract class ConsoleText {
             " 5.- Vender Garage a Socio\n" +
             " 6.- Asignar Vehiculo a Garage\n" +
             " 7.- Realizar Consulta\n" +
+            " 8.- Realizar Consulta\n" +
             " Ingrese el numero de la opcion que desea: ";
 
     public static final String SOCIO_MENU_PRINCIPAL = "";

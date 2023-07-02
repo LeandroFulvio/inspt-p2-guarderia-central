@@ -37,6 +37,14 @@ public class Socio extends User implements Serializable {
         return vehiculoList;
     }
 
+    public boolean tieneVehiculoSinGarage(){
+        for (Vehiculo vehiculo : vehiculoList) {
+            if (!vehiculo.tieneCochera())
+                return true;
+        }
+        return false;
+    }
+
     public void agregarVehiculo(Vehiculo vehiculo){
         vehiculoList.add(vehiculo);
     }

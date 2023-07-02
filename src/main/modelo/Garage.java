@@ -1,5 +1,7 @@
 package main.modelo;
 
+import main.EntradaSalida;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -63,8 +65,19 @@ public class Garage implements Serializable {
         return vehiculosAdminitidos;
     }
 
-    public boolean estaLibre(){
+    public boolean isVacio(){
         return vehiculoGuardado==null;
+    }
+
+    /**
+     * Devuelve true cuando no tiene Socio asignado
+     */
+    public boolean isComprable(){
+        return socio==null;
+    }
+
+    public boolean isOwner(Socio socio){
+        return this.socio.getNombre().equals(socio.getNombre());
     }
 
     public void guardarVehiculo(Vehiculo v){
@@ -82,6 +95,10 @@ public class Garage implements Serializable {
 
     public void mostrar(){
         //TODO
+    }
+
+    public void mostrarNombreZona(){
+        EntradaSalida.mostrarString("ID: " + numero + " Zona: " + zona.getLetra() );
     }
 
 }
