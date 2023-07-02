@@ -73,6 +73,10 @@ public class Garage implements Serializable {
 
     }
 
+    public void conTipoAdminitido(TipoVehiculo tipo){
+        this.vehiculosAdminitidos.add(tipo);
+    }
+
     //liberar garage (remover vehiculo)
 
 }

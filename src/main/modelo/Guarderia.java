@@ -130,4 +130,14 @@ public class Guarderia implements Serializable {
         this.zonaList.add(zona);
     }
 
+    public Zona getZonaByLetra(String letra){
+        return this.zonaList.stream()
+                .filter(x-> x.getLetra().equals(letra))
+                .findFirst().orElse(null);
+    }
+
+    public void registrarGarage(Garage garage){
+        this.garageList.add(garage);
+    }
+
 }

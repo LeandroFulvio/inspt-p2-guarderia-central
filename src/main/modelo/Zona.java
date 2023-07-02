@@ -31,4 +31,11 @@ public class Zona implements Serializable {
         tipoVehiculoSet.add(tipoVehiculo);
     }
 
+    public String getLetra() {
+        return letra;
+    }
+
+    public int getCapacidad() {
+        return capacidad;
+    }
 }

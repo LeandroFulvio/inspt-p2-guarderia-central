@@ -39,6 +39,7 @@ public class Administrador extends User implements Serializable {
                 registrarZona();
                 break;
             case 4: //4.- Registrar Garage
+                registrarGarage();
                 break;
             case 5: //5.- Vender Garage a Socio
                 break;
@@ -65,6 +66,22 @@ public class Administrador extends User implements Serializable {
     private void registrarEmpleado(){
         Empleado newEmpleado = generarEmpleado();
         Guarderia.getIntance().registrarUsuario(newEmpleado);
+    }
+
+    private void registrarGarage(){
+        Garage newGarage = generarGarage();
+        Guarderia.getIntance().registrarGarage(newGarage);
+    }
+
+    private Zona obtenerZona(String letra){
+        Zona zona = Guarderia.getIntance().getZonaByLetra(letra);
+        if(zona!=null){
+            return zona;
+        }else {
+            EntradaSalida.mostrarString(ConsoleText.CREACION_GARAGE_ZONA_NO_EXISTE);
+            obtenerZona(EntradaSalida.leerString());
+        }
+        return null;
     }
 
     private Socio generarSocio(){
@@ -146,6 +163,23 @@ public class Administrador extends User implements Serializable {
         }while (EntradaSalida.leerEntero()!=2);
 
         return zona;
+    }
+
+    private Garage generarGarage(){
+        //datos garage -> Numero
+        EntradaSalida.mostrarString(ConsoleText.CREACION_GARAGE_NUMERO);//Ingrese numero
+        int numero = EntradaSalida.leerEntero();
+        EntradaSalida.mostrarString(ConsoleText.CREACION_GARAGE_ZONA);//Ingrese Zona letra
+        Garage newGarage = new Garage(numero, obtenerZona(EntradaSalida.leerString()));
+
+        //elegir tipos adminitidos
+        EntradaSalida.mostrarString(ConsoleText.CREACION_GARAGE_MENU_TIPO_ADMITIDO);
+        do{
+            menuTiposVehiculo();
+            newGarage.conTipoAdminitido(TipoVehiculo.values()[EntradaSalida.leerEntero()]);
+            EntradaSalida.mostrarString(ConsoleText.CREACION_GARAGE_MENU_AGREGAR_TIPO_ADMITIDO);
+        }while (EntradaSalida.leerEntero()!=2);
+        return newGarage;
     }
 
     private void menuTiposVehiculo(){

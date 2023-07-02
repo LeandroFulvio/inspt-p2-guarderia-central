@@ -19,7 +19,12 @@ public abstract class ConsoleText {
     public static final String CREACION_ZONA_LETRA = "Ingresa la Letra Identificable para la Zona";
     public static final String CREACION_ZONA_CAPACIDAD = "Ingrese la capacidad";
     public static final String CREACION_ZONA_TIPO_VEHICULO_ADMITIDO = "Seleccione el tipo de vehiculo adminitido en la Zona";
-    public static final String CREACION_ZONA_MENU_TIPO_VEHICULO= "1.- Ingresar otro \n " + "2.- Salir.";
+    public static final String CREACION_ZONA_MENU_TIPO_VEHICULO= "1.- Ingresar otro \n 2.- Salir.";
+    public static final String CREACION_GARAGE_NUMERO = "Ingrese el numero para el nuevo Garage";
+    public static final String CREACION_GARAGE_ZONA = "Ingrese la letra de la Zona del nuevo Garage";
+    public static final String CREACION_GARAGE_ZONA_NO_EXISTE = "La zona ingresada no existe. Intente de nuevo.";
+    public static final String CREACION_GARAGE_MENU_TIPO_ADMITIDO = "Seleccione el tipo de vehiculo adminitido en la Zona";
+    public static final String CREACION_GARAGE_MENU_AGREGAR_TIPO_ADMITIDO = "1.- Agregar Tipo Vehiculo admitido en el Garage. \n 2.- Completar creacion.";
 
 
     public static final String BIENVENIDA = "Bienvenido al sistema de Guarderia Central.";
