@@ -15,8 +15,6 @@ public class Zona implements Serializable {
 
     private Set<TipoVehiculo> tipoVehiculoSet;
 
-    //Asignacion de Empleados?
-
     public Zona(String letra, int capacidad) {
         this.letra = letra;
         this.capacidad = capacidad;
@@ -49,6 +47,10 @@ public class Zona implements Serializable {
                 ", Tipo Vehiculo Admitidos { ");
         tipoVehiculoSet.forEach(tp -> EntradaSalida.mostrarString(tp.name() + " ") );
         EntradaSalida.mostrarString("}");
+    }
+
+    public void mostrarLetra(){
+        EntradaSalida.mostrarString(letra + "  ");
     }
 
 }

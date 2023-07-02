@@ -35,6 +35,8 @@ public class Guarderia implements Serializable {
         this.usuarioList = oldInstance.usuarioList;
         this.garageList = oldInstance.garageList;
         this.zonaList = oldInstance.zonaList;
+        this.socioList = oldInstance.socioList;
+        this.empleadoList = oldInstance.empleadoList;
     }
 
     public static Guarderia getIntance(){
@@ -74,7 +76,6 @@ public class Guarderia implements Serializable {
 
 
     public void venderGarage(Garage garage, Socio socio){
-        //TODO: Que la venta se registre en la listas
         garage.comprar(socio);
     }
 
@@ -195,29 +196,29 @@ public class Guarderia implements Serializable {
     }
 
     public void mostrarTodo(){
-        EntradaSalida.mostrarString("Guarderia { \n");
+        EntradaSalida.mostrarString("Guarderia { ");
 
         //Zonas
-        EntradaSalida.mostrarString("Zonas {\n ");
+        EntradaSalida.mostrarString("Zonas { ");
         this.zonaList.forEach(Zona::mostrar);
-        EntradaSalida.mostrarString("\n}");
+        EntradaSalida.mostrarString("}");
 
         //Garages
-        EntradaSalida.mostrarString("Garages { \n");
+        EntradaSalida.mostrarString("Garages { ");
         this.garageList.forEach(Garage::mostrar);
-        EntradaSalida.mostrarString("\n}");
+        EntradaSalida.mostrarString("}");
 
         //Empleados
-        EntradaSalida.mostrarString("Empleados { \n");
+        EntradaSalida.mostrarString("Empleados { ");
         this.empleadoList.forEach(Empleado::mostrar);
-        EntradaSalida.mostrarString("\n}");
+        EntradaSalida.mostrarString("}");
 
         //Socios
-        EntradaSalida.mostrarString("Socios { \n");
+        EntradaSalida.mostrarString("Socios { ");
         this.socioList.forEach(Socio::mostrar);
-        EntradaSalida.mostrarString("\n}");
+        EntradaSalida.mostrarString(" }");
 
-        EntradaSalida.mostrarString("\n}");
+        EntradaSalida.mostrarString("}");
     }
 
 }

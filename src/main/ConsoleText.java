@@ -25,7 +25,7 @@ public abstract class ConsoleText {
 
     public static final String MENU_SELECCION_SOCIO = "Elija el Numero correspondiente al Socio que desea seleccionar";
     public static final String NOMBRE_SOCIO_FUERA_RANGO = "El valor ingresado no es valida. Intente nuevamente.";
-    public static final String MENU_SELECCION_GARAGE = "Elija el ID del Garage a comprar.";
+    public static final String MENU_SELECCION_GARAGE = "Elija el ID del Garage a Seleccionar.";
     public static final String ID_NO_EXISTE = "El ID ingresado no es valido. Intente nuevamente.";
     public static final String MENU_SELECCION_VEHICULO = "Elija el ID del Vehiculo a guardar en cochera.";
 
@@ -35,13 +35,14 @@ public abstract class ConsoleText {
 
     //Menu Principal
     public static final String ADM_MENU_PRINCIPAL = " 1.- Registrar Socio\n" +
-            " 2.- Registrar Empleado \n" +
+            " 2.- Registrar Empleado\n" +
             " 3.- Registrar Zona\n" +
             " 4.- Registrar Garage\n" +
             " 5.- Vender Garage a Socio\n" +
             " 6.- Asignar Vehiculo a Garage\n" +
-            " 7.- Realizar Consulta\n" +
+            " 7.- Asignar Empleado a Zona\n" +
             " 8.- Realizar Consulta\n" +
+            " 0.- Salir\n" +
             " Ingrese el numero de la opcion que desea: ";
 
     public static final String SOCIO_MENU_PRINCIPAL = "";

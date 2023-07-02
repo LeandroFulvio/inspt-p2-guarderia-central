@@ -20,7 +20,6 @@ public class Administrador extends User implements Serializable {
     public void ingresar() {
         System.out.println("Soy el admin");
         mostrarMenuPrincipal();
-
     }
 
     @Override
@@ -57,6 +56,7 @@ public class Administrador extends User implements Serializable {
                 mostrarMenuPrincipal();
                 break;
             case 7: //7.- Asignar Empleado a Zona
+                mostrarMenuAsignarZonaAEmpleado();
                 //TODO:
                 mostrarMenuPrincipal();
                 break;
@@ -65,6 +65,7 @@ public class Administrador extends User implements Serializable {
                 mostrarMenuPrincipal();
                 break;
             case 0: // Salir ?
+                EntradaSalida.mostrarString("Hasta la proxima!");
                 break;
             default:
                 //No valido
@@ -78,18 +79,21 @@ public class Administrador extends User implements Serializable {
         Socio newSocio = generarSocio();
         //Opcional crear vehiculos
         registrarVehiculos(newSocio);
+        EntradaSalida.mostrarString("Socio creado.");
         Guarderia.getIntance().registrarUsuario(newSocio);
         Guarderia.getIntance().registrarSocio(newSocio);
     }
 
     private void registrarEmpleado(){
         Empleado newEmpleado = generarEmpleado();
+        EntradaSalida.mostrarString("Empleado creado.");
         Guarderia.getIntance().registrarUsuario(newEmpleado);
         Guarderia.getIntance().registrarEmpleado(newEmpleado);
     }
 
     private void registrarGarage(){
         Garage newGarage = generarGarage();
+        EntradaSalida.mostrarString("Garage creado.");
         Guarderia.getIntance().registrarGarage(newGarage);
     }
 
@@ -146,7 +150,7 @@ public class Administrador extends User implements Serializable {
             EntradaSalida.mostrarString(ConsoleText.VEHICULO_REGISTRADO);
             EntradaSalida.mostrarString(ConsoleText.MENU_CREACION_VEHICULO);
         }
-
+        EntradaSalida.mostrarString("Vehiculo creado.");
     }
 
     private Vehiculo crearVehiculo(){
@@ -163,6 +167,7 @@ public class Administrador extends User implements Serializable {
 
     private void registrarZona(){
         Zona newZona = generarZona();
+        EntradaSalida.mostrarString("Zona creada.");
         Guarderia.getIntance().registrarZona(newZona);
     }
 
@@ -193,7 +198,7 @@ public class Administrador extends User implements Serializable {
         Garage newGarage = new Garage(numero, obtenerZona(EntradaSalida.leerString()));
 
         //elegir tipos adminitidos
-        EntradaSalida.mostrarString(ConsoleText.CREACION_GARAGE_MENU_TIPO_ADMITIDO);
+        EntradaSalida.mostrarString(ConsoleText.CREACION_GARAGE_MENU_TIPO_ADMITIDO); //TODO: Revisar si esto lo determina la zona y listo
         do{
             menuTiposVehiculo();
             newGarage.conTipoAdminitido(TipoVehiculo.values()[EntradaSalida.leerEntero()]);
@@ -305,6 +310,7 @@ public class Administrador extends User implements Serializable {
                                                             .filter(x->!x.tieneCochera())
                                                             .collect(Collectors.toList());
         Vehiculo vehiculoAGuardar = menuSeleccionVehiculo(vehiculosSinCochera);
+        //TODO: Validacion de tipo de vehiculo
 
         //Updates
         vehiculoAGuardar.setFechaAsignacion(new Date());
@@ -312,6 +318,14 @@ public class Administrador extends User implements Serializable {
 
         //Guardar Vehiculo en Garage para actualizar en instancia?
         Guarderia.getIntance().guardarVehiculoEnGarage(garageSeleccionado, vehiculoAGuardar);
+        //Actualizar Socio?
+    }
+
+    private void mostrarMenuAsignarZonaAEmpleado(){
+        //Elegir empleado
+
+        //Asignar Zonas
+
     }
 
 

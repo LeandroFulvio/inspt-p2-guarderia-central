@@ -33,14 +33,6 @@ public class Garage implements Serializable {
         this.fechaCompra = new Date();
     }
 
-    /**
-     * Compara las dimensiones del vehiculo con las propias
-     */
-    public boolean dimensionesAptas(){
-        //TODO:
-        return false;
-    }
-
     public int leerContadorLuz(){
         return this.contadorLuz;
     }
@@ -81,9 +73,7 @@ public class Garage implements Serializable {
     }
 
     public void guardarVehiculo(Vehiculo v){
-        //TODO: Validar vehiculo es del cliente
         vehiculoGuardado = v ;
-
     }
 
     public void conTipoAdminitido(TipoVehiculo tipo){
@@ -94,7 +84,12 @@ public class Garage implements Serializable {
 
 
     public void mostrar(){
-        //TODO
+        EntradaSalida.mostrarString("Garage:{");
+        EntradaSalida.mostrarString("Numero: " +numero+ ", Zona: " + zona.getLetra() + ", fecha de Compra: " + fechaCompra );
+        String datos = ", Con mantenimiento contratado: " + (mantenimientoContratado?"Si":"No") + (socio!=null ? (", Dueño: " + socio.getNombre()) : ", Sin Dueño")
+                + ", Contador de luz: " + contadorLuz + (vehiculoGuardado!=null ? (", Con Vehiculo: " + vehiculoGuardado.getNombre()) : ", Sin vehiculo Guardado");
+        EntradaSalida.mostrarString(datos);
+        EntradaSalida.mostrarString("}");
     }
 
     public void mostrarNombreZona(){

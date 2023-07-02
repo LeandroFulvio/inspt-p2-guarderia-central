@@ -21,11 +21,15 @@ public class Socio extends User implements Serializable {
 
     @Override
     public void ingresar() {
-
+        mostrarMenuPrincipal();
     }
 
     @Override
     public void mostrarMenuPrincipal() {
+        //Menu mostrar vehiculos
+        //Menu mostrar garages
+        //menu mostrar todo
+        //Salir
 
     }
 
@@ -52,8 +56,8 @@ public class Socio extends User implements Serializable {
     public void mostrar() {
         EntradaSalida.mostrarString("Datos Socio: {");
         super.mostrar();
-        EntradaSalida.mostrarString( ", \n vehiculos: { " );
+        EntradaSalida.mostrarString( "}\n Vehiculos: {" );
         vehiculoList.forEach(Vehiculo::mostrar);
-        EntradaSalida.mostrarString("}, fechaIngreso=" + fechaIngreso +'}');
+        EntradaSalida.mostrarString("}, fecha Ingreso a la Guarderia=" + fechaIngreso +'}');
     }
 }

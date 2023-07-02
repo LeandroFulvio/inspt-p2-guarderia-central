@@ -29,6 +29,10 @@ public class Vehiculo implements Serializable {
         return tipoVehiculo;
     }
 
+    public String getNombre(){
+        return nombre;
+    }
+
     public boolean tieneCochera(){//Si tiene fecha asignada a cochera, ya esta guardado
         return fechaAsignacion!=null;
     }
@@ -40,7 +44,7 @@ public class Vehiculo implements Serializable {
                     ", nombre:'" + nombre + '\'' +
                     ", tipoVehiculo:" + tipoVehiculo.name());
         if(fechaAsignacion!=null) EntradaSalida.mostrarString(", fecha Asignacion:" + fechaAsignacion);
-        EntradaSalida.mostrarString("\n }" );
+        EntradaSalida.mostrarString("}" );
     }
 
 }
