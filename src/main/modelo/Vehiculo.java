@@ -21,9 +21,6 @@ public class Vehiculo implements Serializable {
     public void setFechaAsignacion(Date fechaAsignacion) {
         this.fechaAsignacion = fechaAsignacion;
     }
-    public Date getFechaAsignacion() {
-        return fechaAsignacion;
-    }
 
     public TipoVehiculo getTipoVehiculo() {
         return tipoVehiculo;

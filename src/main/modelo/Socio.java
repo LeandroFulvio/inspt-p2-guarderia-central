@@ -12,6 +12,8 @@ public class Socio extends User implements Serializable {
 
     private List<Vehiculo> vehiculoList; //Vehiculos propios del Socio
 
+    //TODO Agregar atributo DNI
+
     private Date fechaIngreso; //Fecha de Ingreso a la Guarderia
 
     public Socio(String nombre, String password, String direccion, String telefono) {
