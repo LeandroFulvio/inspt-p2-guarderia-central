@@ -2,15 +2,71 @@
 
 @startuml CadenaDeLlamadas
 
-participant ":Main" as M
+participant ":Administrador" as Adm
+participant "EntradaSalida" as SOUT
+participant ":Empleado" as emp
+participant ":Guarderia" as G
+
+Adm -> Adm : registrarEmpleado()
+activate Adm
+
+Adm -> Adm : generarEmpleado()
+
+Adm -> SOUT : mostrarString(ConsoleText.CREACION_NOMBRE)
+activate SOUT
+return
+Adm -> SOUT : leerString()
+activate SOUT
+return
+Adm -> SOUT : mostrarString(ConsoleText.CREACION_PASSWORD)
+activate SOUT
+return
+Adm -> SOUT : leerString()
+activate SOUT
+return
+Adm -> SOUT : mostrarString(ConsoleText.CREACION_DIRECCION)
+activate SOUT
+return
+Adm -> SOUT : leerString()
+activate SOUT
+return
+Adm -> SOUT : mostrarString(ConsoleText.CREACION_TELEFONO)
+activate SOUT
+return
+Adm -> SOUT : leerString()
+activate SOUT
+return
+Adm -> SOUT : mostrarString(ConsoleText.CREACION_CODIGO)
+activate SOUT
+return
+Adm -> SOUT : leerString()
+activate SOUT
+return
+Adm -> SOUT : mostrarString(ConsoleText.CREACION_ESPECIALIDAD)
+activate SOUT
+return
+Adm -> SOUT : leerString()
+activate SOUT
+return
+Adm -> emp : Empleado(String, String, String, String, String, String)
+activate emp
+return
+
+Adm -> SOUT : mostrarString("Empleado creado.")
+activate SOUT
+return
+
+Adm -> G : registrarEmpleado(Empleado)
+activate G
+return
+
+/'
 participant ":Torcaza" as T
 participant ":Paloma" as P
 participant ":Ave" as Av
 participant ":Animal" as An
 participant ":Object" as O
-participant "out:System.PrintStream" as SOUT
-
-M -> T: Torcaza("Torcaza")
+Adm -> T: Torcaza("Torcaza")
 activate T
 
 T -> P: super()<<implicito>>
@@ -45,5 +101,5 @@ T -> SOUT : println("...")
 activate SOUT
 return
 return
-
+'/
 @enduml
