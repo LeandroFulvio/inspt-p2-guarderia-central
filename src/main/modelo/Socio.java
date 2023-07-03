@@ -1,5 +1,6 @@
 package main.modelo;
 
+import main.ConsoleText;
 import main.EntradaSalida;
 
 import java.io.Serializable;
@@ -26,15 +27,28 @@ public class Socio extends User implements Serializable {
 
     @Override
     public void mostrarMenuPrincipal() {
-        //Menu mostrar vehiculos
-        //Menu mostrar garages
-        //menu mostrar todo
-        //Salir
+        EntradaSalida.mostrarString(ConsoleText.SOCIO_MENU_PRINCIPAL);
+        switch (EntradaSalida.leerEntero()) {
+            case 1: //1.- Mostrar data propia
+                this.mostrar();
+                mostrarMenuPrincipal();
+                break;
+            case 2: //2.- Mostrar Vehiculos
+                vehiculoList.forEach(Vehiculo::mostrar);
+                mostrarMenuPrincipal();
+                break;
+            case 3: //3.- mostrar Garages
+                Guarderia.getIntance().getGaragesBySocio(this)
+                        .forEach(Garage::mostrar);
+                mostrarMenuPrincipal();
+                break;
+            case 4: //4.- Salir
+                EntradaSalida.mostrarString("Hasta la proxima!");
+                break;
+            default:
+                break;
+        }
 
-    }
-
-    public Date getFechaIngreso() {
-        return fechaIngreso;
     }
 
     public List<Vehiculo> getVehiculoList() {
@@ -60,4 +74,5 @@ public class Socio extends User implements Serializable {
         vehiculoList.forEach(Vehiculo::mostrar);
         EntradaSalida.mostrarString("}, fecha Ingreso a la Guarderia=" + fechaIngreso +'}');
     }
+
 }

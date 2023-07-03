@@ -1,2 +1,49 @@
 /'Diagrama ejemplo en pagina 117 indice del pdf '/
 
+@startuml CadenaDeLlamadas
+
+participant ":Main" as M
+participant ":Torcaza" as T
+participant ":Paloma" as P
+participant ":Ave" as Av
+participant ":Animal" as An
+participant ":Object" as O
+participant "out:System.PrintStream" as SOUT
+
+M -> T: Torcaza("Torcaza")
+activate T
+
+T -> P: super()<<implicito>>
+activate P
+
+P -> Av: super(1)
+activate Av
+
+Av -> An: super()<<implicito>>
+activate An
+
+An -> O: super()<<implicito>>
+activate O
+return
+
+An -> SOUT : println("...")
+activate SOUT
+return
+return
+
+Av -> SOUT : println("...")
+activate SOUT
+return
+return
+
+P -> SOUT : println("...")
+activate SOUT
+return
+return
+
+T -> SOUT : println("...")
+activate SOUT
+return
+return
+
+@enduml

@@ -82,6 +82,9 @@ public class Garage implements Serializable {
 
     //liberar garage (remover vehiculo)
 
+    public boolean perteneceAZona(String letra){
+        return letra.equals(zona.getLetra());
+    }
 
     public void mostrar(){
         EntradaSalida.mostrarString("Garage:{");

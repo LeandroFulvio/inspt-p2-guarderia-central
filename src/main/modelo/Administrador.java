@@ -30,12 +30,10 @@ public class Administrador extends User implements Serializable {
         //Leer opciones y redirigir
         switch (EntradaSalida.leerEntero()) {
             case 1: // 1.- Registrar Socio
-//                EntradaSalida.leerString();
                 registrarSocio();
                 mostrarMenuPrincipal();
                 break;
             case 2: //2.- Registrar Empleado
-//                EntradaSalida.leerString();
                 registrarEmpleado();
                 mostrarMenuPrincipal();
                 break;

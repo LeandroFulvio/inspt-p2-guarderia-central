@@ -1,5 +1,6 @@
 package main.modelo;
 
+import main.ConsoleText;
 import main.EntradaSalida;
 
 import java.io.Serializable;
@@ -27,11 +28,29 @@ public class Empleado extends User implements Serializable {
 
     @Override
     public void mostrarMenuPrincipal() {
-        //Menu mostrar data propia
-        //Mostrar zonas
-        //mostrar garages de las zonas a cargo
-        //Salir?
-
+        EntradaSalida.mostrarString(ConsoleText.EMPLEADO_MENU_PRINCIPAL);
+        switch (EntradaSalida.leerEntero()) {
+            case 1: //1.- Menu mostrar data propia
+                this.mostrar();
+                mostrarMenuPrincipal();
+                break;
+            case 2: //2.- Mostrar zonas
+                this.zonasAsignadas.forEach(Zona::mostrar);
+                mostrarMenuPrincipal();
+                break;
+            case 3: //3.- mostrar garages de las zonas a cargo
+                zonasAsignadas.forEach(x->{
+                    Guarderia.getIntance().getGaragesByZona(x)
+                            .forEach(Garage::mostrar);
+                });
+                mostrarMenuPrincipal();
+                break;
+            case 4: //4.- Salir
+                EntradaSalida.mostrarString("Hasta la proxima!");
+                break;
+            default:
+                break;
+        }
     }
 
     @Override

@@ -183,9 +183,21 @@ public class Guarderia implements Serializable {
                 .collect(Collectors.toList());
     }
 
+    public List<Garage> getGaragesByZona(Zona zona){
+        return this.garageList.stream()
+                .filter(g->g.perteneceAZona(zona.getLetra()))
+                .collect(Collectors.toList());
+    }
+
     public List<Socio> getSociosConVehiculoSinGuardar(){
         return this.socioList.stream()
                 .filter(Socio::tieneVehiculoSinGarage)
+                .collect(Collectors.toList());
+    }
+
+    public List<Garage> getGaragesBySocio(Socio socio){
+        return this.garageList.stream()
+                .filter(g -> g.isOwner(socio))
                 .collect(Collectors.toList());
     }
 

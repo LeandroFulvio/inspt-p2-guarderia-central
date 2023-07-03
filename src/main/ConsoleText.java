@@ -45,8 +45,18 @@ public abstract class ConsoleText {
             " 0.- Salir\n" +
             " Ingrese el numero de la opcion que desea: ";
 
-    public static final String SOCIO_MENU_PRINCIPAL = "";
-    public static final String EMPLEADO_MENU_PRINCIPAL = "";
+    public static final String SOCIO_MENU_PRINCIPAL = "1.- Mostrar Datos del Propios\n" +
+            "2.- Mostrar Vehiculos\n"+
+            "3.- Mostrar Garages\n"+
+            "4.- Salir\n" +
+            " Ingrese el numero de la opcion que desea: ";
+
+    public static final String EMPLEADO_MENU_PRINCIPAL = "1.- Mostrar Datos del Propios\n" +
+            "2.- Mostrar Zonas a Cargo\n"+
+            "3.- Mostrar Garages a Cargo\n"+
+            "4.- Salir\n" +
+            " Ingrese el numero de la opcion que desea: ";
+
 
     //Crear cosas
     public static final String MENU_CREACION_VEHICULO = "¿Desea registrar un vehiculo? \n" +
