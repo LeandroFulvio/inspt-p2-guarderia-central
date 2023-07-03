@@ -24,8 +24,6 @@ public class Administrador extends User implements Serializable {
 
     @Override
     public void mostrarMenuPrincipal() {
-        //TODO: Try catch para valir inesperado como un string
-
         EntradaSalida.mostrarString(ConsoleText.ADM_MENU_PRINCIPAL);
         //Leer opciones y redirigir
         switch (EntradaSalida.leerEntero()) {
@@ -138,13 +136,9 @@ public class Administrador extends User implements Serializable {
 
     private void registrarVehiculos(Socio socio){
         //Opcional de deseo de generacion de vehiculo con while
-        //TODO: Try catch para valir inesperado como un string
-
         EntradaSalida.mostrarString(ConsoleText.MENU_CREACION_VEHICULO);
         while (EntradaSalida.leerEntero()==1){ // 1.- Agregar Vehiculo
-//            EntradaSalida.leerString();
             socio.agregarVehiculo(crearVehiculo());
-//            EntradaSalida.leerString();
             EntradaSalida.mostrarString(ConsoleText.VEHICULO_REGISTRADO);
             EntradaSalida.mostrarString(ConsoleText.MENU_CREACION_VEHICULO);
         }
@@ -321,9 +315,47 @@ public class Administrador extends User implements Serializable {
 
     private void mostrarMenuAsignarZonaAEmpleado(){
         //Elegir empleado
+        Empleado empleadoSeleccionado = menuSeleccionarEmpleado(Guarderia.getIntance().getEmpleadoList());
 
-        //Asignar Zonas
+        //Elegir y Asignar Zonas
+        Zona zonaSeleccionada = menuSeleccionarZona();
+        EntradaSalida.mostrarString("Asignacion completa!");
+        empleadoSeleccionado.asignarZona(zonaSeleccionada);
+    }
 
+    private Empleado menuSeleccionarEmpleado(List<Empleado> empleados){
+        EntradaSalida.mostrarString(ConsoleText.MENU_SELECCION_EMPLEADO);
+        //Menu de empleados
+        empleados.forEach(Empleado::mostrarNombreCodigo);
+
+        //Leer codigo y buscar empleado
+        Empleado empleadoSeleccionado = null;
+        while (empleadoSeleccionado==null){
+            String codigo = EntradaSalida.leerString();
+
+            empleadoSeleccionado = empleados.stream()
+                    .filter(e-> e.isCodigo(codigo))
+                    .findFirst().orElse(null);
+
+            if (empleadoSeleccionado==null) EntradaSalida.mostrarString(ConsoleText.MENU_CODIGO_NO_EXISTE);
+        }
+        return empleadoSeleccionado;
+    }
+
+    private Zona menuSeleccionarZona(){
+        //Mostrar Zonas
+        EntradaSalida.mostrarString(ConsoleText.MENU_SELECCION_ZONA);
+        Guarderia.getIntance().getZonaList().forEach(Zona::mostrar);
+
+        //Leer Letra
+        Zona zonaSeleccionada = null;
+        while (zonaSeleccionada==null){
+            String letra = EntradaSalida.leerString();
+            zonaSeleccionada = Guarderia.getIntance().getZonaByLetra(letra);
+            if(zonaSeleccionada==null) EntradaSalida.mostrarString(ConsoleText.MENU_LETRA_NO_EXISTE);
+        }
+
+        return zonaSeleccionada;
     }
 
 

@@ -62,8 +62,16 @@ public class Empleado extends User implements Serializable {
         EntradaSalida.mostrarString("\n }\n}");
     }
 
+    public void mostrarNombreCodigo(){
+        EntradaSalida.mostrarString("Codigo: " + codigo + " Nombre: " + getNombre() );
+    }
+
     public void asignarZona(Zona zona){
         zonasAsignadas.add(zona);
+    }
+
+    public boolean isCodigo(String codigo){
+        return codigo.equals(this.codigo);
     }
 
 }

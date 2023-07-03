@@ -207,6 +207,14 @@ public class Guarderia implements Serializable {
                 .collect(Collectors.toList());
     }
 
+    public List<Empleado> getEmpleadoList(){
+        return this.empleadoList;
+    }
+
+    public List<Zona> getZonaList(){
+        return this.zonaList;
+    }
+
     public void mostrarTodo(){
         EntradaSalida.mostrarString("Guarderia { ");
 

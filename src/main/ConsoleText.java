@@ -28,6 +28,10 @@ public abstract class ConsoleText {
     public static final String MENU_SELECCION_GARAGE = "Elija el ID del Garage a Seleccionar.";
     public static final String ID_NO_EXISTE = "El ID ingresado no es valido. Intente nuevamente.";
     public static final String MENU_SELECCION_VEHICULO = "Elija el ID del Vehiculo a guardar en cochera.";
+    public static final String MENU_SELECCION_EMPLEADO = "Elija el codigo del Empleado a seleccionar.";
+    public static final String MENU_CODIGO_NO_EXISTE = "El codigo elegido no es valido. Intente de nuevo.";
+    public static final String MENU_SELECCION_ZONA = "Elija la Letra de la Zona a seleccionar.";
+    public static final String MENU_LETRA_NO_EXISTE = "La letra elegido no es una Zona valida. Intente de nuevo.";
 
     public static final String BIENVENIDA = "Bienvenido al sistema de Guarderia Central.";
     public static final String LOGGED_AS = "Log exitoso. Bienvenido ";
