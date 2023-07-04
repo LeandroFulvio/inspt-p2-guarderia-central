@@ -1,0 +1,226 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+skinparam backgroundColor transparent
+skinparam monochrome true
+skinparam shadowing false
+
+/'Class07 <.. Class08'/
+
+enum TipoVehiculo {
+  MOTORHOME
+  CASARODANTE
+  ARRASTRE
+  CARAVANA
+  TRAILER
+}
+
+/'
+**** Vehiculo Agregacion con TipoVehiculo ****
+'/
+Vehiculo o-- TipoVehiculo : tipoVehiculo
+Vehiculo "*" <-- "1" Socio : vehiculosList
+
+class Vehiculo {
+  matricula : String
+  nombre : String
+  fechaAsignacion : Date
+
+    + Vehiculo(matricula:String, nombre:String, tipo:TipoVehiculo)
+    + setFechaAsignacion(fechaAsignacion:Date)
+    + setFechaAsignacion(Date)
+    + getTipoVehiculo() : TipoVehiculo
+    + getNombre() : String
+    + tieneCochera() : boolean
+    + mostrar()
+}
+
+class     Garage {
+  numero : Integer
+  contadorLuz : Integer
+  mantenimiento : Boolean
+  fechaCompra : Date
+
+    + Garage(numero:Integer, Zona zona)
+    + comprar(Socio)
+    + leerContadorLuz() : Integer
+    + contratarMantenimiento()
+    + getNumero() : Integer
+    + isMantenimientoContratado() : Boolean
+    + getFechaCompra() : Date
+    + getVehiculosAdminitidos() : TipoVehiculo[]
+    + isVacio() : Boolean
+    + isComprable() : Boolean
+    + isOwner() : Boolean
+    + guardarVehiculo(Vehiculo v)
+    + conTipoAdminitido()
+    + perteneceAZona(String letra) : Boolean
+    + mostrar()
+    + mostrarNombreZona()
+
+}
+/'
+**** Garage Composicion con Vehiculo ****
+**** Garage Agregacion con Zona ****
+'/
+Garage o-- Vehiculo : vehiculoGuardado
+Garage o-- Zona : zona
+Garage o-- Socio : socio
+Garage "1" *-- "*" TipoVehiculo : vehiculosAdminitos
+/'
+**** Garage Agregacion con Socio **** ?? No se si es ideal...
+'/
+
+class     Guarderia {
+  loggedUser : User
+  instancia : Guarderia
+
+    -Guarderia()
+    +getInstance():Guarderia
+    -cargarData(Guarderia)
+    -save()
+    +run()
+    +venderGarage(Garage, Socio)
+    +guardarVehiculoEnGarage(Garage, Vehiculo)
+    -loggin()
+    -primerLoggin()
+    -getUserByName(String) : User
+    +registrarUsuario(User)
+    +registrarSocio(Socio)
+    +registrarEmpleado(Empleado)
+    +registrarZona(Zona)
+    +getZonaByLetra(String)
+    +registrarGarage(Garage)
+    +getSocioNameList() : Socio[]
+    +getSocioByName(String) : Socio
+    +getGaragesLibres() : Garage[]
+    +getGaragesByZona() : Garage[]
+    +getSociosConVehiculoSinGuardar() : Socio[]
+    +getGaragesBySocio() : Garage[]
+    +getGaragesLibreBySocio() : Garage[]
+    +getEmpleadoList() : Empleado[]
+    +getZonaList() : Zona[]
+    +mostrarTodo()
+}
+
+Guarderia --> Guarderia
+Guarderia "1" *--> "*" Garage : garageList
+Guarderia "1" *--> "*" Zona : zonaList
+Guarderia "1" *--> "*" Empleado : empleadoList
+Guarderia "1" *--> "*" Socio : socioList
+Guarderia "1" *--> "*" User : usuarioList
+
+class     Zona {
+  letra : String
+  capacidad : Integer
+  cantidadVehiculos : Integer
+
+    + Zona (letra:String, capacidad:Integer, )
+    + getCantidadVehiculos() : Integer
+    + conTipoVehiculo(TipoVehiculo)
+    + getLetra() : String
+    + getCapacidad() : Integer
+    + mostrar()
+    + mostrarLetra()
+}
+
+Zona "1" *-- "many" TipoVehiculo : vehiculosAdminitos
+
+
+abstract class User {
+  nombre : String
+  password : String
+  direccion : String
+  telefono : String
+
+  + User(String, String, String, String)
+  + ingresar()
+  + mostrarMenuPrincipal()
+  + validar(String) : Boolean
+  + actualizarPassword(String, String) : Boolean
+  + getNombre() : String
+  + mostrar()
+}
+
+class     Socio {
+  fechaIngreso : Date
+  dni : Long
+
+    + Socio(String, String, String)
+    + ingresar()
+    + mostrarMenuPrincipal()
+    + getVehiculoList() : Vehiculo[]
+    + tieneVehiculoSinGarage() : boolean
+    + mostrar()
+    + agregarVehiculo(Vehiculo v)
+}
+
+class     Empleado {
+  codigo : Integer
+  especialidad : String
+
+    Empleado(String, String,String,String,String,String)
+    ingresar()
+    mostrarMenuPrincipal()
+    mostrar()
+    mostrarNombreCodigo()
+    asignarZona(Zona)
+    isCodigo(String) : boolean
+
+}
+
+Empleado "1" o-- "*" Zona : zonasAsignadas
+
+class     Administrador {
+    + Administrador(String, String, String, String)
+    + ingresar()
+    + mostrarMenuPrincipal()
+    - registrarSocio()
+    - registrarEmpleado()
+    - registrarGarage()
+    - obtenerZona(String) : Zona
+    - generarSocio() : Socio
+    - generarEmpleado() : Empleado
+    - registrarVehiculos(Socio)
+    - crearVehiculo() : Vehiculo
+    - registrarZona()
+    - generarZona() : Zona
+    - generarGarage() : Garage
+    - menuTiposVehiculo()
+    - menuListaDeSocios(Socio[])
+    - menuListaDeGarages(Garage[])
+    - menuListaDeVehiculos(Vehiculo[])
+    - mostrarMenuVentaGarage()
+    - menuSeleccionSocio() : Socio
+    - menuSeleccionGarage() : Garage
+    - menuSeleccionVehiculo() : Vehiculo
+    - mostrarMenuAsignarVehiculoGarage()
+    - mostrarMenuAsignarZonaAEmpleado()
+    - menuSeleccionarEmpleado(Empleado[]) : Empleado
+    - menuSeleccionarZona() : Zona
+}
+/' DEPENENCIAS DE ADMINISTRADOR CON EL RESTO DEL SISTEMA? '/
+
+User <|-- Administrador
+User <|-- Empleado
+User <|-- Socio
+
+class EntradaSalida {
+  +leerString() : String
+  +leerEntero() : Integer
+  +mostrarString(String)
+  +leerBoolean() : boolean
+}
+
+abstract class ConsoleText {
+}
+
+class FileManager {
+    + FileManager()
+    + deserealizarGuarderia(String) : Guarderia
+    + serializarGuaderia(String, Guarderia)
+}
+
+Guarderia <.. FileManager
+
+@enduml
