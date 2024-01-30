@@ -1,9 +1,8 @@
 # Guarderia Central
 
-## Projecto Primer Parcial - Informatica Aplicada - Programacion II
+## Projecto Final - Informatica Aplicada - Programacion II
 
 Autores
-- Lucas Marchioli
 - Leandro Fulvio
 
 Profesores

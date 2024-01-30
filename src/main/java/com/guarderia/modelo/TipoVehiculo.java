@@ -1,4 +1,4 @@
-package main.modelo;
+package com.guarderia.modelo;
 
 import java.io.Serializable;
 
