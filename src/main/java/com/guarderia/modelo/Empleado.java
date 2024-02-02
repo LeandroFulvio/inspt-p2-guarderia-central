@@ -1,74 +1,67 @@
 package com.guarderia.modelo;
 
-import main.ConsoleText;
-import main.EntradaSalida;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Empleado extends User implements Serializable {
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "empleado")
+public class Empleado {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
     private String codigo;
     private String especialidad;
 
-    private Set<Zona> zonasAsignadas;
+    private Long dni;
+    private String direccion;
+    private String telefono;
 
-    public Empleado(String nombre, String password, String direccion, String telefono, String codigo, String especialidad) {
-        super(nombre, password, direccion, telefono);
-        this.codigo=codigo;
-        this.especialidad=especialidad;
-        this.zonasAsignadas = new HashSet<>();
-    }
+//    private Set<Zona> zonasAsignadas;
+    //TODO: Nueva tabla para relacion zona - empleado
 
-    @Override
-    public void ingresar() {
-        mostrarMenuPrincipal();
-    }
+    @JoinColumn(name = "user_id", updatable = false)
+    private User user;
 
-    @Override
-    public void mostrarMenuPrincipal() {
-        EntradaSalida.mostrarString(ConsoleText.EMPLEADO_MENU_PRINCIPAL);
-        switch (EntradaSalida.leerEntero()) {
-            case 1: //1.- Menu mostrar data propia
-                this.mostrar();
-                mostrarMenuPrincipal();
-                break;
-            case 2: //2.- Mostrar zonas
-                this.zonasAsignadas.forEach(Zona::mostrar);
-                mostrarMenuPrincipal();
-                break;
-            case 3: //3.- mostrar garages de las zonas a cargo
-                zonasAsignadas.forEach(x->{
-                    Guarderia.getIntance().getGaragesByZona(x)
-                            .forEach(Garage::mostrar);
-                });
-                mostrarMenuPrincipal();
-                break;
-            case 4: //4.- Salir
-                EntradaSalida.mostrarString("Hasta la proxima!");
-                break;
-            default:
-                break;
-        }
-    }
-
-    @Override
-    public void mostrar(){
-        EntradaSalida.mostrarString("Datos Empleado: {");
-        super.mostrar();
-        EntradaSalida.mostrarString(", codigo: " + codigo + ", especialidad: " + especialidad + ", Zonas Asignadas: {\n");
-        zonasAsignadas.forEach(Zona::mostrarLetra);
-        EntradaSalida.mostrarString("\n }\n}");
-    }
-
-    public void mostrarNombreCodigo(){
-        EntradaSalida.mostrarString("Codigo: " + codigo + " Nombre: " + getNombre() );
-    }
-
-    public void asignarZona(Zona zona){
-        zonasAsignadas.add(zona);
-    }
+//
+//    @Override
+//    public void mostrarMenuPrincipal() {
+//        EntradaSalida.mostrarString(ConsoleText.EMPLEADO_MENU_PRINCIPAL);
+//        switch (EntradaSalida.leerEntero()) {
+//            case 1: //1.- Menu mostrar data propia
+//                this.mostrar();
+//                mostrarMenuPrincipal();
+//                break;
+//            case 2: //2.- Mostrar zonas
+//                this.zonasAsignadas.forEach(Zona::mostrar);
+//                mostrarMenuPrincipal();
+//                break;
+//            case 3: //3.- mostrar garages de las zonas a cargo
+//                zonasAsignadas.forEach(x->{
+//                    Guarderia.getIntance().getGaragesByZona(x)
+//                            .forEach(Garage::mostrar);
+//                });
+//                mostrarMenuPrincipal();
+//                break;
+//            case 4: //4.- Salir
+//                EntradaSalida.mostrarString("Hasta la proxima!");
+//                break;
+//            default:
+//                break;
+//        }
+//    }
 
     public boolean isCodigo(String codigo){
         return codigo.equals(this.codigo);

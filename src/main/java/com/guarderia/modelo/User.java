@@ -1,10 +1,8 @@
 package com.guarderia.modelo;
 
-import main.ConsoleText;
-import main.EntradaSalida;
-
 import java.io.Serializable;
 
+@Deprecated
 public abstract class User implements Serializable {
 
     private String nombre;
@@ -19,8 +17,8 @@ public abstract class User implements Serializable {
         this.telefono = telefono;
     }
 
-    public abstract void ingresar(); // Abstracto con implementacion en cada user
-    public abstract void mostrarMenuPrincipal();
+//    public abstract void ingresar(); // Abstracto con implementacion en cada user
+//    public abstract void mostrarMenuPrincipal();
 
     public boolean validar(String pass){
         return this.password.equals(pass);
@@ -41,11 +39,6 @@ public abstract class User implements Serializable {
         return nombre;
     }
 
-    public void mostrar(){
-        EntradaSalida.mostrarString("nombre:'" + nombre + '\'' +
-//                ", password:'" + password + '\'' +
-                ", direccion:'" + direccion + '\'' +
-                ", telefono:'" + telefono + '\'' );
-    }
+
 
 }

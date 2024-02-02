@@ -1,56 +1,35 @@
 package com.guarderia.modelo;
 
-import main.EntradaSalida;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
-import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
-public class Zona implements Serializable {
+@Data
+@Builder
+@RequiredArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "zona")
+public class Zona {
 
+    @Id
     private String letra; //Identificador local de la Zona
 
     private int capacidad;
+
+    @Column(name = "cantidad_vehiculos")
     private int cantidadVehiculos;
 
-    private Set<TipoVehiculo> tipoVehiculoSet;
-
-    public Zona(String letra, int capacidad) {
-        this.letra = letra;
-        this.capacidad = capacidad;
-        this.cantidadVehiculos = 0;
-        this.tipoVehiculoSet = new HashSet<>();
-    }
-
-    //Registrar vehiculo en capacidad
-
-    //Quitar vehiculo de capacidad
+    private List<TipoVehiculo> tipoVehiculoSet;
+    //TODO: Nueva tabla para relacion zona - TipoVehiculoAdmitidos
 
 
-    public void conTipoVehiculo(TipoVehiculo tipoVehiculo){
-        tipoVehiculoSet.add(tipoVehiculo);
-    }
-
-    public String getLetra() {
-        return letra;
-    }
-
-    public int getCapacidad() {
-        return capacidad;
-    }
-
-    public void mostrar(){
-        EntradaSalida.mostrarString("Zona{" +
-                " Letra:'" + letra + '\'' +
-                ", Capacidad:" + capacidad +
-                ", Cantidad de vehiculos:" + cantidadVehiculos +
-                ", Tipo Vehiculo Admitidos { ");
-        tipoVehiculoSet.forEach(tp -> EntradaSalida.mostrarString(tp.name() + " ") );
-        EntradaSalida.mostrarString("}");
-    }
-
-    public void mostrarLetra(){
-        EntradaSalida.mostrarString(letra + "  ");
-    }
 
 }

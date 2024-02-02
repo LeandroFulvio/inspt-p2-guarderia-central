@@ -1,9 +1,5 @@
 package com.guarderia.modelo;
 
-import main.ConsoleText;
-import main.EntradaSalida;
-import main.FileManager;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +9,7 @@ import java.util.stream.Collectors;
  *   FACADE ** Se usa para instanciar el resto de los elementos del sistema
  *   SINGLETON ** Solo puede existir 1 guarderia
  */
+@Deprecated
 public class Guarderia implements Serializable {
 
     private static Guarderia instance = null;
@@ -25,9 +22,9 @@ public class Guarderia implements Serializable {
         socioList = new ArrayList<>();
         empleadoList = new ArrayList<>();
 
-        //Manejo de archivo - Excepciones manejadas por el FileManager
-        FileManager fileManager = new FileManager();
-        instance = fileManager.deserealizarGuarderia("Guarderia-central.txt");
+//        //Manejo de archivo - Excepciones manejadas por el FileManager
+//        FileManager fileManager = new FileManager();
+//        instance = fileManager.deserealizarGuarderia("Guarderia-central.txt");
         if(instance!=null) cargarData(instance);
     }
 
@@ -57,18 +54,15 @@ public class Guarderia implements Serializable {
     private void save(){
         loggedUser=null;
         instance=this;
-        //Serializar
-        FileManager fileManager = new FileManager();
-        fileManager.serializarGuaderia("Guarderia-central.txt", this);
     }
 
     public void run(){
         //Loggear usuario
-        if (!usuarioList.isEmpty()) loggin();
-        else primerLoggin();
+//        if (!usuarioList.isEmpty()) loggin();
+//        else primerLoggin();
 
         //Usuario proceder -> Va a la imple del usuario correspondiente
-        loggedUser.ingresar();
+//        loggedUser.ingresar();
 
         //Salvar datos sistema
         save();
@@ -94,43 +88,43 @@ public class Guarderia implements Serializable {
 
 
 
-    private void loggin(){
-        EntradaSalida.mostrarString(ConsoleText.BIENVENIDA);
-        //Pedir credenciales
-        while(loggedUser==null){
-            EntradaSalida.mostrarString(ConsoleText.CREACION_NOMBRE);
-            String nombre = EntradaSalida.leerString();
-            EntradaSalida.mostrarString(ConsoleText.CREACION_PASSWORD);
-            String password = EntradaSalida.leerString();
-
-            User u = getUserByName(nombre);
-            //validar
-            if(u!=null && u.validar(password)){
-                //marcar como usuario loggeado
-                loggedUser=u;
-                EntradaSalida.mostrarString(ConsoleText.LOGGED_AS + nombre);
-            }else {
-                //bad credential
-                EntradaSalida.mostrarString(ConsoleText.BAD_CREDENTIALS);
-            }
-        }
-    }
+//    private void loggin(){
+////        EntradaSalida.mostrarString(ConsoleText.BIENVENIDA);
+//        //Pedir credenciales
+//        while(loggedUser==null){
+////            EntradaSalida.mostrarString(ConsoleText.CREACION_NOMBRE);
+////            String nombre = EntradaSalida.leerString();
+////            EntradaSalida.mostrarString(ConsoleText.CREACION_PASSWORD);
+////            String password = EntradaSalida.leerString();
+//
+//            User u = getUserByName(nombre);
+//            //validar
+//            if(u!=null && u.validar(password)){
+//                //marcar como usuario loggeado
+//                loggedUser=u;
+////                EntradaSalida.mostrarString(ConsoleText.LOGGED_AS + nombre);
+//            }else {
+//                //bad credential
+////                EntradaSalida.mostrarString(ConsoleText.BAD_CREDENTIALS);
+//            }
+//        }
+//    }
 
 
     private void primerLoggin(){
         //Crear administrador
-        EntradaSalida.mostrarString(ConsoleText.MENU_PRIMER_LOGGIN_1);
-        String nombre = EntradaSalida.leerString();
-        EntradaSalida.mostrarString(ConsoleText.CREACION_PASSWORD);
-        String password = EntradaSalida.leerString();
-        EntradaSalida.mostrarString(ConsoleText.CREACION_DIRECCION);
-        String direccion = EntradaSalida.leerString();
-        EntradaSalida.mostrarString(ConsoleText.CREACION_TELEFONO);
-        String telefono = EntradaSalida.leerString();
+//        EntradaSalida.mostrarString(ConsoleText.MENU_PRIMER_LOGGIN_1);
+//        String nombre = EntradaSalida.leerString();
+//        EntradaSalida.mostrarString(ConsoleText.CREACION_PASSWORD);
+//        String password = EntradaSalida.leerString();
+//        EntradaSalida.mostrarString(ConsoleText.CREACION_DIRECCION);
+//        String direccion = EntradaSalida.leerString();
+//        EntradaSalida.mostrarString(ConsoleText.CREACION_TELEFONO);
+//        String telefono = EntradaSalida.leerString();
 
-        Administrador adm = new Administrador(nombre, password, direccion, telefono);
-        usuarioList.add(adm);
-        loggedUser = adm;
+//        Administrador adm = new Administrador(nombre, password, direccion, telefono);
+//        usuarioList.add(adm);
+//        loggedUser = adm;
     }
 
     private User getUserByName(String nombre){
@@ -165,17 +159,17 @@ public class Guarderia implements Serializable {
         this.garageList.add(garage);
     }
 
-    public List<String> getSocioNameList(){
-        return this.socioList.stream()
-                .map(User::getNombre)
-                .collect(Collectors.toList());
-    }
-
-    public Socio getSocioByName(String name){
-        return this.socioList.stream()
-                .filter(x-> (name).equals(x.getNombre()))
-                .findFirst().orElse(null);
-    }
+//    public List<String> getSocioNameList(){
+//        return this.socioList.stream()
+//                .map(User::getNombre)
+//                .collect(Collectors.toList());
+//    }
+//
+//    public Socio getSocioByName(String name){
+//        return this.socioList.stream()
+//                .filter(x-> (name).equals(x.getNombre()))
+//                .findFirst().orElse(null);
+//    }
 
     public List<Garage> getGaragesLibres(){
         return this.garageList.stream()
@@ -215,30 +209,30 @@ public class Guarderia implements Serializable {
         return this.zonaList;
     }
 
-    public void mostrarTodo(){
-        EntradaSalida.mostrarString("Guarderia { ");
-
-        //Zonas
-        EntradaSalida.mostrarString("Zonas { ");
-        this.zonaList.forEach(Zona::mostrar);
-        EntradaSalida.mostrarString("}");
-
-        //Garages
-        EntradaSalida.mostrarString("Garages { ");
-        this.garageList.forEach(Garage::mostrar);
-        EntradaSalida.mostrarString("}");
-
-        //Empleados
-        EntradaSalida.mostrarString("Empleados { ");
-        this.empleadoList.forEach(Empleado::mostrar);
-        EntradaSalida.mostrarString("}");
-
-        //Socios
-        EntradaSalida.mostrarString("Socios { ");
-        this.socioList.forEach(Socio::mostrar);
-        EntradaSalida.mostrarString(" }");
-
-        EntradaSalida.mostrarString("}");
-    }
+//    public void mostrarTodo(){
+//        EntradaSalida.mostrarString("Guarderia { ");
+//
+//        //Zonas
+//        EntradaSalida.mostrarString("Zonas { ");
+//        this.zonaList.forEach(Zona::mostrar);
+//        EntradaSalida.mostrarString("}");
+//
+//        //Garages
+//        EntradaSalida.mostrarString("Garages { ");
+//        this.garageList.forEach(Garage::mostrar);
+//        EntradaSalida.mostrarString("}");
+//
+//        //Empleados
+//        EntradaSalida.mostrarString("Empleados { ");
+//        this.empleadoList.forEach(Empleado::mostrar);
+//        EntradaSalida.mostrarString("}");
+//
+//        //Socios
+//        EntradaSalida.mostrarString("Socios { ");
+//        this.socioList.forEach(Socio::mostrar);
+//        EntradaSalida.mostrarString(" }");
+//
+//        EntradaSalida.mostrarString("}");
+//    }
 
 }

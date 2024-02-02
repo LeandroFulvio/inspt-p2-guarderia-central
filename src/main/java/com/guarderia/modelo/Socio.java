@@ -1,61 +1,67 @@
 package com.guarderia.modelo;
 
-import main.ConsoleText;
-import main.EntradaSalida;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedBy;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Socio extends User implements Serializable {
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "socio")
+public class Socio {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
+    @OneToMany(mappedBy = "socio")
     private List<Vehiculo> vehiculoList; //Vehiculos propios del Socio
 
-    //TODO Agregar atributo DNI
+    private Long dni;
 
+    private String direccion;
+    private String telefono;
+
+    @CreatedBy
     private Date fechaIngreso; //Fecha de Ingreso a la Guarderia
 
-    public Socio(String nombre, String password, String direccion, String telefono) {
-        super(nombre,password,direccion,telefono);
-        this.fechaIngreso = new Date(); //Se registra la fecha de Ingreso a la guarderia al momento de crearlo
-        vehiculoList = new ArrayList<>();
-    }
+    @JoinColumn(name = "user_id", updatable = false)
+    private User user;
 
-    @Override
-    public void ingresar() {
-        mostrarMenuPrincipal();
-    }
 
-    @Override
-    public void mostrarMenuPrincipal() {
-        EntradaSalida.mostrarString(ConsoleText.SOCIO_MENU_PRINCIPAL);
-        switch (EntradaSalida.leerEntero()) {
-            case 1: //1.- Mostrar data propia
-                this.mostrar();
-                mostrarMenuPrincipal();
-                break;
-            case 2: //2.- Mostrar Vehiculos
-                vehiculoList.forEach(Vehiculo::mostrar);
-                mostrarMenuPrincipal();
-                break;
-            case 3: //3.- mostrar Garages
-                Guarderia.getIntance().getGaragesBySocio(this)
-                        .forEach(Garage::mostrar);
-                mostrarMenuPrincipal();
-                break;
-            case 4: //4.- Salir
-                EntradaSalida.mostrarString("Hasta la proxima!");
-                break;
-            default:
-                break;
-        }
-
-    }
-
-    public List<Vehiculo> getVehiculoList() {
-        return vehiculoList;
-    }
+//    @Override
+//    public void mostrarMenuPrincipal() {
+//        EntradaSalida.mostrarString(ConsoleText.SOCIO_MENU_PRINCIPAL);
+//        switch (EntradaSalida.leerEntero()) {
+//            case 1: //1.- Mostrar data propia
+//                this.mostrar();
+//                mostrarMenuPrincipal();
+//                break;
+//            case 2: //2.- Mostrar Vehiculos
+//                vehiculoList.forEach(Vehiculo::mostrar);
+//                mostrarMenuPrincipal();
+//                break;
+//            case 3: //3.- mostrar Garages
+//                Guarderia.getIntance().getGaragesBySocio(this)
+//                        .forEach(Garage::mostrar);
+//                mostrarMenuPrincipal();
+//                break;
+//            case 4: //4.- Salir
+//                EntradaSalida.mostrarString("Hasta la proxima!");
+//                break;
+//            default:
+//                break;
+//        }
+//
+//    }
 
     public boolean tieneVehiculoSinGarage(){
         for (Vehiculo vehiculo : vehiculoList) {
@@ -67,14 +73,6 @@ public class Socio extends User implements Serializable {
 
     public void agregarVehiculo(Vehiculo vehiculo){
         vehiculoList.add(vehiculo);
-    }
-
-    public void mostrar() {
-        EntradaSalida.mostrarString("Datos Socio: {");
-        super.mostrar();
-        EntradaSalida.mostrarString( "}\n Vehiculos: {" );
-        vehiculoList.forEach(Vehiculo::mostrar);
-        EntradaSalida.mostrarString("}, fecha Ingreso a la Guarderia=" + fechaIngreso +'}');
     }
 
 }

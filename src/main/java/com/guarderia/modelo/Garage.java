@@ -1,31 +1,51 @@
 package com.guarderia.modelo;
 
-import main.EntradaSalida;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Garage implements Serializable {
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "garage")
+public class Garage {
 
-    private final int numero; //Identificador local del Garage
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private int id;
+
+    private int numero; //Identificador local del Garage
+
+    @Column(name = "contador_luz")
     private int contadorLuz;
+
+    @Column(name = "mantenimiento_contratado")
     private boolean mantenimientoContratado;
+
+    @Column(name = "fecha_compra")
     private Date fechaCompra;
 
+    //TODO: JOIN
     private List<TipoVehiculo> vehiculosAdminitidos;
 
+    @ManyToOne
+    @JoinColumn(name = "socio_id")
     private Socio socio;
+
+    @OneToOne
+    @JoinColumn(name = "vehiculo_guardado_id")
     private Vehiculo vehiculoGuardado;
+
+    @ManyToOne
+    @JoinColumn(name = "zona_id")
     private Zona zona;
-
-
-    public Garage(int numero, Zona zona) {
-        this.numero = numero;
-        vehiculosAdminitidos = new ArrayList<>();
-        this.zona = zona;
-    }
 
 
     public void comprar(Socio s){
@@ -41,22 +61,6 @@ public class Garage implements Serializable {
         this.mantenimientoContratado = Boolean.TRUE;
     }
 
-    public int getNumero() {
-        return numero;
-    }
-
-    public boolean isMantenimientoContratado() {
-        return mantenimientoContratado;
-    }
-
-    public Date getFechaCompra() {
-        return fechaCompra;
-    }
-
-    public List<TipoVehiculo> getVehiculosAdminitidos() {
-        return vehiculosAdminitidos;
-    }
-
     public boolean isVacio(){
         return vehiculoGuardado==null;
     }
@@ -68,9 +72,9 @@ public class Garage implements Serializable {
         return socio==null;
     }
 
-    public boolean isOwner(Socio socio){
-        return this.socio.getNombre().equals(socio.getNombre());
-    }
+//    public boolean isOwner(Socio socio){
+//        return this.socio.getNombre().equals(socio.getNombre());
+//    }
 
     public void guardarVehiculo(Vehiculo v){
         vehiculoGuardado = v ;
@@ -86,17 +90,17 @@ public class Garage implements Serializable {
         return letra.equals(zona.getLetra());
     }
 
-    public void mostrar(){
-        EntradaSalida.mostrarString("Garage:{");
-        EntradaSalida.mostrarString("Numero: " +numero+ ", Zona: " + zona.getLetra() + ", fecha de Compra: " + fechaCompra );
-        String datos = ", Con mantenimiento contratado: " + (mantenimientoContratado?"Si":"No") + (socio!=null ? (", Dueño: " + socio.getNombre()) : ", Sin Dueño")
-                + ", Contador de luz: " + contadorLuz + (vehiculoGuardado!=null ? (", Con Vehiculo: " + vehiculoGuardado.getNombre()) : ", Sin vehiculo Guardado");
-        EntradaSalida.mostrarString(datos);
-        EntradaSalida.mostrarString("}");
-    }
-
-    public void mostrarNombreZona(){
-        EntradaSalida.mostrarString("ID: " + numero + " Zona: " + zona.getLetra() );
-    }
+//    public void mostrar(){
+//        EntradaSalida.mostrarString("Garage:{");
+//        EntradaSalida.mostrarString("Numero: " +numero+ ", Zona: " + zona.getLetra() + ", fecha de Compra: " + fechaCompra );
+//        String datos = ", Con mantenimiento contratado: " + (mantenimientoContratado?"Si":"No") + (socio!=null ? (", Dueño: " + socio.getNombre()) : ", Sin Dueño")
+//                + ", Contador de luz: " + contadorLuz + (vehiculoGuardado!=null ? (", Con Vehiculo: " + vehiculoGuardado.getNombre()) : ", Sin vehiculo Guardado");
+//        EntradaSalida.mostrarString(datos);
+//        EntradaSalida.mostrarString("}");
+//    }
+//
+//    public void mostrarNombreZona(){
+//        EntradaSalida.mostrarString("ID: " + numero + " Zona: " + zona.getLetra() );
+//    }
 
 }
