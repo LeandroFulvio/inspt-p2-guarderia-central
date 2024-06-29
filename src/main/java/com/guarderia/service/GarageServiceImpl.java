@@ -21,12 +21,12 @@ public class GarageServiceImpl implements GarageService {
     }
 
     @Override
-    public Optional<Garage> findById(String id) {
+    public Optional<Garage> findById(Long id) {
         return Optional.empty();
     }
 
     @Override
-    public List<Garage> findBySocioId(int id) {
+    public List<Garage> findBySocioId(Long id) {
         return null;
     }
 
@@ -36,12 +36,13 @@ public class GarageServiceImpl implements GarageService {
     }
 
     @Override
-    public void update(String id, GarageRequest request) {
+    public void update(Long id, GarageRequest request) {
 
     }
 
     @Override
-    public void deleteById(String id) {
+    public void deleteById(Long id) {
+
 
     }
 }

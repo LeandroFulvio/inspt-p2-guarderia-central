@@ -189,17 +189,17 @@ public class Guarderia implements Serializable {
                 .collect(Collectors.toList());
     }
 
-    public List<Garage> getGaragesBySocio(Socio socio){
-        return this.garageList.stream()
-                .filter(g -> g.isOwner(socio))
-                .collect(Collectors.toList());
-    }
-
-    public List<Garage> getGaragesLibreBySocio(Socio socio){
-        return this.garageList.stream()
-                .filter(g -> g.isVacio() && g.isOwner(socio))
-                .collect(Collectors.toList());
-    }
+//    public List<Garage> getGaragesBySocio(Socio socio){
+//        return this.garageList.stream()
+//                .filter(g -> g.isOwner(socio))
+//                .collect(Collectors.toList());
+//    }
+//
+//    public List<Garage> getGaragesLibreBySocio(Socio socio){
+//        return this.garageList.stream()
+//                .filter(g -> g.isVacio() && g.isOwner(socio))
+//                .collect(Collectors.toList());
+//    }
 
     public List<Empleado> getEmpleadoList(){
         return this.empleadoList;

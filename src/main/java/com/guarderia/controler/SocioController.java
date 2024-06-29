@@ -1,45 +1,42 @@
 package com.guarderia.controler;
 
-import com.guarderia.request.ZonaRequest;
-import com.guarderia.service.ZonaService;
+import com.guarderia.request.SocioRequest;
+import com.guarderia.service.SocioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/zona")
+@RequestMapping("/api/v1/socio")
 @RequiredArgsConstructor
-public class ZonaController {
+public class SocioController {
 
-    private final ZonaService service;
+    private final SocioService service;
 
-    //get all
     @GetMapping
-    public ResponseEntity<?> findAllZonas(){
+    public ResponseEntity<?> findAllVehicles(){
         return ResponseEntity.ok(service.findAll());
     }
 
-    //get one
-    @GetMapping(value = "/{id}", produces = "application/json")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<?> findById(@PathVariable Long id){
         return ResponseEntity.ok(service.findById(id));
     }
 
-    //create
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody ZonaRequest request){
+    public ResponseEntity<?> create(@RequestBody SocioRequest request){
         service.save(request);
 
         return ResponseEntity
-            .accepted()
-            .build();
+                .accepted()
+                .build();
     }
 
     //update
     @PutMapping(value = "/{id}", produces = "application/json")
-    public ResponseEntity<?> update(@PathVariable String id,
-                                        @RequestBody ZonaRequest zona){
-        service.update(id, zona);
+    public ResponseEntity<?> update(@PathVariable Long id,
+                                    @RequestBody SocioRequest request){
+        service.update(id, request);
 
         return ResponseEntity
                 .accepted()
@@ -48,7 +45,7 @@ public class ZonaController {
 
     //delete
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<?> delete(@PathVariable String id){
+    public ResponseEntity<?> deleteZona(@PathVariable Long id){
 
         service.deleteById(id);
 
@@ -57,10 +54,5 @@ public class ZonaController {
                 .accepted()
                 .build();
     }
-/*
- ResponseEntity.badRequest()
-            .body("Year of birth cannot be in the future");
-
- */
 
 }

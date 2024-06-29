@@ -9,10 +9,10 @@ import java.util.Optional;
 public interface GarageService {
 
     List<Garage> findAll();
-    Optional<Garage> findById(String id);
-    List<Garage> findBySocioId(int id);
+    Optional<Garage> findById(Long id);
+    List<Garage> findBySocioId(Long id);
     void save(GarageRequest request);
-    void update(String id, GarageRequest request);
-    void deleteById(String id);
+    void update(Long id, GarageRequest request);
+    void deleteById(Long id);
 
 }

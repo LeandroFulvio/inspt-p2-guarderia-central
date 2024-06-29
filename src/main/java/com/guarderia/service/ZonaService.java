@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface ZonaService {
 
     List<Zona> findAll();
-    Optional<Zona> findById(String id);
+    Optional<Zona> findById(Long id);
     void save(ZonaRequest request);
     void update(String id, ZonaRequest request);
     void deleteById(String id);

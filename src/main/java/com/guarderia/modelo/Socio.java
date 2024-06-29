@@ -19,8 +19,8 @@ import java.util.List;
 public class Socio {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @OneToMany(mappedBy = "socio")
     private List<Vehiculo> vehiculoList; //Vehiculos propios del Socio

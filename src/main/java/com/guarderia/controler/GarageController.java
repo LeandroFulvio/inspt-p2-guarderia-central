@@ -19,7 +19,7 @@ public class GarageController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<?> findById(@PathVariable String id){
+    public ResponseEntity<?> findById(@PathVariable Long id){
         return ResponseEntity.ok(service.findById(id));
     }
 
@@ -36,7 +36,7 @@ public class GarageController {
 
     //update
     @PutMapping(value = "/{id}", produces = "application/json")
-    public ResponseEntity<?> update(@PathVariable String id,
+    public ResponseEntity<?> update(@PathVariable Long id,
                                     @RequestBody GarageRequest garage){
         service.update(id, garage);
 
@@ -47,7 +47,7 @@ public class GarageController {
 
     //delete
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<?> deleteZona(@PathVariable String id){
+    public ResponseEntity<?> deleteZona(@PathVariable Long id){
 
         service.deleteById(id);
 

@@ -19,8 +19,8 @@ import java.util.Set;
 public class Empleado {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String codigo;
     private String especialidad;
@@ -29,7 +29,13 @@ public class Empleado {
     private String direccion;
     private String telefono;
 
-//    private Set<Zona> zonasAsignadas;
+    @ManyToMany()
+    @JoinTable(
+            name = "empleado_zona",
+            joinColumns = @JoinColumn(name = "zona_id"),
+            inverseJoinColumns = @JoinColumn(name = "empleado_id")
+    )
+    private Set<Zona> zonasAsignadas;
     //TODO: Nueva tabla para relacion zona - empleado
 
     @JoinColumn(name = "user_id", updatable = false)

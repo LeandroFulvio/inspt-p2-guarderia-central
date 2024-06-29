@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface VehiculoRepository extends JpaRepository<Vehiculo, Long> {
 
-    List<Vehiculo> findBySocioId (int socioId);
+    List<Vehiculo> findBySocioId (Long socioId);
 
 }

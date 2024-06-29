@@ -17,13 +17,14 @@ import java.util.Date;
 public class Vehiculo  {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String matricula;
     private String nombre;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "tipo")
+    @OneToOne
+    @JoinColumn(name = "tipo_id")
     private TipoVehiculo tipoVehiculo;
 
     @Column(name = "fecha_asignacion")

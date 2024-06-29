@@ -21,8 +21,8 @@ public class ZonaServiceImpl implements ZonaService {
     }
 
     @Override
-    public Optional<Zona> findById(String id) {
-        return Optional.empty();
+    public Optional<Zona> findById(Long id) {
+        return repository.findById(id);
     }
 
     @Override

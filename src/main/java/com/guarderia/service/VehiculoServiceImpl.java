@@ -21,12 +21,12 @@ public class VehiculoServiceImpl implements VehiculoService{
     }
 
     @Override
-    public Optional<Vehiculo> findById(String id) {
+    public Optional<Vehiculo> findById(Long id) {
         return Optional.empty();
     }
 
     @Override
-    public List<Vehiculo> findBySocioId(int socioId) {
+    public List<Vehiculo> findBySocioId(Long socioId) {
         return repository.findBySocioId(socioId);
     }
 

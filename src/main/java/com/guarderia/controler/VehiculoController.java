@@ -19,7 +19,7 @@ public class VehiculoController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<?> findById(@PathVariable String id){
+    public ResponseEntity<?> findById(@PathVariable Long id){
         return ResponseEntity.ok(service.findById(id));
     }
 

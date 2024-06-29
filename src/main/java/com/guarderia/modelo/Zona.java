@@ -1,9 +1,6 @@
 package com.guarderia.modelo;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,6 +17,9 @@ import java.util.List;
 public class Zona {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String letra; //Identificador local de la Zona
 
     private int capacidad;
@@ -27,8 +27,14 @@ public class Zona {
     @Column(name = "cantidad_vehiculos")
     private int cantidadVehiculos;
 
-    private List<TipoVehiculo> tipoVehiculoSet;
-    //TODO: Nueva tabla para relacion zona - TipoVehiculoAdmitidos
+    @ManyToMany
+    @JoinTable(
+            name = "tipoVehiculoZona",
+            joinColumns = @JoinColumn(name = "zona_id"),
+            inverseJoinColumns = @JoinColumn(name = "tipoVehiculo_id")
+    )
+    private List<TipoVehiculo> tipoVehiculoAdminitos;
+
 
 
 

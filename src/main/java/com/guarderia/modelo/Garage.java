@@ -18,8 +18,8 @@ import java.util.List;
 public class Garage {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private int numero; //Identificador local del Garage
 
