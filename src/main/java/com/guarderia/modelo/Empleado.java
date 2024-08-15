@@ -1,13 +1,12 @@
 package com.guarderia.modelo;
 
+import com.guarderia.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -15,7 +14,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "empleado")
+@Table(name = "empleados")
 public class Empleado {
 
     @Id
@@ -36,41 +35,9 @@ public class Empleado {
             inverseJoinColumns = @JoinColumn(name = "empleado_id")
     )
     private Set<Zona> zonasAsignadas;
-    //TODO: Nueva tabla para relacion zona - empleado
 
+    @OneToOne
     @JoinColumn(name = "user_id", updatable = false)
     private User user;
-
-//
-//    @Override
-//    public void mostrarMenuPrincipal() {
-//        EntradaSalida.mostrarString(ConsoleText.EMPLEADO_MENU_PRINCIPAL);
-//        switch (EntradaSalida.leerEntero()) {
-//            case 1: //1.- Menu mostrar data propia
-//                this.mostrar();
-//                mostrarMenuPrincipal();
-//                break;
-//            case 2: //2.- Mostrar zonas
-//                this.zonasAsignadas.forEach(Zona::mostrar);
-//                mostrarMenuPrincipal();
-//                break;
-//            case 3: //3.- mostrar garages de las zonas a cargo
-//                zonasAsignadas.forEach(x->{
-//                    Guarderia.getIntance().getGaragesByZona(x)
-//                            .forEach(Garage::mostrar);
-//                });
-//                mostrarMenuPrincipal();
-//                break;
-//            case 4: //4.- Salir
-//                EntradaSalida.mostrarString("Hasta la proxima!");
-//                break;
-//            default:
-//                break;
-//        }
-//    }
-
-    public boolean isCodigo(String codigo){
-        return codigo.equals(this.codigo);
-    }
 
 }

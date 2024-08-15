@@ -1,5 +1,6 @@
 package com.guarderia.modelo;
 
+import com.guarderia.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "socio")
+@Table(name = "socios")
 public class Socio {
 
     @Id
@@ -25,14 +26,15 @@ public class Socio {
     @OneToMany(mappedBy = "socio")
     private List<Vehiculo> vehiculoList; //Vehiculos propios del Socio
 
-    private Long dni;
-
+    private String nombre;
     private String direccion;
+    private Long dni;
     private String telefono;
 
     @CreatedBy
     private Date fechaIngreso; //Fecha de Ingreso a la Guarderia
 
+    @OneToOne
     @JoinColumn(name = "user_id", updatable = false)
     private User user;
 

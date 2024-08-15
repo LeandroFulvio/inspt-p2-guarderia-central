@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User implements UserDetails {
 
     @Id
@@ -25,6 +25,8 @@ public class User implements UserDetails {
     private Integer id;
     private String username;
     private String password;
+    private String lastname;
+    private String firstname;
 
     @Enumerated(EnumType.STRING)
     private Role role;

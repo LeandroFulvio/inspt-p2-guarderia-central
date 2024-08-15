@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "garage")
+@Table(name = "garages")
 public class Garage {
 
     @Id
@@ -32,8 +32,13 @@ public class Garage {
     @Column(name = "fecha_compra")
     private Date fechaCompra;
 
-    //TODO: JOIN
-    private List<TipoVehiculo> vehiculosAdminitidos;
+    @ManyToMany()
+    @JoinTable(
+            name = "garage_tipo_vehiculo",
+            joinColumns = @JoinColumn(name = "garage_id"),
+            inverseJoinColumns = @JoinColumn(name = "tipo_vehiculo_id")
+    )
+    private List<TipoVehiculo> vehiculosAdmitidos;
 
     @ManyToOne
     @JoinColumn(name = "socio_id")
@@ -81,7 +86,7 @@ public class Garage {
     }
 
     public void conTipoAdminitido(TipoVehiculo tipo){
-        this.vehiculosAdminitidos.add(tipo);
+        this.vehiculosAdmitidos.add(tipo);
     }
 
     //liberar garage (remover vehiculo)
@@ -89,18 +94,5 @@ public class Garage {
     public boolean perteneceAZona(String letra){
         return letra.equals(zona.getLetra());
     }
-
-//    public void mostrar(){
-//        EntradaSalida.mostrarString("Garage:{");
-//        EntradaSalida.mostrarString("Numero: " +numero+ ", Zona: " + zona.getLetra() + ", fecha de Compra: " + fechaCompra );
-//        String datos = ", Con mantenimiento contratado: " + (mantenimientoContratado?"Si":"No") + (socio!=null ? (", Dueño: " + socio.getNombre()) : ", Sin Dueño")
-//                + ", Contador de luz: " + contadorLuz + (vehiculoGuardado!=null ? (", Con Vehiculo: " + vehiculoGuardado.getNombre()) : ", Sin vehiculo Guardado");
-//        EntradaSalida.mostrarString(datos);
-//        EntradaSalida.mostrarString("}");
-//    }
-//
-//    public void mostrarNombreZona(){
-//        EntradaSalida.mostrarString("ID: " + numero + " Zona: " + zona.getLetra() );
-//    }
 
 }

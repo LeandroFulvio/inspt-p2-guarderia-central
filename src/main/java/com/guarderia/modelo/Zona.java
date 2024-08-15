@@ -13,7 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "zona")
+@Table(name = "zonas")
 public class Zona {
 
     @Id
@@ -27,6 +27,9 @@ public class Zona {
     @Column(name = "cantidad_vehiculos")
     private int cantidadVehiculos;
 
+    private int ancho;
+    private int profundidad;
+
     @ManyToMany
     @JoinTable(
             name = "tipoVehiculoZona",
@@ -34,8 +37,5 @@ public class Zona {
             inverseJoinColumns = @JoinColumn(name = "tipoVehiculo_id")
     )
     private List<TipoVehiculo> tipoVehiculoAdminitos;
-
-
-
 
 }
