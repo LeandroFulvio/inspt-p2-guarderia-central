@@ -32,7 +32,7 @@ public class Zona {
 
     @ManyToMany
     @JoinTable(
-            name = "tipoVehiculoZona",
+            name = "tipoVehiculosZonas",
             joinColumns = @JoinColumn(name = "zona_id"),
             inverseJoinColumns = @JoinColumn(name = "tipoVehiculo_id")
     )

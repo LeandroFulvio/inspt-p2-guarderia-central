@@ -32,13 +32,13 @@ public class Garage {
     @Column(name = "fecha_compra")
     private Date fechaCompra;
 
-    @ManyToMany()
-    @JoinTable(
-            name = "garage_tipo_vehiculo",
-            joinColumns = @JoinColumn(name = "garage_id"),
-            inverseJoinColumns = @JoinColumn(name = "tipo_vehiculo_id")
-    )
-    private List<TipoVehiculo> vehiculosAdmitidos;
+//    @ManyToMany()
+//    @JoinTable(
+//            name = "garage_tipo_vehiculo",
+//            joinColumns = @JoinColumn(name = "garage_id"),
+//            inverseJoinColumns = @JoinColumn(name = "tipo_vehiculo_id")
+//    )
+//    private List<TipoVehiculo> vehiculosAdmitidos;
 
     @ManyToOne
     @JoinColumn(name = "socio_id")
@@ -51,7 +51,6 @@ public class Garage {
     @ManyToOne
     @JoinColumn(name = "zona_id")
     private Zona zona;
-
 
     public void comprar(Socio s){
         this.socio = s;
@@ -85,9 +84,9 @@ public class Garage {
         vehiculoGuardado = v ;
     }
 
-    public void conTipoAdminitido(TipoVehiculo tipo){
-        this.vehiculosAdmitidos.add(tipo);
-    }
+//    public void conTipoAdminitido(TipoVehiculo tipo){
+//        this.vehiculosAdmitidos.add(tipo);
+//    }
 
     //liberar garage (remover vehiculo)
 

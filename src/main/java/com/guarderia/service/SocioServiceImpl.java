@@ -1,7 +1,9 @@
 package com.guarderia.service;
 
 import com.guarderia.modelo.Socio;
+import com.guarderia.repository.SocioRepository;
 import com.guarderia.request.SocioRequest;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,8 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class SocioServiceImpl implements SocioService{
+
+    private final SocioRepository repository;
 
     @Override
     public List<Socio> findAll() {
@@ -24,6 +28,11 @@ public class SocioServiceImpl implements SocioService{
 
     @Override
     public void save(SocioRequest request) {
+        var socio = Socio.builder()
+                .id(request.getId())
+                .build();
+
+        repository.save(socio);
 
     }
 

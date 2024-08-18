@@ -18,6 +18,8 @@ public class SocioController {
         return ResponseEntity.ok(service.findAll());
     }
 
+    //All vehicles by socio
+
     @GetMapping(value = "/{id}")
     public ResponseEntity<?> findById(@PathVariable Long id){
         return ResponseEntity.ok(service.findById(id));

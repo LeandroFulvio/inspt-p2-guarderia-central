@@ -38,33 +38,6 @@ public class Socio {
     @JoinColumn(name = "user_id", updatable = false)
     private User user;
 
-
-//    @Override
-//    public void mostrarMenuPrincipal() {
-//        EntradaSalida.mostrarString(ConsoleText.SOCIO_MENU_PRINCIPAL);
-//        switch (EntradaSalida.leerEntero()) {
-//            case 1: //1.- Mostrar data propia
-//                this.mostrar();
-//                mostrarMenuPrincipal();
-//                break;
-//            case 2: //2.- Mostrar Vehiculos
-//                vehiculoList.forEach(Vehiculo::mostrar);
-//                mostrarMenuPrincipal();
-//                break;
-//            case 3: //3.- mostrar Garages
-//                Guarderia.getIntance().getGaragesBySocio(this)
-//                        .forEach(Garage::mostrar);
-//                mostrarMenuPrincipal();
-//                break;
-//            case 4: //4.- Salir
-//                EntradaSalida.mostrarString("Hasta la proxima!");
-//                break;
-//            default:
-//                break;
-//        }
-//
-//    }
-
     public boolean tieneVehiculoSinGarage(){
         for (Vehiculo vehiculo : vehiculoList) {
             if (!vehiculo.tieneCochera())

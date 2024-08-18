@@ -1,5 +1,6 @@
 package com.guarderia.auth;
 
+import com.guarderia.user.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,5 +16,6 @@ public class RegisterRequest {
     private String lastname;
     private String username;
     private String password;
+    private Role role;
 
 }
