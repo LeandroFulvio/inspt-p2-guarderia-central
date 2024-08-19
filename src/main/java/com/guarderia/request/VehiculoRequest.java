@@ -1,6 +1,6 @@
 package com.guarderia.request;
 
-import com.guarderia.modelo.TipoVehiculo;
+import jakarta.persistence.JoinColumn;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +15,8 @@ public class VehiculoRequest {
     private Long id;
     private String matricula;
     private String nombre;
-    private TipoVehiculo tipoVehiculo;
+    @JoinColumn(name = "tipo_vehiculo_id")
+    private Long tipoVehiculo;
     private Date fechaAsignacion;
     private Long idSocio;
 

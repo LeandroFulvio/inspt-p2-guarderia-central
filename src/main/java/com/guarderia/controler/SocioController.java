@@ -1,5 +1,6 @@
 package com.guarderia.controler;
 
+import com.guarderia.modelo.Socio;
 import com.guarderia.request.SocioRequest;
 import com.guarderia.service.SocioService;
 import lombok.RequiredArgsConstructor;
@@ -27,11 +28,7 @@ public class SocioController {
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody SocioRequest request){
-        service.save(request);
-
-        return ResponseEntity
-                .accepted()
-                .build();
+        return ResponseEntity.ok(service.save(request));
     }
 
     //update
@@ -48,9 +45,7 @@ public class SocioController {
     //delete
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> deleteZona(@PathVariable Long id){
-
         service.deleteById(id);
-
 
         return ResponseEntity
                 .accepted()

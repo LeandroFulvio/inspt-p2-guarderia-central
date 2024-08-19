@@ -10,8 +10,8 @@ public interface SocioService {
 
     List<Socio> findAll();
     Optional<Socio> findById(Long id);
-    void save(SocioRequest request);
-    void update(Long id, SocioRequest request);
+    Socio save(SocioRequest request);
+    Socio update(Long id, SocioRequest request);
     void deleteById(Long id);
 
 

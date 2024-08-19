@@ -18,6 +18,6 @@ public class SocioRequest {
     private String direccion;
     private String telefono;
     @JsonProperty("user_id")
-    private Long userId;
+    private Integer userId;
 
 }

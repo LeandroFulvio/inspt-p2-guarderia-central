@@ -26,7 +26,6 @@ public class Vehiculo  {
     @OneToOne
     @JoinColumn(name = "tipo_id")
     private TipoVehiculo tipoVehiculo;
-    private String dimensiones;
 
     @Column(name = "fecha_asignacion")
     private Date fechaAsignacion;

@@ -26,7 +26,6 @@ public class Socio {
     @OneToMany(mappedBy = "socio")
     private List<Vehiculo> vehiculoList; //Vehiculos propios del Socio
 
-    private String nombre;
     private String direccion;
     private Long dni;
     private String telefono;
