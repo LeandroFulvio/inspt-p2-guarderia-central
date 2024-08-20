@@ -3,11 +3,16 @@ package com.guarderia.service;
 import com.guarderia.modelo.Vehiculo;
 import com.guarderia.repository.VehiculoRepository;
 import com.guarderia.request.VehiculoRequest;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -15,14 +20,18 @@ public class VehiculoServiceImpl implements VehiculoService{
 
     private final VehiculoRepository repository;
 
+    private final SocioService socioService;
+    private final TipoVehiculoService tipoVehiculoService;
+
     @Override
     public List<Vehiculo> findAll() {
         return repository.findAll();
     }
 
     @Override
-    public Optional<Vehiculo> findById(Long id) {
-        return Optional.empty();
+    public Vehiculo findById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("No se encontro vehiculo con ID: " + id));
     }
 
     @Override
@@ -31,22 +40,39 @@ public class VehiculoServiceImpl implements VehiculoService{
     }
 
     @Override
-    public void save(VehiculoRequest request) {
+    public Vehiculo save(VehiculoRequest request) {
         var vehiculo = Vehiculo.builder()
                 .matricula(request.getMatricula())
-                .nombre(request.getNombre()) //TODO: Socio , tipoVehiculo
+                .nombre(request.getNombre())
+                .socio(socioService.findById(request.getIdSocio())
+                        .orElseThrow(() -> new EntityNotFoundException("No se encontro socio con ID: " + request.getId())))
+                .tipoVehiculo(tipoVehiculoService.findById(request.getTipoVehiculo())
+                        .orElseThrow(() -> new EntityNotFoundException("No se encontro el tipo de vehiculo con ID: " + request.getTipoVehiculo())))
                 .build();
 
-        repository.save(vehiculo);
+        return repository.save(vehiculo);
     }
 
     @Override
-    public void update(String id, VehiculoRequest request) {
-
+    public List<Vehiculo> saveAll(List<VehiculoRequest> request) {
+        List<Vehiculo> response = new ArrayList<>();
+        for (VehiculoRequest r : request) {
+            response.add(save(r));
+        }
+        return response;
     }
 
     @Override
-    public void deleteById(String id) {
+    public void update(Long id, VehiculoRequest request) {
 
     }
+
+    //update fecha asignacion -> Cuando se ingresa a un garage
+
+
+    @Override
+    public void deleteById(Long id) {
+        repository.deleteById(id);
+    }
+
 }

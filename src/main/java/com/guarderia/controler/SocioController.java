@@ -1,6 +1,5 @@
 package com.guarderia.controler;
 
-import com.guarderia.modelo.Socio;
 import com.guarderia.request.SocioRequest;
 import com.guarderia.service.SocioService;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +18,6 @@ public class SocioController {
         return ResponseEntity.ok(service.findAll());
     }
 
-    //All vehicles by socio
-
     @GetMapping(value = "/{id}")
     public ResponseEntity<?> findById(@PathVariable Long id){
         return ResponseEntity.ok(service.findById(id));
@@ -35,11 +32,7 @@ public class SocioController {
     @PutMapping(value = "/{id}", produces = "application/json")
     public ResponseEntity<?> update(@PathVariable Long id,
                                     @RequestBody SocioRequest request){
-        service.update(id, request);
-
-        return ResponseEntity
-                .accepted()
-                .build();
+        return ResponseEntity.ok(service.update(id, request));
     }
 
     //delete

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.annotation.CreatedBy;
 
 import java.util.Date;
 
@@ -24,7 +25,7 @@ public class Vehiculo  {
     private String nombre;
 
     @OneToOne
-    @JoinColumn(name = "tipo_id")
+    @JoinColumn(name = "tipo_vehiculo_id")
     private TipoVehiculo tipoVehiculo;
 
     @Column(name = "fecha_asignacion")

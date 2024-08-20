@@ -1,6 +1,7 @@
 package com.guarderia.service;
 
 import com.guarderia.modelo.Empleado;
+import com.guarderia.repository.EmpleadoRepository;
 import com.guarderia.request.EmpleadoRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,8 +11,9 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class EmpeladoServiceImpl implements EmpleadoService{
+public class EmpleadoServiceImpl implements EmpleadoService{
 
+    private final EmpleadoRepository repository;
 
     @Override
     public List<Empleado> findAll() {

@@ -23,19 +23,20 @@ public class VehiculoController {
         return ResponseEntity.ok(service.findById(id));
     }
 
+    @GetMapping(value = "/{id}/socio")
+    public ResponseEntity<?> findBySocioId(@PathVariable Long id){
+        return ResponseEntity.ok(service.findBySocioId(id));
+    }
+
     //create
     @PostMapping
     public ResponseEntity<?> create(@RequestBody VehiculoRequest request){
-        service.save(request);
-
-        return ResponseEntity
-                .accepted()
-                .build();
+        return ResponseEntity.ok(service.save(request));
     }
 
     //update
     @PutMapping(value = "/{id}", produces = "application/json")
-    public ResponseEntity<?> update(@PathVariable String id,
+    public ResponseEntity<?> update(@PathVariable Long id,
                                         @RequestBody VehiculoRequest vehiculo){
         service.update(id, vehiculo);
 
@@ -46,7 +47,7 @@ public class VehiculoController {
 
     //delete
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<?> deleteZona(@PathVariable String id){
+    public ResponseEntity<?> deleteZona(@PathVariable Long id){
 
         service.deleteById(id);
 

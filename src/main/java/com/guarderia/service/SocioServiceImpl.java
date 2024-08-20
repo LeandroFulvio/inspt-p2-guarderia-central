@@ -4,7 +4,7 @@ import com.guarderia.modelo.Socio;
 import com.guarderia.repository.SocioRepository;
 import com.guarderia.request.SocioRequest;
 import com.guarderia.user.UserService;
-import lombok.Builder;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -45,12 +45,11 @@ public class SocioServiceImpl implements SocioService{
 
     @Override
     public Socio update(Long id, SocioRequest request) {
-        var socio = repository.findById(id).orElseThrow();
+        var socio = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("No se encontro socio con ID: " + request.getId()));
         socio.setDni(request.getDni());
         socio.setDireccion(request.getDireccion());
         socio.setTelefono(request.getTelefono());
-//        socio.setVehiculoList(request.getVehiculos());
-        //TODO: manejo de Vehiculos
 
         return repository.save(socio);
     }
@@ -59,4 +58,5 @@ public class SocioServiceImpl implements SocioService{
     public void deleteById(Long id) {
         repository.deleteById(id);
     }
+
 }

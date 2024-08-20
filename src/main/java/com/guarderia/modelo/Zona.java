@@ -19,16 +19,13 @@ public class Zona {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String letra; //Identificador local de la Zona
-
     private int capacidad;
+    private int ancho;
+    private int profundidad;
 
     @Column(name = "cantidad_vehiculos")
     private int cantidadVehiculos;
-
-    private int ancho;
-    private int profundidad;
 
     @ManyToMany
     @JoinTable(

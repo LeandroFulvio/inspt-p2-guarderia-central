@@ -1,6 +1,6 @@
 package com.guarderia.request;
 
-import jakarta.persistence.JoinColumn;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,9 +15,10 @@ public class VehiculoRequest {
     private Long id;
     private String matricula;
     private String nombre;
-    @JoinColumn(name = "tipo_vehiculo_id")
+    @JsonProperty("tipo_vehiculo_id")
     private Long tipoVehiculo;
     private Date fechaAsignacion;
+    @JsonProperty("socio_id")
     private Long idSocio;
 
 }

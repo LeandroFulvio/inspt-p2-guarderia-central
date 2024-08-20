@@ -22,10 +22,6 @@ public class Socio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @OneToMany(mappedBy = "socio")
-    private List<Vehiculo> vehiculoList; //Vehiculos propios del Socio
-
     private String direccion;
     private Long dni;
     private String telefono;
@@ -37,16 +33,7 @@ public class Socio {
     @JoinColumn(name = "user_id", updatable = false)
     private User user;
 
-    public boolean tieneVehiculoSinGarage(){
-        for (Vehiculo vehiculo : vehiculoList) {
-            if (!vehiculo.tieneCochera())
-                return true;
-        }
-        return false;
-    }
-
-    public void agregarVehiculo(Vehiculo vehiculo){
-        vehiculoList.add(vehiculo);
-    }
+    @Transient
+    private List<Vehiculo> vehiculoList; //Vehiculos propios del Socio
 
 }

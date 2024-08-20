@@ -10,9 +10,10 @@ import java.util.Optional;
 public interface VehiculoService {
 
     List<Vehiculo> findAll();
-    Optional<Vehiculo> findById(Long id);
+    Vehiculo findById(Long id);
     List<Vehiculo> findBySocioId(Long socioId);
-    void save(VehiculoRequest request);
-    void update(String id, VehiculoRequest request);
-    void deleteById(String id);
+    Vehiculo save(VehiculoRequest request);
+    List<Vehiculo> saveAll(List<VehiculoRequest> request);
+    void update(Long id, VehiculoRequest request);
+    void deleteById(Long id);
 }
