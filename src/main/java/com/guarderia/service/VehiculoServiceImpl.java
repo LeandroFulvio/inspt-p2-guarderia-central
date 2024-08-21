@@ -64,7 +64,7 @@ public class VehiculoServiceImpl implements VehiculoService{
 
     @Override
     public void update(Long id, VehiculoRequest request) {
-
+        //TODO: update vehiculo
     }
 
     //update fecha asignacion -> Cuando se ingresa a un garage

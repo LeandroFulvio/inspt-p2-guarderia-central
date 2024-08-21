@@ -10,9 +10,9 @@ public interface ZonaService {
 
     List<Zona> findAll();
     Optional<Zona> findById(Long id);
-    void save(ZonaRequest request);
-    void update(String id, ZonaRequest request);
-    void deleteById(String id);
+    Zona save(ZonaRequest request);
+    Zona update(Long id, ZonaRequest request);
+    void deleteById(Long id);
 
 
 }

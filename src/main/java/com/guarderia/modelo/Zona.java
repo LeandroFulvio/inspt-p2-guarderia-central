@@ -19,6 +19,7 @@ public class Zona {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique=true)
     private String letra; //Identificador local de la Zona
     private int capacidad;
     private int ancho;

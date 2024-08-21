@@ -26,18 +26,14 @@ public class ZonaController {
     }
 
     //create
-    @PostMapping
+    @PostMapping(consumes = "application/json")
     public ResponseEntity<?> create(@RequestBody ZonaRequest request){
-        service.save(request);
-
-        return ResponseEntity
-            .accepted()
-            .build();
+        return ResponseEntity.ok(service.save(request));
     }
 
     //update
     @PutMapping(value = "/{id}", produces = "application/json")
-    public ResponseEntity<?> update(@PathVariable String id,
+    public ResponseEntity<?> update(@PathVariable Long id,
                                         @RequestBody ZonaRequest zona){
         service.update(id, zona);
 
@@ -48,10 +44,8 @@ public class ZonaController {
 
     //delete
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<?> delete(@PathVariable String id){
-
+    public ResponseEntity<?> delete(@PathVariable Long id){
         service.deleteById(id);
-
 
         return ResponseEntity
                 .accepted()

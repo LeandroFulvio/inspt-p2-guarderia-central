@@ -14,6 +14,7 @@ import java.util.Optional;
 public class ZonaServiceImpl implements ZonaService {
 
     private final ZonaRepository repository;
+    private final TipoVehiculoService tipoVehiculoService;
 
     @Override
     public List<Zona> findAll() {
@@ -26,17 +27,26 @@ public class ZonaServiceImpl implements ZonaService {
     }
 
     @Override
-    public void save(ZonaRequest request) {
+    public Zona save(ZonaRequest request) {
+        var zona = Zona.builder()
+                .letra(request.getLetra())
+                .capacidad(request.getCapacidad())
+                .cantidadVehiculos(0)
+                .tipoVehiculoAdminitos(tipoVehiculoService.findAll(request.getTipoVehiculoAdmitidos())) //TODO: tipovehiculo
+                .build();
 
+        return repository.save(zona);
     }
 
     @Override
-    public void update(String id, ZonaRequest request) {
-
+    public Zona update(Long id, ZonaRequest request) {
+        //TODO: Zona update
+        return null;
     }
 
     @Override
-    public void deleteById(String id) {
-
+    public void deleteById(Long id) {
+        repository.deleteById(id);
     }
+
 }
