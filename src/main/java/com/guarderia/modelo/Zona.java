@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Builder
@@ -35,5 +36,8 @@ public class Zona {
             inverseJoinColumns = @JoinColumn(name = "tipoVehiculo_id")
     )
     private List<TipoVehiculo> tipoVehiculoAdminitos;
+
+    @OneToMany(mappedBy = "zona")
+    private Set<AsignacionZona> asignacionZona;
 
 }

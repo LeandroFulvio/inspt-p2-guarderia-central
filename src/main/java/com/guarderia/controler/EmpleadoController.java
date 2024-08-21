@@ -25,11 +25,7 @@ public class EmpleadoController {
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody EmpleadoRequest request){
-        service.save(request);
-
-        return ResponseEntity
-                .accepted()
-                .build();
+        return ResponseEntity.ok(service.save(request));
     }
 
     //update

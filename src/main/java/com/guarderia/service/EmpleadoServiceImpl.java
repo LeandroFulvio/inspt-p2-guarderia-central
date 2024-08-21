@@ -3,41 +3,54 @@ package com.guarderia.service;
 import com.guarderia.modelo.Empleado;
 import com.guarderia.repository.EmpleadoRepository;
 import com.guarderia.request.EmpleadoRequest;
+import com.guarderia.user.UserService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class EmpleadoServiceImpl implements EmpleadoService{
 
     private final EmpleadoRepository repository;
+    private final UserService userService;
 
     @Override
     public List<Empleado> findAll() {
+        return repository.findAll();
+    }
+
+    @Override
+    public Empleado findById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("No se encontro empleado con ID: " + id));
+    }
+
+    @Override
+    public Empleado save(EmpleadoRequest request) {
+        var empleado = Empleado.builder()
+                .dni(request.getDni())
+                .direccion(request.getDireccion())
+                .codigo(request.getCodigo())
+                .telefono(request.getTelefono())
+                .especialidad(request.getEspecialidad())
+                .user(userService.getUserById(request.getUserId()))
+                .build();
+
+        return repository.save(empleado);
+    }
+
+    @Override
+    public Empleado update(Long id, EmpleadoRequest request) {
+        //TODO: update empelado
         return null;
     }
 
     @Override
-    public Optional<Empleado> findById(Long id) {
-        return Optional.empty();
-    }
-
-    @Override
-    public void save(EmpleadoRequest request) {
-
-    }
-
-    @Override
-    public void update(Long id, EmpleadoRequest request) {
-
-    }
-
-    @Override
     public void deleteById(Long id) {
-
+        repository.deleteById(id);
     }
 
 }

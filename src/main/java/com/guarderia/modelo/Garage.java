@@ -32,14 +32,6 @@ public class Garage {
     @Column(name = "fecha_compra")
     private Date fechaCompra;
 
-//    @ManyToMany()
-//    @JoinTable(
-//            name = "garage_tipo_vehiculo",
-//            joinColumns = @JoinColumn(name = "garage_id"),
-//            inverseJoinColumns = @JoinColumn(name = "tipo_vehiculo_id")
-//    )
-//    private List<TipoVehiculo> vehiculosAdmitidos;
-
     @ManyToOne
     @JoinColumn(name = "socio_id")
     private Socio socio;

@@ -3,6 +3,7 @@ package com.guarderia.service;
 import com.guarderia.modelo.Zona;
 import com.guarderia.repository.ZonaRepository;
 import com.guarderia.request.ZonaRequest;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +23,9 @@ public class ZonaServiceImpl implements ZonaService {
     }
 
     @Override
-    public Optional<Zona> findById(Long id) {
-        return repository.findById(id);
+    public Zona findById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("No se encontro zona con ID: " + id));
     }
 
     @Override

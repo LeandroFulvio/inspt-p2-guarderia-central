@@ -28,13 +28,8 @@ public class Empleado {
     private String direccion;
     private String telefono;
 
-    @ManyToMany()
-    @JoinTable(
-            name = "empleado_zona",
-            joinColumns = @JoinColumn(name = "zona_id"),
-            inverseJoinColumns = @JoinColumn(name = "empleado_id")
-    )
-    private Set<Zona> zonasAsignadas;
+    @OneToMany(mappedBy = "empleado")
+    private Set<AsignacionZona> zonasAsignadas;
 
     @OneToOne
     @JoinColumn(name = "user_id", updatable = false)

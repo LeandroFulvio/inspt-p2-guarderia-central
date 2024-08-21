@@ -9,9 +9,9 @@ import java.util.Optional;
 public interface EmpleadoService {
 
     List<Empleado> findAll();
-    Optional<Empleado> findById(Long id);
-    void save(EmpleadoRequest request);
-    void update(Long id, EmpleadoRequest request);
+    Empleado findById(Long id);
+    Empleado save(EmpleadoRequest request);
+    Empleado update(Long id, EmpleadoRequest request);
     void deleteById(Long id);
 
 }

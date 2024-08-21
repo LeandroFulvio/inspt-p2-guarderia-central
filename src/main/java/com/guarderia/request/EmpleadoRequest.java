@@ -1,7 +1,13 @@
 package com.guarderia.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
+@Builder
 public class EmpleadoRequest {
 
     private Long id;
@@ -10,10 +16,7 @@ public class EmpleadoRequest {
     private Long dni;
     private String direccion;
     private String telefono;
-
-    //Zonas asignadas?
-
     @JsonProperty("user_id")
-    private Long userId;
+    private Integer userId;
 
 }

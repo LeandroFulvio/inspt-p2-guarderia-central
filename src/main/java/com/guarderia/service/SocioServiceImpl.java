@@ -26,7 +26,7 @@ public class SocioServiceImpl implements SocioService{
 
     @Override
     public Optional<Socio> findById(Long id) {
-        return repository.findById(id);
+        return repository.findById(id);//TODO: resolver el optional aca
     }
 
     @Override
