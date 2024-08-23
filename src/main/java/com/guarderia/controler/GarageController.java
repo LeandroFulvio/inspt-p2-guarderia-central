@@ -14,7 +14,7 @@ public class GarageController {
     private final GarageService service;
 
     @GetMapping
-    public ResponseEntity<?> findAllVehicles(){
+    public ResponseEntity<?> findAllGarages(){
         return ResponseEntity.ok(service.findAll());
     }
 

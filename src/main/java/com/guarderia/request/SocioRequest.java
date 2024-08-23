@@ -13,7 +13,6 @@ import java.util.List;
 public class SocioRequest {
 
     private Long id;
-    private List<VehiculoRequest> vehiculos;
     private Long dni;
     private String direccion;
     private String telefono;

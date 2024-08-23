@@ -54,7 +54,7 @@ public class VehiculoController {
     //delete
     @DeleteMapping(value = "/{id}")
     @PreAuthorize("hasAuthority('admin:delete')")
-    public ResponseEntity<?> deleteZona(@PathVariable Long id){
+    public ResponseEntity<?> delete(@PathVariable Long id){
 
         service.deleteById(id);
 
