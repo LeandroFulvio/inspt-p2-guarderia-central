@@ -11,8 +11,13 @@ public interface GarageService {
     List<Garage> findAll();
     Optional<Garage> findById(Long id);
     List<Garage> findBySocioId(Long id);
-    void save(GarageRequest request);
-    void update(Long id, GarageRequest request);
+    Garage findByVehiculoId(Long id);
+    List<Garage> findByZonaId(Long id);
+    Garage save(GarageRequest request);
+    List<Garage> saveAll(List<GarageRequest> request);
+    Garage update(Long id, GarageRequest request);
     void deleteById(Long id);
+
+
 
 }

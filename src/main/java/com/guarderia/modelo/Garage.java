@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
-import java.util.List;
 
 @Data
 @Builder
@@ -21,6 +20,7 @@ public class Garage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JoinColumn(name = "numero", nullable = false)
     private int numero; //Identificador local del Garage
 
     @Column(name = "contador_luz")
