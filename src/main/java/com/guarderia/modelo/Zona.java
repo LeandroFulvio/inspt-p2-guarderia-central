@@ -38,6 +38,6 @@ public class Zona {
     private List<TipoVehiculo> tipoVehiculoAdminitos;
 
     @OneToMany(mappedBy = "zona")
-    private Set<AsignacionZona> asignacionZona;
+    private Set<AsignacionZona> asignacionZona;//Lazy, no va a responderse en consultas de Zona
 
 }

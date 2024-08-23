@@ -18,5 +18,4 @@ public class AsignacionZonaRequest {
     @JsonProperty("vehiculos_asignados")
     private int vehiculosAsignados;
 
-
 }

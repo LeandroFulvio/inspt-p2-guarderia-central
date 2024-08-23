@@ -32,33 +32,25 @@ public class VehiculoController {
         return ResponseEntity.ok(service.findBySocioId(id));
     }
 
-    //create
     @PostMapping
     @PreAuthorize("hasAuthority('admin:create')")
     public ResponseEntity<?> create(@RequestBody VehiculoRequest request){
         return ResponseEntity.ok(service.save(request));
     }
 
-    //update
     @PutMapping(value = "/{id}", produces = "application/json")
     @PreAuthorize("hasAuthority('admin:update')")
-    public ResponseEntity<?> update(@PathVariable Long id,
-                                        @RequestBody VehiculoRequest vehiculo){
+    public ResponseEntity<?> update(@PathVariable Long id,@RequestBody VehiculoRequest vehiculo){
         service.update(id, vehiculo);
-
         return ResponseEntity
                 .accepted()
                 .build();
     }
 
-    //delete
     @DeleteMapping(value = "/{id}")
     @PreAuthorize("hasAuthority('admin:delete')")
     public ResponseEntity<?> delete(@PathVariable Long id){
-
         service.deleteById(id);
-
-
         return ResponseEntity
                 .accepted()
                 .build();

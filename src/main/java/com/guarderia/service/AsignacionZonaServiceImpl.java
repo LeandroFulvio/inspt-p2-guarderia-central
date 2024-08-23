@@ -7,6 +7,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -52,7 +53,11 @@ public class AsignacionZonaServiceImpl implements AsignacionZonaService{
 
     @Override
     public List<AsignacionZona> saveAll(List<AsignacionZonaRequest> request) {
-        return null;
+        List<AsignacionZona> response = new ArrayList<>();
+        for (AsignacionZonaRequest r : request){
+            response.add(save(r));
+        }
+        return response;
     }
 
     @Override
@@ -63,8 +68,11 @@ public class AsignacionZonaServiceImpl implements AsignacionZonaService{
 
     @Override
     public List<AsignacionZona> updateAll(List<AsignacionZonaRequest> request) {
-        //TODO: update Asginacion
-        return null;
+        List<AsignacionZona> response = new ArrayList<>();
+        for (AsignacionZonaRequest r : request){
+            response.add(this.update(r.getId(), r));
+        }
+        return response;
     }
 
     @Override
