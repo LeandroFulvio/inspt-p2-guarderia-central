@@ -3,11 +3,13 @@ package com.guarderia.service;
 import com.guarderia.modelo.Garage;
 import com.guarderia.repository.GarageRepository;
 import com.guarderia.request.GarageRequest;
+import com.guarderia.request.VehiculoRequest;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +18,9 @@ import java.util.Optional;
 public class GarageServiceImpl implements GarageService {
 
     private final GarageRepository repository;
+    private final ZonaService zonaService;
+    private final SocioService  socioService;
+    private final VehiculoService vehiculoService;
 
     @Override
     public List<Garage> findAll() {
@@ -23,8 +28,9 @@ public class GarageServiceImpl implements GarageService {
     }
 
     @Override
-    public Optional<Garage> findById(Long id) {
-        return Optional.empty();
+    public Garage findById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("No se encontro garage con ID: " + id));
     }
 
     @Override
@@ -44,10 +50,29 @@ public class GarageServiceImpl implements GarageService {
     }
 
     @Override
+    public Garage create(GarageRequest request) {
+        var socio = socioService.findById(request.getSocioId())
+                            .orElse(null);
+
+        var garage = Garage.builder()
+                .numero(request.getNumero())
+                .mantenimientoContratado(request.isMantenimientoContratado())
+                .contadorLuz(request.getContadorLuz())
+                .zona(zonaService.findById(request.getZonaId()))
+                .socio(socio)
+                .fechaCompra(socio!=null ? new Date() : null)
+                .build();
+        return repository.save(garage);
+    }
+
+    @Override
     public Garage save(GarageRequest request) {
         var garage = Garage.builder()
                 .numero(request.getNumero())
-                //TODO: add fields
+                .mantenimientoContratado(request.isMantenimientoContratado())
+                .contadorLuz(request.getContadorLuz())
+                .zona(zonaService.findById(request.getZonaId()))
+                .vehiculoGuardado(vehiculoService.findById(request.getVehiculoGuardadoId()))
                 .build();
 
         return repository.save(garage);
@@ -72,5 +97,42 @@ public class GarageServiceImpl implements GarageService {
     public void deleteById(Long id) {
         repository.deleteById(id);
     }
+
+    @Override
+    public Garage garagePurchase(Long id, Long socioId) {
+        var garage = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("No se encontro garage con ID: " + id));
+        var socio = socioService.findById(socioId)
+                .orElseThrow(() -> new EntityNotFoundException("No se encontro socio con ID: " + socioId));
+
+        garage.setSocio(socio);
+        garage.setFechaCompra(new Date());
+
+        return repository.save(garage);
+    }
+
+    @Override
+    public Garage vehicleIngress(Long id, VehiculoRequest vehiculoRequest) {
+        var garage = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("No se encontro garage con ID: " + id));
+
+        var vehiculo = vehiculoService.findOrCreate(vehiculoRequest);
+        vehiculo.setFechaAsignacion(new Date());
+        garage.setVehiculoGuardado(vehiculo);
+
+        return repository.save(garage);
+    }
+
+    @Override
+    public Garage vehicleEgress(Long id) {
+        var garage = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("No se encontro garage con ID: " + id));
+
+        vehiculoService.removerAsignacion(garage.getVehiculoGuardado().getId());
+        garage.setVehiculoGuardado(null);
+
+        return repository.save(garage);
+    }
+
 
 }

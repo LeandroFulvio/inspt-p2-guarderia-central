@@ -67,12 +67,30 @@ public class VehiculoServiceImpl implements VehiculoService{
         //TODO: update vehiculo
     }
 
-    //update fecha asignacion -> Cuando se ingresa a un garage
-
-
     @Override
     public void deleteById(Long id) {
         repository.deleteById(id);
     }
+
+    @Override
+    public Vehiculo findOrCreate(VehiculoRequest request) {
+        if(request.getId()!=null) {
+            var v = repository.findById(request.getId())
+                    .orElseThrow(() -> new EntityNotFoundException("No se encontro vehiculo con ID: " + request.getId()));
+            v.setFechaAsignacion(new Date());
+            return v;
+        }
+
+        return save(request);
+    }
+
+    @Override
+    public Vehiculo removerAsignacion(Long id) {
+        var v = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("No se encontro vehiculo con ID: " + id));
+        v.setFechaAsignacion(null);
+        return repository.save(v);
+    }
+
 
 }

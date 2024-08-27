@@ -24,7 +24,7 @@ public class TipoVehiculoController {
 
     @GetMapping
     @PreAuthorize("hasAuthority('admin:read') or hasAuthority('socio:read') or hasAuthority('empleado:read')")
-    public ResponseEntity<?> findById(){
+    public ResponseEntity<?> findAll(){
         return ResponseEntity.ok(service.findAll());
     }
 

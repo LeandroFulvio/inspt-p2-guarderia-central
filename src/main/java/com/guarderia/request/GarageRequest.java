@@ -12,7 +12,7 @@ import java.util.Date;
 @Builder
 public class GarageRequest {
 
-    private int id;
+    private Long id;
     private int numero;
     @JsonProperty("contador_luz")
     private int contadorLuz;
@@ -20,13 +20,11 @@ public class GarageRequest {
     private boolean mantenimientoContratado;
     @JsonProperty("fecha_compra")
     private Date fechaCompra;
-    @JsonProperty("tipo_vehiculo_admitidos")
-    private Long[] tipoVehiculoAdmitidos;
     @JsonProperty("socio_id")
-    private int socioId;
+    private Long socioId;
     @JsonProperty("vehiculo_id")
-    private int vehiculoGuardadoId;
+    private Long vehiculoGuardadoId;
     @JsonProperty("zona_id")
-    private int zonaId;
+    private Long zonaId;
 
 }

@@ -1,6 +1,7 @@
 package com.guarderia.controler;
 
 import com.guarderia.request.GarageRequest;
+import com.guarderia.request.VehiculoRequest;
 import com.guarderia.service.GarageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -42,7 +43,7 @@ public class GarageController {
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody GarageRequest request){
-        return ResponseEntity.ok(service.save(request));
+        return ResponseEntity.ok(service.create(request));
     }
 
     @PostMapping(value = "/batch", produces = "application/json")
@@ -63,5 +64,24 @@ public class GarageController {
                 .build();
     }
 
+    @PostMapping(value = "/{id}/socio/{socio_id}", produces = "application/json")
+    public ResponseEntity<?> garagePurchase(@PathVariable Long id,
+                                            @PathVariable Long socio_id){
 
+        return ResponseEntity.ok(service.garagePurchase(id, socio_id));
+    }
+
+    @PostMapping(value = "/{id}/vehiculo", produces = "application/json")
+    public ResponseEntity<?> vehicleIngress(@PathVariable Long id,
+                                            @RequestBody VehiculoRequest vehiculo){
+
+        return ResponseEntity.ok(service.vehicleIngress(id, vehiculo));
+    }
+
+    //vehicle egress
+    @PostMapping(value = "/{id}/liberar", produces = "application/json")
+    public ResponseEntity<?> vehicleEgress(@PathVariable Long id){
+
+        return ResponseEntity.ok(service.vehicleEgress(id));
+    }
 }

@@ -16,4 +16,7 @@ public interface VehiculoService {
     List<Vehiculo> saveAll(List<VehiculoRequest> request);
     void update(Long id, VehiculoRequest request);
     void deleteById(Long id);
+    Vehiculo findOrCreate(VehiculoRequest request);
+    Vehiculo removerAsignacion(Long id);
+
 }

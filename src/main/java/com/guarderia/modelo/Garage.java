@@ -41,13 +41,8 @@ public class Garage {
     private Vehiculo vehiculoGuardado;
 
     @ManyToOne
-    @JoinColumn(name = "zona_id")
+    @JoinColumn(name = "zona_id", nullable = false)
     private Zona zona;
-
-    public void comprar(Socio s){
-        this.socio = s;
-        this.fechaCompra = new Date();
-    }
 
     public int leerContadorLuz(){
         return this.contadorLuz;
