@@ -4,6 +4,7 @@ import com.guarderia.request.ZonaRequest;
 import com.guarderia.service.ZonaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,37 +14,33 @@ public class ZonaController {
 
     private final ZonaService service;
 
-    //get all
     @GetMapping
+    @PreAuthorize("hasAuthority('admin:read') or hasAuthority('empleado:read')")
     public ResponseEntity<?> findAllZonas(){
         return ResponseEntity.ok(service.findAll());
     }
 
-    //get one
     @GetMapping(value = "/{id}", produces = "application/json")
+    @PreAuthorize("hasAuthority('admin:read') or hasAuthority('empleado:read')")
     public ResponseEntity<?> findById(@PathVariable Long id){
         return ResponseEntity.ok(service.findById(id));
     }
 
-    //create
     @PostMapping(consumes = "application/json")
+    @PreAuthorize("hasAuthority('admin:create')")
     public ResponseEntity<?> create(@RequestBody ZonaRequest request){
         return ResponseEntity.ok(service.save(request));
     }
 
-    //update
     @PutMapping(value = "/{id}", produces = "application/json")
+    @PreAuthorize("hasAuthority('admin:update')")
     public ResponseEntity<?> update(@PathVariable Long id,
                                         @RequestBody ZonaRequest zona){
-        service.update(id, zona);
-
-        return ResponseEntity
-                .accepted()
-                .build();
+        return ResponseEntity.ok(service.update(id, zona));
     }
 
-    //delete
     @DeleteMapping(value = "/{id}")
+    @PreAuthorize("hasAuthority('admin:delete')")
     public ResponseEntity<?> delete(@PathVariable Long id){
         service.deleteById(id);
 
@@ -51,10 +48,6 @@ public class ZonaController {
                 .accepted()
                 .build();
     }
-/*
- ResponseEntity.badRequest()
-            .body("Year of birth cannot be in the future");
 
- */
 
 }

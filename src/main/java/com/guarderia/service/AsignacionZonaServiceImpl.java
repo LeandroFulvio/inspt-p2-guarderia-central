@@ -62,8 +62,14 @@ public class AsignacionZonaServiceImpl implements AsignacionZonaService{
 
     @Override
     public AsignacionZona update(Long id, AsignacionZonaRequest request) {
-        //TODO: update Asginacion
-        return null;
+        var asignacion = findById(id);
+        asignacion.setZona(zonaService.findById(request.getZonaId()));
+        asignacion.setEmpleado(empleadoService.findById(request.getEmpleadoId()));
+        asignacion.setVehiculosACargo(request.getVehiculosAsignados());
+
+        repository.save(asignacion);
+
+        return asignacion;
     }
 
     @Override

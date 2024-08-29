@@ -42,7 +42,13 @@ public class ZonaServiceImpl implements ZonaService {
 
     @Override
     public Zona update(Long id, ZonaRequest request) {
-        //TODO: Zona update
+        var zona = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("No se encontro zona con ID: " + id));
+        zona.setLetra(request.getLetra());
+        zona.setCapacidad(request.getCapacidad());
+        zona.setTipoVehiculoAdminitos(tipoVehiculoService.findAll(request.getTipoVehiculoAdmitidos()));
+        zona.setCantidadVehiculos(request.getCantidadVehiculos());
+
         return null;
     }
 

@@ -14,5 +14,4 @@ public interface ZonaService {
     Zona update(Long id, ZonaRequest request);
     void deleteById(Long id);
 
-
 }

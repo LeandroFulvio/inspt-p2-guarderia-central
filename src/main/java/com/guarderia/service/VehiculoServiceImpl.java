@@ -63,8 +63,9 @@ public class VehiculoServiceImpl implements VehiculoService{
     }
 
     @Override
-    public void update(Long id, VehiculoRequest request) {
+    public Vehiculo update(Long id, VehiculoRequest request) {
         //TODO: update vehiculo
+        return null;
     }
 
     @Override

@@ -44,14 +44,6 @@ public class Garage {
     @JoinColumn(name = "zona_id", nullable = false)
     private Zona zona;
 
-    public int leerContadorLuz(){
-        return this.contadorLuz;
-    }
-
-    public void contratarMantenimiento(){
-        this.mantenimientoContratado = Boolean.TRUE;
-    }
-
     public boolean isVacio(){
         return vehiculoGuardado==null;
     }
@@ -63,19 +55,9 @@ public class Garage {
         return socio==null;
     }
 
-//    public boolean isOwner(Socio socio){
-//        return this.socio.getNombre().equals(socio.getNombre());
-//    }
-
     public void guardarVehiculo(Vehiculo v){
         vehiculoGuardado = v ;
     }
-
-//    public void conTipoAdminitido(TipoVehiculo tipo){
-//        this.vehiculosAdmitidos.add(tipo);
-//    }
-
-    //liberar garage (remover vehiculo)
 
     public boolean perteneceAZona(String letra){
         return letra.equals(zona.getLetra());

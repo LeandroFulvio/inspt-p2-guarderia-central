@@ -20,4 +20,10 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
 
+    //Maybe bad request? -> error en serializacion
+
+    //500
+
+    //duplicated key
+
 }

@@ -26,7 +26,7 @@ public class Zona {
     private int ancho;
     private int profundidad;
 
-    @Column(name = "cantidad_vehiculos")
+    @Column(name = "cantidad_vehiculos", nullable = false)
     private int cantidadVehiculos;
 
     @ManyToMany

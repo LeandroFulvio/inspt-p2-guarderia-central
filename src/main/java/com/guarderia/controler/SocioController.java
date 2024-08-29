@@ -32,7 +32,6 @@ public class SocioController {
         return ResponseEntity.ok(service.save(request));
     }
 
-    //update
     @PutMapping(value = "/{id}", produces = "application/json")
     @PreAuthorize("hasAuthority('admin:update')")
     public ResponseEntity<?> update(@PathVariable Long id,
@@ -40,7 +39,6 @@ public class SocioController {
         return ResponseEntity.ok(service.update(id, request));
     }
 
-    //delete
     @DeleteMapping(value = "/{id}")
     @PreAuthorize("hasAuthority('admin:delete')")
     public ResponseEntity<?> deleteZona(@PathVariable Long id){

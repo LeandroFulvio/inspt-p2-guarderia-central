@@ -44,8 +44,15 @@ public class EmpleadoServiceImpl implements EmpleadoService{
 
     @Override
     public Empleado update(Long id, EmpleadoRequest request) {
-        //TODO: update empelado
-        return null;
+        var empleado = findById(id);
+        empleado.setCodigo(request.getCodigo());
+        empleado.setDni(request.getDni());
+        empleado.setTelefono(request.getTelefono());
+        empleado.setEspecialidad(request.getEspecialidad());
+        empleado.setDireccion(request.getDireccion());
+        repository.save(empleado);
+
+        return empleado;
     }
 
     @Override

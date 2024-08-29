@@ -119,6 +119,7 @@ public class GarageServiceImpl implements GarageService {
         var vehiculo = vehiculoService.findOrCreate(vehiculoRequest);
         vehiculo.setFechaAsignacion(new Date());
         garage.setVehiculoGuardado(vehiculo);
+        garage.getZona().setCantidadVehiculos(garage.getZona().getCantidadVehiculos()+1);
 
         return repository.save(garage);
     }
@@ -130,9 +131,11 @@ public class GarageServiceImpl implements GarageService {
 
         vehiculoService.removerAsignacion(garage.getVehiculoGuardado().getId());
         garage.setVehiculoGuardado(null);
+        garage.getZona().setCantidadVehiculos(garage.getZona().getCantidadVehiculos()-1);
 
         return repository.save(garage);
     }
 
+    //getVehicleByZona ?
 
 }

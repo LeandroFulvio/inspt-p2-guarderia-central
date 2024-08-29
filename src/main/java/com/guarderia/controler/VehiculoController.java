@@ -41,10 +41,7 @@ public class VehiculoController {
     @PutMapping(value = "/{id}", produces = "application/json")
     @PreAuthorize("hasAuthority('admin:update')")
     public ResponseEntity<?> update(@PathVariable Long id,@RequestBody VehiculoRequest vehiculo){
-        service.update(id, vehiculo);
-        return ResponseEntity
-                .accepted()
-                .build();
+        return ResponseEntity.ok(service.update(id, vehiculo));
     }
 
     @DeleteMapping(value = "/{id}")
