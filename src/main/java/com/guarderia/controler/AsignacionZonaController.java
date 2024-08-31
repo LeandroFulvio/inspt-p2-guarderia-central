@@ -2,6 +2,7 @@ package com.guarderia.controler;
 
 import com.guarderia.request.AsignacionZonaRequest;
 import com.guarderia.service.AsignacionZonaService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -42,7 +43,7 @@ public class AsignacionZonaController {
 
     @PostMapping
     @PreAuthorize("hasAuthority('admin:create') or hasAuthority('empleado:create')")
-    public ResponseEntity<?> create(@RequestBody AsignacionZonaRequest request){
+    public ResponseEntity<?> create(@RequestBody @Valid AsignacionZonaRequest request){
         return ResponseEntity.ok(service.save(request));
     }
 
@@ -55,7 +56,7 @@ public class AsignacionZonaController {
     @PutMapping(value = "/{id}", produces = "application/json")
     @PreAuthorize("hasAuthority('admin:update') or hasAuthority('empleado:update')")
     public ResponseEntity<?> update(@PathVariable Long id,
-                                    @RequestBody AsignacionZonaRequest request){
+                                    @RequestBody @Valid AsignacionZonaRequest request){
         return ResponseEntity.ok(service.update(id, request));
     }
 

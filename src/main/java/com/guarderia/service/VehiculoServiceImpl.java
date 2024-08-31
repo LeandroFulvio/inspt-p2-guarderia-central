@@ -64,8 +64,19 @@ public class VehiculoServiceImpl implements VehiculoService{
 
     @Override
     public Vehiculo update(Long id, VehiculoRequest request) {
-        //TODO: update vehiculo
-        return null;
+        var vehiculo = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("No se encontro vehiculo con ID: " + id));
+        vehiculo.setNombre(request.getNombre());
+        vehiculo.setTipoVehiculo(tipoVehiculoService.findById(request.getTipoVehiculo())
+                        .orElseThrow(() ->
+                                new EntityNotFoundException("No se encontro " +
+                                "el tipo de vehiculo con ID: " + request.getTipoVehiculo())));
+        vehiculo.setSocio(socioService.findById(request.getIdSocio())
+                        .orElseThrow(() ->
+                                new EntityNotFoundException("No se encontro socio con ID: " + request.getId())));
+        vehiculo.setFechaAsignacion(request.getFechaAsignacion());
+
+        return repository.save(vehiculo);
     }
 
     @Override

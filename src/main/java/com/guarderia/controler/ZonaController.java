@@ -2,6 +2,7 @@ package com.guarderia.controler;
 
 import com.guarderia.request.ZonaRequest;
 import com.guarderia.service.ZonaService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -28,7 +29,7 @@ public class ZonaController {
 
     @PostMapping(consumes = "application/json")
     @PreAuthorize("hasAuthority('admin:create')")
-    public ResponseEntity<?> create(@RequestBody ZonaRequest request){
+    public ResponseEntity<?> create(@RequestBody @Valid ZonaRequest request){
         return ResponseEntity.ok(service.save(request));
     }
 

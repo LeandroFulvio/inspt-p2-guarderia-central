@@ -37,6 +37,7 @@ public class Vehiculo  {
     @JoinColumn(name = "socio_id", updatable = false)
     private Socio socio;
 
+    @Transient
     public boolean tieneCochera(){//Si tiene fecha asignada a cochera, ya esta guardado
         return fechaAsignacion!=null;
     }

@@ -1,12 +1,12 @@
 package com.guarderia.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Getter
 @Setter
@@ -14,6 +14,8 @@ import java.util.List;
 public class ZonaRequest implements Serializable {
 
     private Long id;
+
+    @NotBlank(message = "letra es requerida")
     private String letra;
     private int capacidad;
 

@@ -89,8 +89,18 @@ public class GarageServiceImpl implements GarageService {
 
     @Override
     public Garage update(Long id, GarageRequest request) {
-        //TODO: update garage
-        return null;
+        var garage = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("No se encontro garage con ID: " + id));
+        garage.setSocio(socioService.findById(request.getSocioId())
+                .orElseThrow(() -> new EntityNotFoundException("No se encontro socio con ID: " + request.getSocioId())));
+        garage.setVehiculoGuardado(vehiculoService.findById(request.getVehiculoGuardadoId()));
+        garage.setZona(zonaService.findById(request.getZonaId()));
+        garage.setContadorLuz(request.getContadorLuz());
+        garage.setMantenimientoContratado(request.isMantenimientoContratado());
+        garage.setNumero(request.getNumero());
+        garage.setFechaCompra(request.getFechaCompra());//Maybe not?
+
+        return repository.save(garage);
     }
 
     @Override
