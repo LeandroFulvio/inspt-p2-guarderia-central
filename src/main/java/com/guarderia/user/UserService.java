@@ -1,5 +1,7 @@
 package com.guarderia.user;
 
+import com.guarderia.request.EmpleadoForm;
+import com.guarderia.request.SocioFrom;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,7 +14,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserService {
 
-//    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
     private final UserRepository repository;
     //TODO: Requiere usar Principal
 //    public void changePassword(ChangePasswordRequest request, Principal connectedUser) {
@@ -38,4 +40,29 @@ public class UserService {
     public User getUserById(Integer id){
         return repository.findById(id).orElseThrow();
     }
+
+    public User create(SocioFrom request) {
+        var user = User.builder()
+                .username(request.getUsername())
+                .firstname(request.getFirstname())
+                .lastname(request.getLastname())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .role(Role.SOCIO)
+                .build();
+
+        return repository.save(user);
+    }
+
+    public User create(EmpleadoForm request) {
+        var user = User.builder()
+                .username(request.getUsername())
+                .firstname(request.getFirstname())
+                .lastname(request.getLastname())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .role(Role.EMPLEADO)
+                .build();
+
+        return repository.save(user);
+    }
+
 }

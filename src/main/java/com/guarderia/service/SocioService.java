@@ -1,6 +1,7 @@
 package com.guarderia.service;
 
 import com.guarderia.modelo.Socio;
+import com.guarderia.request.SocioFrom;
 import com.guarderia.request.SocioRequest;
 
 import java.util.List;
@@ -11,6 +12,7 @@ public interface SocioService {
     List<Socio> findAll();
     Optional<Socio> findById(Long id);
     Socio save(SocioRequest request);
+    Socio save(SocioFrom request);
     Socio update(Long id, SocioRequest request);
     void deleteById(Long id);
 

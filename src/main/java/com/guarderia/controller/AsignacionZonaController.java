@@ -1,11 +1,10 @@
-package com.guarderia.controler;
+package com.guarderia.controller;
 
 import com.guarderia.request.AsignacionZonaRequest;
 import com.guarderia.service.AsignacionZonaService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

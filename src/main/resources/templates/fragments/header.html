@@ -37,14 +37,14 @@
                             Admin Panel
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownAdminMenuLink">
-                            <a class="dropdown-item" th:href="@{/api/administrador}">Administrador</a>
+                            <a class="dropdown-item" th:href="@{/api/socio}">Socios</a>
 
                         </div>
                     </li>
                 </div>
                 <div sec:authorize="hasAnyRole('ROLE_SOCIO')">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAdminMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownSocioMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Gestion de Socio
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownSocioMenuLink">
@@ -55,7 +55,7 @@
                 </div>
                 <div sec:authorize="hasAnyRole('ROLE_EMPLEADO')">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAdminMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownEmpleadoMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Gestion de Empleado
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownEmpleadoMenuLink">

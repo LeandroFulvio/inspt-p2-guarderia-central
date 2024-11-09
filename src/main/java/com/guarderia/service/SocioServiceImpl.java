@@ -2,7 +2,9 @@ package com.guarderia.service;
 
 import com.guarderia.modelo.Socio;
 import com.guarderia.repository.SocioRepository;
+import com.guarderia.request.SocioFrom;
 import com.guarderia.request.SocioRequest;
+import com.guarderia.user.User;
 import com.guarderia.user.UserService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -37,6 +39,21 @@ public class SocioServiceImpl implements SocioService{
                 .direccion(request.getDireccion())
                 .telefono(request.getTelefono())
                 .user(userService.getUserById(request.getUserId()))
+                .fechaIngreso(new Date())
+                .build();
+
+        return repository.save(socio);
+    }
+
+    @Override
+    public Socio save(SocioFrom request) {
+        var user = userService.create(request);
+
+        var socio = Socio.builder()
+                .dni(request.getDni())
+                .direccion(request.getDireccion())
+                .telefono(request.getTelefono())
+                .user(user)
                 .fechaIngreso(new Date())
                 .build();
 

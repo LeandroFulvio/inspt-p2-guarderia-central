@@ -1,18 +1,17 @@
-package com.guarderia.controler;
+package com.guarderia.controller;
 
-import com.guarderia.request.VehiculoRequest;
-import com.guarderia.service.VehiculoService;
+import com.guarderia.request.SocioRequest;
+import com.guarderia.service.SocioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/vehiculo")
+@RequestMapping("/api/v1/socio")
 @RequiredArgsConstructor
-public class VehiculoController {
+public class SocioController {
 
-    private final VehiculoService service;
+    private final SocioService service;
 
     @GetMapping
 //    @PreAuthorize("hasAuthority('admin:read') or hasAuthority('socio:read') or hasAuthority('empleado:read')")
@@ -26,28 +25,24 @@ public class VehiculoController {
         return ResponseEntity.ok(service.findById(id));
     }
 
-    @GetMapping(value = "/{id}/socio")
-//    @PreAuthorize("hasAuthority('admin:read') or hasAuthority('socio:read') or hasAuthority('empleado:read')")
-    public ResponseEntity<?> findBySocioId(@PathVariable Long id){
-        return ResponseEntity.ok(service.findBySocioId(id));
-    }
-
     @PostMapping
 //    @PreAuthorize("hasAuthority('admin:create')")
-    public ResponseEntity<?> create(@RequestBody VehiculoRequest request){
+    public ResponseEntity<?> create(@RequestBody SocioRequest request){
         return ResponseEntity.ok(service.save(request));
     }
 
     @PutMapping(value = "/{id}", produces = "application/json")
 //    @PreAuthorize("hasAuthority('admin:update')")
-    public ResponseEntity<?> update(@PathVariable Long id,@RequestBody VehiculoRequest vehiculo){
-        return ResponseEntity.ok(service.update(id, vehiculo));
+    public ResponseEntity<?> update(@PathVariable Long id,
+                                    @RequestBody SocioRequest request){
+        return ResponseEntity.ok(service.update(id, request));
     }
 
     @DeleteMapping(value = "/{id}")
 //    @PreAuthorize("hasAuthority('admin:delete')")
-    public ResponseEntity<?> delete(@PathVariable Long id){
+    public ResponseEntity<?> deleteZona(@PathVariable Long id){
         service.deleteById(id);
+
         return ResponseEntity
                 .accepted()
                 .build();

@@ -2,6 +2,7 @@ package com.guarderia.service;
 
 import com.guarderia.modelo.Empleado;
 import com.guarderia.repository.EmpleadoRepository;
+import com.guarderia.request.EmpleadoForm;
 import com.guarderia.request.EmpleadoRequest;
 import com.guarderia.user.UserService;
 import jakarta.persistence.EntityNotFoundException;
@@ -37,6 +38,22 @@ public class EmpleadoServiceImpl implements EmpleadoService{
                 .telefono(request.getTelefono())
                 .especialidad(request.getEspecialidad())
                 .user(userService.getUserById(request.getUserId()))
+                .build();
+
+        return repository.save(empleado);
+    }
+
+    @Override
+    public Empleado save(EmpleadoForm request) {
+        var user = userService.create(request);
+
+        var empleado = Empleado.builder()
+                .dni(request.getDni())
+                .direccion(request.getDireccion())
+                .codigo(request.getCodigo())
+                .telefono(request.getTelefono())
+                .especialidad(request.getEspecialidad())
+                .user(user)
                 .build();
 
         return repository.save(empleado);
