@@ -1,0 +1,31 @@
+body {
+    overflow: auto;
+}
+
+footer{
+    position:fixed;
+    bottom:0px;
+    height: 40px;
+    margin:0;
+    clear: both;
+    margin-top: -100px;
+    width: 100%;
+    background-color: #343a40;
+}
+
+.dropdown:hover .dropdown-menu{
+    animation-name: example;
+    animation: example 300ms;
+    display: block;
+}
+@keyframes example {
+    from {opacity:.2}
+    to {opacity:1;}
+}
+
+.dropdown-item:hover {
+    transform: scale(1.20);
+    transition: all 100ms;
+}
+
+

@@ -14,15 +14,15 @@ import java.security.Principal;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final UserService service;
-
-    @PatchMapping
-    public ResponseEntity<?> changePassword(
-            @RequestBody ChangePasswordRequest request,
-            Principal connectedUser
-    ) {
-        service.changePassword(request, connectedUser);
-        return ResponseEntity.ok().build();
-    }
+//    private final UserService service;
+//
+//    @PatchMapping
+//    public ResponseEntity<?> changePassword(
+//            @RequestBody ChangePasswordRequest request,
+//            Principal connectedUser
+//    ) {
+//        service.changePassword(request, connectedUser);
+//        return ResponseEntity.ok().build();
+//    }
 
 }

@@ -15,37 +15,37 @@ public class VehiculoController {
     private final VehiculoService service;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('admin:read') or hasAuthority('socio:read') or hasAuthority('empleado:read')")
+//    @PreAuthorize("hasAuthority('admin:read') or hasAuthority('socio:read') or hasAuthority('empleado:read')")
     public ResponseEntity<?> findAllVehicles(){
         return ResponseEntity.ok(service.findAll());
     }
 
     @GetMapping(value = "/{id}")
-    @PreAuthorize("hasAuthority('admin:read') or hasAuthority('socio:read') or hasAuthority('empleado:read')")
+//    @PreAuthorize("hasAuthority('admin:read') or hasAuthority('socio:read') or hasAuthority('empleado:read')")
     public ResponseEntity<?> findById(@PathVariable Long id){
         return ResponseEntity.ok(service.findById(id));
     }
 
     @GetMapping(value = "/{id}/socio")
-    @PreAuthorize("hasAuthority('admin:read') or hasAuthority('socio:read') or hasAuthority('empleado:read')")
+//    @PreAuthorize("hasAuthority('admin:read') or hasAuthority('socio:read') or hasAuthority('empleado:read')")
     public ResponseEntity<?> findBySocioId(@PathVariable Long id){
         return ResponseEntity.ok(service.findBySocioId(id));
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('admin:create')")
+//    @PreAuthorize("hasAuthority('admin:create')")
     public ResponseEntity<?> create(@RequestBody VehiculoRequest request){
         return ResponseEntity.ok(service.save(request));
     }
 
     @PutMapping(value = "/{id}", produces = "application/json")
-    @PreAuthorize("hasAuthority('admin:update')")
+//    @PreAuthorize("hasAuthority('admin:update')")
     public ResponseEntity<?> update(@PathVariable Long id,@RequestBody VehiculoRequest vehiculo){
         return ResponseEntity.ok(service.update(id, vehiculo));
     }
 
     @DeleteMapping(value = "/{id}")
-    @PreAuthorize("hasAuthority('admin:delete')")
+//    @PreAuthorize("hasAuthority('admin:delete')")
     public ResponseEntity<?> delete(@PathVariable Long id){
         service.deleteById(id);
         return ResponseEntity

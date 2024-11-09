@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      class="h-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <div th:replace="~{fragments/header :: header-css}"/>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1 0 auto;
+        }
+    </style>
+</head>
+<body class="d-flex flex-column h-100">
+<div th:replace="~{fragments/header :: header}"/>
+
+<main class="flex-shrink-0">
+    <div class="container mt-4">
+        <h1 class="mb-4">Dashboard</h1>
+
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">User Information</h5>
+                        <p class="card-text">Username: <span th:text="${#authentication.name}"></span></p>
+                        <p class="card-text">Authorities: <span th:text="${#authentication.authorities}"></span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Access Information</h5>
+                        <div sec:authorize="isAuthenticated()">
+                            <p class="card-text">This content is only shown to authenticated users.</p>
+                        </div>
+                        <div sec:authorize="hasRole('ROLE_ADMIN')">
+                            <p class="card-text">This content is only shown to administrators.</p>
+                        </div>
+                        <div sec:authorize="hasRole('ROLE_SOCIO')">
+                            <p class="card-text">This content is only shown to socios.</p>
+                        </div>
+                        <div sec:authorize="hasRole('ROLE_EMPLEADO')">
+                            <p class="card-text">This content is only shown to empleados.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Roles</h5>
+                        <p class="card-text">Your roles are:</p>
+                        <ul>
+                            <li th:each="authority : ${#authentication.authorities}" th:text="${authority.authority}"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div th:replace="~{fragments/footer :: footer}"/>
+</body>
+</html>

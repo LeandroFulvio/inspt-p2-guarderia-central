@@ -6,6 +6,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
+import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import static com.guarderia.user.Role.*;
 
@@ -25,7 +29,7 @@ public class GuarderiaApplication {
 					.firstname("Admin")
 					.lastname("Admin")
 					.username("admin")
-					.password("password")
+					.password("pass")
 					.role(ADMIN)
 					.build();
 			System.out.println("Admin token: " + service.register(admin).getAccessToken());
@@ -34,7 +38,7 @@ public class GuarderiaApplication {
 					.firstname("empleado")
 					.lastname("empleado")
 					.username("empleado")
-					.password("password")
+					.password("pass")
 					.role(EMPLEADO)
 					.build();
 			System.out.println("Empleado token: " + service.register(empleado).getAccessToken());
@@ -43,7 +47,7 @@ public class GuarderiaApplication {
 					.firstname("socio")
 					.lastname("socio")
 					.username("socio")
-					.password("password")
+					.password("pass")
 					.role(SOCIO)
 					.build();
 			System.out.println("Socio token: " + service.register(socio).getAccessToken());

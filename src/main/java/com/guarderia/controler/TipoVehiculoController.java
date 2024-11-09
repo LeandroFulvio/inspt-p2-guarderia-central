@@ -17,13 +17,13 @@ public class TipoVehiculoController {
     private final TipoVehiculoService service;
 
     @GetMapping(value = "/{id}")
-    @PreAuthorize("hasAuthority('admin:read') or hasAuthority('socio:read') or hasAuthority('empleado:read')")
+//    @PreAuthorize("hasAuthority('admin:read') or hasAuthority('socio:read') or hasAuthority('empleado:read')")
     public ResponseEntity<?> findById(@PathVariable Long id){
         return ResponseEntity.ok(service.findById(id));
     }
 
     @GetMapping
-    @PreAuthorize("hasAuthority('admin:read') or hasAuthority('socio:read') or hasAuthority('empleado:read')")
+//    @PreAuthorize("hasAuthority('admin:read') or hasAuthority('socio:read') or hasAuthority('empleado:read')")
     public ResponseEntity<?> findAll(){
         return ResponseEntity.ok(service.findAll());
     }
