@@ -73,6 +73,18 @@ public class EmpleadoServiceImpl implements EmpleadoService{
     }
 
     @Override
+    public Empleado update(Empleado empleado){
+        var original = findById(empleado.getId());
+        original.setCodigo(empleado.getCodigo());
+        original.setDni(empleado.getDni());
+        original.setTelefono(empleado.getTelefono());
+        original.setEspecialidad(empleado.getEspecialidad());
+        original.setDireccion(empleado.getDireccion());
+
+        return repository.save(original);
+    }
+
+    @Override
     public void deleteById(Long id) {
         repository.deleteById(id);
     }

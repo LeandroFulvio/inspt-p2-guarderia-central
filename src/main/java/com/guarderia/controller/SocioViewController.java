@@ -27,4 +27,11 @@ public class SocioViewController {
         return "redirect:/api/socio";
     }
 
+    @GetMapping("/edit/{id}")
+    public String showSocio(@PathVariable Long id, Model model){
+        model.addAttribute("socio", service.findById(id) );
+
+        return "/api/showSocio";
+    }
+
 }

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Empleado</title>
+    <div th:replace="~{fragments/header :: header-css}"/>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1 0 auto;
+        }
+    </style>
+</head>
+<body class="d-flex flex-column h-100">
+<div th:replace="~{fragments/header :: header}"/>
+<main class="flex-shrink-0">
+    <div class="container mt-4">
+        <h1>Editar Empleado</h1>
+        <form th:object="${empleado}" th:action="@{/api/empleado/update}" method="post">
+            <input type="hidden" th:field="*{id}"/>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Información de Usuario</h5>
+                            <div class="mb-3">
+                                <label for="firstname" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="firstname" th:field="*{user.firstname}" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="lastname" class="form-label">Apellido</label>
+                                <input type="text" class="form-control" id="lastname" th:field="*{user.lastname}" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Nombre de usuario</label>
+                                <input type="text" class="form-control" id="username" th:field="*{user.username}" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Información de Empleado</h5>
+                            <div class="mb-3">
+                                <label for="codigo" class="form-label">Código</label>
+                                <input type="text" class="form-control" id="codigo" th:field="*{codigo}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="especialidad" class="form-label">Especialidad</label>
+                                <input type="text" class="form-control" id="especialidad" th:field="*{especialidad}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="dni" class="form-label">DNI</label>
+                                <input type="number" class="form-control" id="dni" th:field="*{dni}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="direccion" class="form-label">Dirección</label>
+                                <input type="text" class="form-control" id="direccion" th:field="*{direccion}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="telefono" class="form-label">Teléfono</label>
+                                <input type="tel" class="form-control" id="telefono" th:field="*{telefono}" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Actualizar</button>
+        </form>
+    </div>
+</main>
+<div th:replace="~{fragments/footer :: footer}"/>
+</body>
+</html>

@@ -14,6 +14,7 @@ public interface EmpleadoService {
     Empleado save(EmpleadoRequest request);
     Empleado save(EmpleadoForm request);
     Empleado update(Long id, EmpleadoRequest request);
+    Empleado update(Empleado empleado);
     void deleteById(Long id);
 
 }
