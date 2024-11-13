@@ -44,8 +44,7 @@ public class VehiculoServiceImpl implements VehiculoService{
         var vehiculo = Vehiculo.builder()
                 .matricula(request.getMatricula())
                 .nombre(request.getNombre())
-                .socio(socioService.findById(request.getIdSocio())
-                        .orElseThrow(() -> new EntityNotFoundException("No se encontro socio con ID: " + request.getId())))
+                .socio(socioService.findById(request.getIdSocio()))
                 .tipoVehiculo(tipoVehiculoService.findById(request.getTipoVehiculo())
                         .orElseThrow(() -> new EntityNotFoundException("No se encontro el tipo de vehiculo con ID: " + request.getTipoVehiculo())))
                 .build();
@@ -71,9 +70,7 @@ public class VehiculoServiceImpl implements VehiculoService{
                         .orElseThrow(() ->
                                 new EntityNotFoundException("No se encontro " +
                                 "el tipo de vehiculo con ID: " + request.getTipoVehiculo())));
-        vehiculo.setSocio(socioService.findById(request.getIdSocio())
-                        .orElseThrow(() ->
-                                new EntityNotFoundException("No se encontro socio con ID: " + request.getId())));
+        vehiculo.setSocio(socioService.findById(request.getIdSocio()));
         vehiculo.setFechaAsignacion(request.getFechaAsignacion());
 
         return repository.save(vehiculo);

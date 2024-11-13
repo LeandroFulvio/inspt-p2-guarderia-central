@@ -10,10 +10,11 @@ import java.util.Optional;
 public interface SocioService {
 
     List<Socio> findAll();
-    Optional<Socio> findById(Long id);
+    Socio findById(Long id);
     Socio save(SocioRequest request);
     Socio save(SocioFrom request);
     Socio update(Long id, SocioRequest request);
+    Socio update(Socio socio);
     void deleteById(Long id);
 
 

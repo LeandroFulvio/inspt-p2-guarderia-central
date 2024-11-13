@@ -1,5 +1,6 @@
 package com.guarderia.controller;
 
+import com.guarderia.modelo.Socio;
 import com.guarderia.request.SocioFrom;
 import com.guarderia.service.SocioService;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +33,21 @@ public class SocioViewController {
         model.addAttribute("socio", service.findById(id) );
 
         return "/api/showSocio";
+    }
+
+    @PostMapping("/update")
+    public String update(@ModelAttribute Socio socio, Model model){
+        service.update(socio);
+        model.addAttribute("socios", service.findAll() );
+
+        return "/api/socio";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteSocio(@PathVariable Long id){
+        service.deleteById(id);
+
+        return "redirect:/api/socio";
     }
 
 }

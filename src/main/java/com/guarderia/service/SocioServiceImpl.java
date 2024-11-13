@@ -27,8 +27,9 @@ public class SocioServiceImpl implements SocioService{
     }
 
     @Override
-    public Optional<Socio> findById(Long id) {
-        return repository.findById(id);//TODO: resolver el optional aca
+    public Socio findById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("No se encontro socio con ID: " + id));
     }
 
     @Override
@@ -69,6 +70,16 @@ public class SocioServiceImpl implements SocioService{
         socio.setTelefono(request.getTelefono());
 
         return repository.save(socio);
+    }
+
+    @Override
+    public Socio update(Socio socio){
+        var original = findById(socio.getId());
+        original.setDni(socio.getDni());
+        original.setTelefono(socio.getTelefono());
+        original.setDireccion(socio.getDireccion());
+
+        return repository.save(original);
     }
 
     @Override

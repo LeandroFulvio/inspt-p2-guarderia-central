@@ -31,7 +31,7 @@ public class Empleado {
     @OneToMany(mappedBy = "empleado")
     private Set<AsignacionZona> zonasAsignadas;//Lazy, no va a responderse en consultas de Empleado
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "user_id", updatable = false)
     private User user;
 

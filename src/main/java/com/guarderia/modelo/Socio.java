@@ -29,7 +29,7 @@ public class Socio {
     @CreatedBy
     private Date fechaIngreso; //Fecha de Ingreso a la Guarderia
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "user_id", updatable = false)
     private User user;
 

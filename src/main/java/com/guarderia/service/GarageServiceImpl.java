@@ -51,8 +51,7 @@ public class GarageServiceImpl implements GarageService {
 
     @Override
     public Garage create(GarageRequest request) {
-        var socio = socioService.findById(request.getSocioId())
-                            .orElse(null);
+        var socio = socioService.findById(request.getSocioId());
 
         var garage = Garage.builder()
                 .numero(request.getNumero())
@@ -91,8 +90,7 @@ public class GarageServiceImpl implements GarageService {
     public Garage update(Long id, GarageRequest request) {
         var garage = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("No se encontro garage con ID: " + id));
-        garage.setSocio(socioService.findById(request.getSocioId())
-                .orElseThrow(() -> new EntityNotFoundException("No se encontro socio con ID: " + request.getSocioId())));
+        garage.setSocio(socioService.findById(request.getSocioId()));
         garage.setVehiculoGuardado(vehiculoService.findById(request.getVehiculoGuardadoId()));
         garage.setZona(zonaService.findById(request.getZonaId()));
         garage.setContadorLuz(request.getContadorLuz());
@@ -112,8 +110,7 @@ public class GarageServiceImpl implements GarageService {
     public Garage garagePurchase(Long id, Long socioId) {
         var garage = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("No se encontro garage con ID: " + id));
-        var socio = socioService.findById(socioId)
-                .orElseThrow(() -> new EntityNotFoundException("No se encontro socio con ID: " + socioId));
+        var socio = socioService.findById(socioId);
 
         garage.setSocio(socio);
         garage.setFechaCompra(new Date());
