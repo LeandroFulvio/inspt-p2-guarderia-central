@@ -108,6 +108,11 @@
                            sec:authorize="hasRole('ROLE_ADMIN')"
                            class="btn btn-danger btn-sm">Borrar</a>
                     </td>
+                    <td>
+                        <a th:href="@{/api/vehiculo/socio/{id}(id=${socio.id})}"
+                           sec:authorize="hasRole('ROLE_ADMIN')"
+                           class="btn btn-success btn-sm">Asignar Vehículo</a>
+                    </td>
                 </tr>
                 </tbody>
             </table>

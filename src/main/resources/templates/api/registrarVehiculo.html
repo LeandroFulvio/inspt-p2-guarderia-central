@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      class="h-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Vehículo para Socio</title>
+    <div th:replace="~{fragments/header :: header-css}"/>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1 0 auto;
+        }
+    </style>
+</head>
+<body class="d-flex flex-column h-100">
+<div th:replace="~{fragments/header :: header}"/>
+<main class="flex-shrink-0">
+    <div class="container mt-4">
+        <h1>Crear Vehículo para Socio</h1>
+        <form th:action="@{/api/vehiculo/create}" th:object="${vehiculoForm}" method="post">
+            <input type="hidden" th:field="*{idSocio}"/>
+            <div class="mb-3">
+                <label for="socio" class="form-label">Socio</label>
+                <input type="text" class="form-control" id="socio" th:value="${socio.user.username}" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="matricula" class="form-label">Matrícula</label>
+                <input type="text" class="form-control" id="matricula" th:field="*{matricula}" required>
+            </div>
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nombre" th:field="*{nombre}" required>
+            </div>
+            <div class="mb-3">
+                <label for="tipoVehiculo" class="form-label">Tipo de Vehículo</label>
+                <select class="form-select" id="tipoVehiculo" th:field="*{tipoVehiculoId}" required>
+                    <option value="">Seleccione un tipo de vehículo</option>
+                    <option th:each="tipo : ${tiposVehiculo}"
+                            th:value="${tipo.id}"
+                            th:text="${tipo.nombre}">
+                    </option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Crear Vehículo</button>
+        </form>
+    </div>
+</main>
+<div th:replace="~{fragments/footer :: footer}"/>
+</body>
+</html>

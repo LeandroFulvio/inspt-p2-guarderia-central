@@ -33,8 +33,9 @@ public class TipoVehiculoServiceImpl implements TipoVehiculoService{
     }
 
     @Override
-    public Optional<TipoVehiculo> findById(Long id) {
-        return repository.findById(id);
+    public TipoVehiculo findById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("No se encontro el tipo de vehiculo con ID: " + id));
     }
 
     @Override

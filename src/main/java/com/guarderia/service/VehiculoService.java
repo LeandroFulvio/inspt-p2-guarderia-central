@@ -1,6 +1,7 @@
 package com.guarderia.service;
 
 import com.guarderia.modelo.Vehiculo;
+import com.guarderia.request.VehiculoForm;
 import com.guarderia.request.VehiculoRequest;
 
 
@@ -13,6 +14,7 @@ public interface VehiculoService {
     Vehiculo findById(Long id);
     List<Vehiculo> findBySocioId(Long socioId);
     Vehiculo save(VehiculoRequest request);
+    Vehiculo create(VehiculoForm form);
     List<Vehiculo> saveAll(List<VehiculoRequest> request);
     Vehiculo update(Long id, VehiculoRequest request);
     void deleteById(Long id);

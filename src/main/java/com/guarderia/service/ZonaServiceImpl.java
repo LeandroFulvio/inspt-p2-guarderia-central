@@ -49,7 +49,7 @@ public class ZonaServiceImpl implements ZonaService {
                 .ancho(form.getAncho())
                 .profundidad(form.getProfundidad())
                 .cantidadVehiculos(0)
-                .tipoVehiculoAdminitos(tipoVehiculoService.findAll(form.getTipoVehiculoAdmitidos())) //TODO: tipovehiculo
+                .tipoVehiculoAdminitos(tipoVehiculoService.findAll(form.getTipoVehiculoAdmitidos()))
                 .build();
 
         return repository.save(zona);

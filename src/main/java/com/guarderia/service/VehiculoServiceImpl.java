@@ -2,6 +2,7 @@ package com.guarderia.service;
 
 import com.guarderia.modelo.Vehiculo;
 import com.guarderia.repository.VehiculoRepository;
+import com.guarderia.request.VehiculoForm;
 import com.guarderia.request.VehiculoRequest;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -45,8 +46,19 @@ public class VehiculoServiceImpl implements VehiculoService{
                 .matricula(request.getMatricula())
                 .nombre(request.getNombre())
                 .socio(socioService.findById(request.getIdSocio()))
-                .tipoVehiculo(tipoVehiculoService.findById(request.getTipoVehiculo())
-                        .orElseThrow(() -> new EntityNotFoundException("No se encontro el tipo de vehiculo con ID: " + request.getTipoVehiculo())))
+                .tipoVehiculo(tipoVehiculoService.findById(request.getTipoVehiculo()))
+                .build();
+
+        return repository.save(vehiculo);
+    }
+
+    @Override
+    public Vehiculo create(VehiculoForm form){
+        var vehiculo = Vehiculo.builder()
+                .matricula(form.getMatricula())
+                .nombre(form.getNombre())
+                .socio(socioService.findById(form.getIdSocio()))
+                .tipoVehiculo(tipoVehiculoService.findById(form.getTipoVehiculoId()))
                 .build();
 
         return repository.save(vehiculo);
@@ -66,10 +78,7 @@ public class VehiculoServiceImpl implements VehiculoService{
         var vehiculo = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("No se encontro vehiculo con ID: " + id));
         vehiculo.setNombre(request.getNombre());
-        vehiculo.setTipoVehiculo(tipoVehiculoService.findById(request.getTipoVehiculo())
-                        .orElseThrow(() ->
-                                new EntityNotFoundException("No se encontro " +
-                                "el tipo de vehiculo con ID: " + request.getTipoVehiculo())));
+        vehiculo.setTipoVehiculo(tipoVehiculoService.findById(request.getTipoVehiculo()));
         vehiculo.setSocio(socioService.findById(request.getIdSocio()));
         vehiculo.setFechaAsignacion(request.getFechaAsignacion());
 
