@@ -11,6 +11,7 @@
             flex-direction: column;
             min-height: 100vh;
         }
+
         main {
             flex: 1 0 auto;
         }
@@ -22,53 +23,53 @@
 <main class="flex-shrink-0">
     <div class="container mt-4">
         <div class="container mt-4" sec:authorize="hasRole('ROLE_ADMIN')">
-        <form th:action="@{/api/socio}" method="post">
-            <div class="row">
-                <div class="col-md-6 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Information de Registro</h5>
-                            <div class="mb-3">
-                                <label for="firstname" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="firstname" name="firstname" required>
+            <form th:action="@{/api/socio}" method="post">
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Information de Registro</h5>
+                                <div class="mb-3">
+                                    <label for="firstname" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" id="firstname" name="firstname" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="lastname" class="form-label">Apellido</label>
+                                    <input type="text" class="form-control" id="lastname" name="lastname" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Nombre de Usuario</label>
+                                    <input type="text" class="form-control" id="username" name="username" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Contaseña</label>
+                                    <input type="password" class="form-control" id="password" name="password" required>
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="lastname" class="form-label">Apellido</label>
-                                <input type="text" class="form-control" id="lastname" name="lastname" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="username" class="form-label">Nombre de Usuario</label>
-                                <input type="text" class="form-control" id="username" name="username" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Contaseña</label>
-                                <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Informacion del Socio</h5>
+                                <div class="mb-3">
+                                    <label for="dni" class="form-label">DNI</label>
+                                    <input type="number" class="form-control" id="dni" name="dni" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="direccion" class="form-label">Dirección</label>
+                                    <input type="text" class="form-control" id="direccion" name="direccion" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="telefono" class="form-label">Teléfono</label>
+                                    <input type="tel" class="form-control" id="telefono" name="telefono" required>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Informacion del Socio</h5>
-                            <div class="mb-3">
-                                <label for="dni" class="form-label">DNI</label>
-                                <input type="number" class="form-control" id="dni" name="dni" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="direccion" class="form-label">Dirección</label>
-                                <input type="text" class="form-control" id="direccion" name="direccion" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="telefono" class="form-label">Teléfono</label>
-                                <input type="tel" class="form-control" id="telefono" name="telefono" required>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Register</button>
-        </form>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
         </div>
 
         <div class="col-md-6 mb-4">
@@ -95,17 +96,17 @@
                     <td th:text="${socio.telefono}"></td>
                     <td th:text="${#dates.format(socio.fechaIngreso, 'dd-MM-yyyy')}"></td>
                     <td style="white-space: nowrap">
-<!--                        <div class="action-buttons">-->
-                            <a th:href="@{/api/socio/edit/{id}(id=${socio.id})}"
-                               sec:authorize="hasRole('ROLE_ADMIN')"
-                               class="btn btn-primary btn-sm" >Edit</a>
-<!--                        </div>-->
+                        <!--                        <div class="action-buttons">-->
+                        <a th:href="@{/api/socio/edit/{id}(id=${socio.id})}"
+                           sec:authorize="hasRole('ROLE_ADMIN')"
+                           class="btn btn-primary btn-sm">Editar</a>
+                        <!--                        </div>-->
                     </td>
                     <td style="white-space: nowrap">
                         <a th:href="@{/api/socio/delete/{id}(id=${socio.id})}"
                            onclick="return confirm('Confirmar Eliminacion')"
                            sec:authorize="hasRole('ROLE_ADMIN')"
-                           class="btn btn-danger btn-sm" >Delete</a>
+                           class="btn btn-danger btn-sm">Borrar</a>
                     </td>
                 </tr>
                 </tbody>

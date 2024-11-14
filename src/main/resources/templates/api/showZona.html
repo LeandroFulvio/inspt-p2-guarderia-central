@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Empleado</title>
+    <div th:replace="~{fragments/header :: header-css}"/>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1 0 auto;
+        }
+    </style>
+</head>
+<body class="d-flex flex-column h-100">
+<div th:replace="~{fragments/header :: header}"/>
+<main class="flex-shrink-0">
+
+    <div class="container mt-4">
+        <h1>Editar Zona</h1>
+        <form th:object="${zona}" th:action="@{/api/zona/update}" method="post">
+            <input type="hidden" th:field="*{id}"/>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Información de Zona</h5>
+                            <div class="mb-3">
+                                <label for="letra" class="form-label">Letra</label>
+                                <input type="text" class="form-control" id="letra" th:field="*{letra}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="capacidad" class="form-label">Capacidad</label>
+                                <input type="number" class="form-control" id="capacidad" th:field="*{capacidad}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="ancho" class="form-label">Ancho</label>
+                                <input type="number" class="form-control" id="ancho" th:field="*{ancho}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="profundidad" class="form-label">Profundidad</label>
+                                <input type="number" class="form-control" id="profundidad" th:field="*{profundidad}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="tipoVehiculoAdmitidos" class="form-label">Tipos de Vehículos Admitidos</label>
+                                <select multiple class="form-select" id="tipoVehiculoAdmitidos" th:field="*{tipoVehiculoAdminitos}">
+                                    <option th:each="tipoVehiculo : ${allTipoVehiculos}"
+                                            th:value="${tipoVehiculo.id}"
+                                            th:text="${tipoVehiculo.nombre + ' (' + tipoVehiculo.ancho + 'x' + tipoVehiculo.largo + 'x' + tipoVehiculo.alto +')'}"
+                                            th:selected="${zona.tipoVehiculoAdminitos.contains(tipoVehiculo)}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Actualizar</button>
+        </form>
+    </div>
+
+</main>
+<div th:replace="~{fragments/footer :: footer}"/>
+</body>
+</html>

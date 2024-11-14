@@ -110,11 +110,11 @@
                         <div class="action-buttons">
                             <a th:href="@{/api/empleado/edit/{id}(id=${empleado.id})}"
                                sec:authorize="hasRole('ROLE_ADMIN')"
-                               class="btn btn-primary btn-sm" >Edit</a>
+                               class="btn btn-primary btn-sm" >Editar</a>
                             <a th:href="@{/api/empleado/delete/{id}(id=${empleado.id})}"
                                onclick="return confirm('Confirmar Eliminacion')"
                                sec:authorize="hasRole('ROLE_ADMIN')"
-                               class="btn btn-danger btn-sm" >Delete</a>
+                               class="btn btn-danger btn-sm" >Borrar</a>
                         </div>
                     </td>
                 </tr>

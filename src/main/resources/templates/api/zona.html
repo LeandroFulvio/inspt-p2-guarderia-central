@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      class="h-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zonas</title>
+    <div th:replace="~{fragments/header :: header-css}"/>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1 0 auto;
+        }
+    </style>
+</head>
+<body class="d-flex flex-column h-100">
+<div th:replace="~{fragments/header :: header}"/>
+<main class="flex-shrink-0">
+    <div class="container mt-4">
+        <div class="container mt-4" sec:authorize="hasRole('ROLE_ADMIN')">
+            <form th:action="@{/api/zona}" th:object="${zonaForm}" method="post">
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Zona</h5>
+                                <div class="mb-3">
+                                    <label for="letra" class="form-label">Letra</label>
+                                    <input type="text" class="form-control" id="letra" name="letra" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="capacidad" class="form-label">Capacidad</label>
+                                    <input type="number" class="form-control" id="capacidad" name="capacidad" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="ancho" class="form-label">Ancho</label>
+                                    <input type="number" class="form-control" id="ancho" name="ancho" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="profundidad" class="form-label">Profundidad</label>
+                                    <input type="number" class="form-control" id="profundidad" name="profundidad" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="tipoVehiculoAdmitidos" class="form-label">Tipos de Vehículos Admitidos</label>
+                                    <select multiple class="form-select" id="tipoVehiculoAdmitidos" name="tipoVehiculoAdmitidos">
+                                        <option th:each="tipoVehiculo : ${tipoVehiculos}"
+                                                th:value="${tipoVehiculo.id}"
+                                                th:text="${tipoVehiculo.nombre + ' (' + tipoVehiculo.ancho + 'x' + tipoVehiculo.largo + 'x' + tipoVehiculo.alto +')'}">
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar Zona</button>
+            </form>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <h1>Zonas</h1>
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Letra</th>
+                    <th>Cantidad de Vehiculos</th>
+                    <th>Capacidad</th>
+                    <th>Ancho</th>
+                    <th>Profundidad</th>
+                    <th>Tipo Vehiculos Admitidos</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="zona : ${zonas}">
+                    <td th:text="${zona.letra}"></td>
+                    <td th:text="${zona.cantidadVehiculos}"></td>
+                    <td th:text="${zona.capacidad}"></td>
+                    <td th:text="${zona.ancho}"></td>
+                    <td th:text="${zona.profundidad}"></td>
+                    <td>
+                        <ul>
+                            <li th:each="tipoVehiculo : ${zona.tipoVehiculoAdminitos}" th:text="${tipoVehiculo.nombre}"></li>
+                        </ul>
+                    </td>
+                    <td style="white-space: nowrap">
+                        <a th:href="@{/api/zona/edit/{id}(id=${zona.id})}"
+                           sec:authorize="hasRole('ROLE_ADMIN')"
+                           class="btn btn-primary btn-sm">Editar</a>
+                    </td>
+                    <td style="white-space: nowrap">
+                        <a th:href="@{/api/zona/delete/{id}(id=${zona.id})}"
+                           onclick="return confirm('Confirmar Eliminacion')"
+                           sec:authorize="hasRole('ROLE_ADMIN')"
+                           class="btn btn-danger btn-sm">Borrar</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</main>
+<div th:replace="~{fragments/footer :: footer}"/>
+</body>
+</html>

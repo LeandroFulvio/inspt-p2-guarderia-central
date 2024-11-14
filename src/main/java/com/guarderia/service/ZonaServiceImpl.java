@@ -2,6 +2,7 @@ package com.guarderia.service;
 
 import com.guarderia.modelo.Zona;
 import com.guarderia.repository.ZonaRepository;
+import com.guarderia.request.ZonaForm;
 import com.guarderia.request.ZonaRequest;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -41,6 +42,20 @@ public class ZonaServiceImpl implements ZonaService {
     }
 
     @Override
+    public Zona save(ZonaForm form) {
+        var zona = Zona.builder()
+                .letra(form.getLetra())
+                .capacidad(form.getCapacidad())
+                .ancho(form.getAncho())
+                .profundidad(form.getProfundidad())
+                .cantidadVehiculos(0)
+                .tipoVehiculoAdminitos(tipoVehiculoService.findAll(form.getTipoVehiculoAdmitidos())) //TODO: tipovehiculo
+                .build();
+
+        return repository.save(zona);
+    }
+
+    @Override
     public Zona update(Long id, ZonaRequest request) {
         var zona = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("No se encontro zona con ID: " + id));
@@ -50,6 +65,19 @@ public class ZonaServiceImpl implements ZonaService {
         zona.setCantidadVehiculos(request.getCantidadVehiculos());
 
         return null;
+    }
+
+    @Override
+    public Zona update(Zona zona) {
+        var original = findById(zona.getId());
+
+        original.setLetra(zona.getLetra());
+        original.setCapacidad(zona.getCapacidad());
+        original.setTipoVehiculoAdminitos(zona.getTipoVehiculoAdminitos());
+        original.setAncho(zona.getAncho());
+        original.setProfundidad(zona.getProfundidad());
+
+        return repository.save(original);
     }
 
     @Override
