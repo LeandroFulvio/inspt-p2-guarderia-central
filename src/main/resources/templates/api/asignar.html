@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      class="h-100">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asignar Zona a Empleado</title>
+  <div th:replace="~{fragments/header :: header-css}"/>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    main {
+      flex: 1 0 auto;
+    }
+  </style>
+</head>
+<body class="d-flex flex-column h-100">
+<div th:replace="~{fragments/header :: header}"/>
+<main class="flex-shrink-0">
+  <div class="container mt-4">
+    <h1>Asignar Zona a Empleado</h1>
+    <form th:action="@{/api/asignacion/create}" th:object="${asignacionForm}" method="post">
+      <input type="hidden" th:field="*{empleadoId}"/>
+      <div class="mb-3">
+        <label for="empleado" class="form-label">Empleado</label>
+        <input type="text" class="form-control" id="empleado" th:value="${empleado.user.username}" readonly>
+      </div>
+      <div class="mb-3">
+        <label for="zona" class="form-label">Zona</label>
+        <select class="form-select" id="zona" th:field="*{zonaId}" required>
+          <option value="">Seleccione una zona</option>
+          <option th:each="zona : ${zonas}" th:value="${zona.id}" th:text="${zona.letra}"></option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="vehiculosACargo" class="form-label">Vehículos a Cargo</label>
+        <input type="number" class="form-control" id="vehiculosACargo" th:field="*{vehiculosACargo}" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Asignar Zona</button>
+    </form>
+  </div>
+</main>
+<div th:replace="~{fragments/footer :: footer}"/>
+</body>
+</html>

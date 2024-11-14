@@ -1,7 +1,10 @@
 package com.guarderia.service;
 
 import com.guarderia.modelo.AsignacionZona;
+import com.guarderia.modelo.Empleado;
+import com.guarderia.modelo.Zona;
 import com.guarderia.repository.AsignacionZonaRepository;
+import com.guarderia.request.AsignacionZonaForm;
 import com.guarderia.request.AsignacionZonaRequest;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -40,6 +43,27 @@ public class AsignacionZonaServiceImpl implements AsignacionZonaService{
     }
 
     @Override
+    public List<Zona> findAllZonas() {
+        return zonaService.findAll();
+    }
+
+    @Override
+    public Empleado findEmpleadoById(Long id) {
+        return empleadoService.findById(id);
+    }
+
+    @Override
+    public AsignacionZona create(AsignacionZonaForm form){
+        var asignacion = AsignacionZona.builder()
+                .zona(zonaService.findById(form.getZonaId()))
+                .empleado(empleadoService.findById(form.getEmpleadoId()))
+                .vehiculosACargo(form.getVehiculosACargo())
+                .build();
+
+        return repository.save(asignacion);
+    }
+
+    @Override
     public AsignacionZona save(AsignacionZonaRequest request) {
         var asignacion = AsignacionZona.builder()
                 .id(request.getId())
@@ -70,6 +94,15 @@ public class AsignacionZonaServiceImpl implements AsignacionZonaService{
         repository.save(asignacion);
 
         return asignacion;
+    }
+
+    @Override
+    public AsignacionZona update(AsignacionZona asignacion){
+        var original = findById(asignacion.getId());
+        original.setVehiculosACargo(asignacion.getVehiculosACargo());
+        original.setZona(asignacion.getZona());
+
+        return repository.save(original);
     }
 
     @Override
