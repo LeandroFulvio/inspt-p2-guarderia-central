@@ -22,7 +22,7 @@
 <div th:replace="~{fragments/header :: header}"/>
 <main class="flex-shrink-0">
     <div class="container mt-4">
-        <div class="container mt-4" sec:authorize="hasRole('ROLE_ADMIN')">
+        <div class="container mt-4"  th:unless="${socio != null}" sec:authorize="hasRole('ROLE_ADMIN')" >
             <form th:action="@{/api/socio}" method="post">
                 <div class="row">
                     <div class="col-md-6 mb-4">
@@ -83,7 +83,7 @@
                     <th>Apellido</th>
                     <th>Direccion</th>
                     <th>Telefono</th>
-                    <th>Fecha Ingreso</th>
+                    <th>Ingreso</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -108,10 +108,15 @@
                            sec:authorize="hasRole('ROLE_ADMIN')"
                            class="btn btn-danger btn-sm">Borrar</a>
                     </td>
-                    <td>
+                    <td style="white-space: nowrap">
                         <a th:href="@{/api/vehiculo/socio/{id}(id=${socio.id})}"
                            sec:authorize="hasRole('ROLE_ADMIN')"
                            class="btn btn-success btn-sm">Asignar Vehículo</a>
+                    </td>
+                    <td style="white-space: nowrap">
+                        <a th:href="@{/api/vehiculo/vehiculosocio/{id}(id=${socio.id})}"
+                           sec:authorize="hasRole('ROLE_ADMIN')"
+                           class="btn btn-danger btn-sm">Ver Vehiculos</a>
                     </td>
                 </tr>
                 </tbody>

@@ -26,7 +26,7 @@ public class Vehiculo  {
 
     private String nombre;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "tipo_vehiculo_id")
     private TipoVehiculo tipoVehiculo;
 

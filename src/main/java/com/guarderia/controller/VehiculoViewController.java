@@ -20,11 +20,14 @@ public class VehiculoViewController {
 
     @GetMapping
     public String findAllVehiculos(Model model){
+        model.addAttribute("socio", null);
         model.addAttribute("vehiculos", service.findAll() );
         model.addAttribute("tipoVehiculos", tipoVehiculoService.findAll());
 
         return "/api/vehiculos";
     }
+
+    //Get by Id ?
 
     @GetMapping("/socio/{id}")
     public String showCreationForm(@PathVariable Long id, Model model) {
@@ -33,6 +36,15 @@ public class VehiculoViewController {
         model.addAttribute("vehiculoForm", VehiculoForm.builder().idSocio(id).build() );
 
         return "/api/registrarVehiculo";
+    }
+
+    @GetMapping("/vehiculosocio/{id}")
+    public String showVehiclesFrom(@PathVariable Long id, Model model) {
+        model.addAttribute("socio", socioService.findById(id));
+        model.addAttribute("tiposVehiculo", tipoVehiculoService.findAll());
+        model.addAttribute("vehiculos", service.findBySocioId(id) );
+
+        return "/api/vehiculos";
     }
 
     @PostMapping("/create")
