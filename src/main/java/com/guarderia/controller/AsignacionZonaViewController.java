@@ -22,6 +22,20 @@ public class AsignacionZonaViewController {
         return "/api/asignaciones";
     }
 
+    @GetMapping("/empleadoasignacion/{id}")
+    public String findAsignacionesByEmpleado(@PathVariable Long id,Model model){
+        model.addAttribute("AllAsignaciones", service.findByEmpleadoId(id) );
+
+        return "/api/asignaciones";
+    }
+
+    @GetMapping("/zonaasignacion/{id}")
+    public String findAsignacionesByZona(@PathVariable Long id,Model model){
+        model.addAttribute("AllAsignaciones", service.findByZonaId(id) );
+
+        return "/api/asignaciones";
+    }
+
     @GetMapping("/empleado/{id}")
     public String showAsignacionForm(@PathVariable Long id, Model model) {
         model.addAttribute("empleado", service.findEmpleadoById(id));

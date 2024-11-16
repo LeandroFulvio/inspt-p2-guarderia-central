@@ -106,23 +106,26 @@
                     <td th:text="${empleado.user.lastname}"></td>
                     <td th:text="${empleado.direccion}"></td>
                     <td th:text="${empleado.telefono}"></td>
-                    <td>
-                        <div class="action-buttons">
-                            <a th:href="@{/api/empleado/edit/{id}(id=${empleado.id})}"
-                               sec:authorize="hasRole('ROLE_ADMIN')"
-                               class="btn btn-primary btn-sm" >Editar</a>
-                            <a th:href="@{/api/empleado/delete/{id}(id=${empleado.id})}"
-                               onclick="return confirm('Confirmar Eliminacion')"
-                               sec:authorize="hasRole('ROLE_ADMIN')"
-                               class="btn btn-danger btn-sm" >Borrar</a>
-                        </div>
+                    <td style="white-space: nowrap">
+                        <a th:href="@{/api/empleado/edit/{id}(id=${empleado.id})}"
+                           sec:authorize="hasRole('ROLE_ADMIN')"
+                           class="btn btn-primary btn-sm" >Editar</a>
                     </td>
-                    <td>
-                        <div class="action-buttons">
+                    <td style="white-space: nowrap">
+                        <a th:href="@{/api/empleado/delete/{id}(id=${empleado.id})}"
+                           onclick="return confirm('Confirmar Eliminacion')"
+                           sec:authorize="hasRole('ROLE_ADMIN')"
+                           class="btn btn-danger btn-sm" >Borrar</a>
+                    </td>
+                    <td style="white-space: nowrap">
                             <a th:href="@{/api/asignacion/empleado/{id}(id=${empleado.id})}"
                                sec:authorize="hasRole('ROLE_ADMIN')"
                                class="btn btn-primary btn-sm" >Asignar Zona</a>
-                        </div>
+                    </td>
+                    <td style="white-space: nowrap">
+                        <a th:href="@{/api/asignacion/empleadoasignacion/{id}(id=${empleado.id})}"
+                           sec:authorize="hasRole('ROLE_ADMIN')"
+                           class="btn btn-primary btn-sm" >Ver Asignaciones</a>
                     </td>
                 </tr>
                 </tbody>

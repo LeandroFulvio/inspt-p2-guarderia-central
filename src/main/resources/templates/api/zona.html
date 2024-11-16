@@ -98,6 +98,11 @@
                            sec:authorize="hasRole('ROLE_ADMIN')"
                            class="btn btn-danger btn-sm">Borrar</a>
                     </td>
+                    <td style="white-space: nowrap">
+                        <a th:href="@{/api/asignacion/zonaasignacion/{id}(id=${zona.id})}"
+                           sec:authorize="hasRole('ROLE_ADMIN')"
+                           class="btn btn-danger btn-sm">Ver Asignaciones</a>
+                    </td>
                 </tr>
                 </tbody>
             </table>
