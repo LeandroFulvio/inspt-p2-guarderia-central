@@ -1,6 +1,7 @@
 package com.guarderia.service;
 
 import com.guarderia.modelo.Garage;
+import com.guarderia.request.GarageForm;
 import com.guarderia.request.GarageRequest;
 import com.guarderia.request.VehiculoRequest;
 
@@ -15,6 +16,7 @@ public interface GarageService {
     Garage findByVehiculoId(Long id);
     List<Garage> findByZonaId(Long id);
     Garage create(GarageRequest request);
+    Garage create(GarageForm form);
     Garage save(GarageRequest request);
     List<Garage> saveAll(List<GarageRequest> request);
     Garage update(Long id, GarageRequest request);

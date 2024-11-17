@@ -2,6 +2,7 @@ package com.guarderia.service;
 
 import com.guarderia.modelo.Garage;
 import com.guarderia.repository.GarageRepository;
+import com.guarderia.request.GarageForm;
 import com.guarderia.request.GarageRequest;
 import com.guarderia.request.VehiculoRequest;
 import jakarta.persistence.EntityNotFoundException;
@@ -61,6 +62,22 @@ public class GarageServiceImpl implements GarageService {
                 .socio(socio)
                 .fechaCompra(socio!=null ? new Date() : null)
                 .build();
+        return repository.save(garage);
+    }
+
+    @Override
+    public Garage create(GarageForm request) {
+        var socio = request.getSocioId()!= null ? socioService.findById(request.getSocioId()) : null;
+
+        var garage = Garage.builder()
+                .numero(request.getNumero())
+                .mantenimientoContratado(request.isMantenimientoContratado())
+                .contadorLuz(request.getContadorLuz())
+                .zona(zonaService.findById(request.getZonaId()))
+                .socio(socio)
+                .fechaCompra(socio!=null ? new Date() : null)
+                .build();
+
         return repository.save(garage);
     }
 
