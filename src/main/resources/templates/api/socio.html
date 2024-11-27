@@ -96,6 +96,19 @@
                     <td th:text="${socio.telefono}"></td>
                     <td th:text="${#dates.format(socio.fechaIngreso, 'dd-MM-yyyy')}"></td>
                     <td style="white-space: nowrap">
+                        <a th:href="@{/api/vehiculo/socio/{id}(id=${socio.id})}"
+                           sec:authorize="hasRole('ROLE_ADMIN')"
+                           class="btn btn-success btn-sm">Registrar Vehículo</a>
+                    </td>
+                    <td style="white-space: nowrap">
+                        <a th:href="@{/api/vehiculo/vehiculosocio/{id}(id=${socio.id})}"
+                           sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_SOCIO')"
+                           class="btn btn-danger btn-sm">Ver Vehiculos</a>
+                    </td>
+
+<!--                    Comprar Garage-->
+
+                    <td style="white-space: nowrap">
                         <!--                        <div class="action-buttons">-->
                         <a th:href="@{/api/socio/edit/{id}(id=${socio.id})}"
                            sec:authorize="hasRole('ROLE_ADMIN')"
@@ -108,16 +121,7 @@
                            sec:authorize="hasRole('ROLE_ADMIN')"
                            class="btn btn-danger btn-sm">Borrar</a>
                     </td>
-                    <td style="white-space: nowrap">
-                        <a th:href="@{/api/vehiculo/socio/{id}(id=${socio.id})}"
-                           sec:authorize="hasRole('ROLE_ADMIN')"
-                           class="btn btn-success btn-sm">Asignar Vehículo</a>
-                    </td>
-                    <td style="white-space: nowrap">
-                        <a th:href="@{/api/vehiculo/vehiculosocio/{id}(id=${socio.id})}"
-                           sec:authorize="hasRole('ROLE_ADMIN')"
-                           class="btn btn-danger btn-sm">Ver Vehiculos</a>
-                    </td>
+
                 </tr>
                 </tbody>
             </table>

@@ -41,6 +41,10 @@ public class UserService {
         return repository.findById(id).orElseThrow();
     }
 
+    public User getUserByName(String name){
+        return repository.findByUsername(name).orElseThrow();
+    }
+
     public User create(SocioFrom request) {
         var user = User.builder()
                 .username(request.getUsername())

@@ -33,6 +33,11 @@ public class SocioServiceImpl implements SocioService{
     }
 
     @Override
+    public Socio findByName(String name){
+       return repository.findByUserUsername(name);
+    }
+
+    @Override
     public Socio save(SocioRequest request) {
         var socio = Socio.builder()
                 .id(request.getId())

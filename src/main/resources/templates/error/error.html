@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Error</title>
+    <style>
+        .error-container {
+            text-align: center;
+            margin-top: 50px;
+        }
+        .back-button {
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="error-container">
+    <h1>Oops!</h1>
+    <h2 th:text="${statusCode}">404</h2>
+    <p th:text="${errorMessage}">Error message</p>
+    <button class="back-button" onclick="window.history.back()">Go Back</button>
+</div>
+</body>
+</html>

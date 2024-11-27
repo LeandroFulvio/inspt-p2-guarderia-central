@@ -7,10 +7,7 @@ import com.guarderia.service.ZonaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/api/garage")
@@ -22,7 +19,7 @@ public class GarageViewController {
     private final SocioService socioService;
 
     @GetMapping
-    public String findAllEmpleados(Model model){
+    public String findAllGarages(Model model){
         model.addAttribute("garageForm", GarageForm.builder().numero(0).build());
         model.addAttribute("socio", null);
         model.addAttribute("AllSocios", socioService.findAll());
@@ -35,6 +32,16 @@ public class GarageViewController {
     @PostMapping
     public String create(@ModelAttribute(name = "garageForm") GarageForm request){
         service.create(request);
+        return "redirect:/api/garage";
+    }
+
+    //edit
+
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Long id){
+        service.deleteById(id);
+
         return "redirect:/api/garage";
     }
 

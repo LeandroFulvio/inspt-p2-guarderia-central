@@ -22,6 +22,15 @@ public class SocioViewController {
         return "/api/socio";
     }
 
+    @GetMapping("/{name}")
+    public String findSocioByUsername(@PathVariable String name, Model model){
+        var socio = service.findByName(name);
+
+        model.addAttribute("socio", socio );
+//new page? what to show to socio
+        return "/api/socio";
+    }
+
     @PostMapping
     public String create(@ModelAttribute(name = "SocioForm") SocioFrom request){
         service.save(request);

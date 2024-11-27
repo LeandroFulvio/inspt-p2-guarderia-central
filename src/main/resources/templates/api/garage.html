@@ -42,7 +42,7 @@
 <!--                    <input type="date" class="form-control" id="fechaCompra" th:field="*{fechaCompra}">-->
 <!--                </div>-->
                 <div class="mb-3">
-                    <label for="socio" class="form-label">Socio</label>
+                    <label for="socio" class="form-label">Socio (opcional)</label>
                     <select class="form-select" id="socio" th:field="*{socioId}">
                         <option value="">Seleccione un socio</option>
                         <option th:each="socio : ${AllSocios}"
@@ -63,7 +63,7 @@
 <!--                </div>-->
                 <div class="mb-3">
                     <label for="zona" class="form-label">Zona</label>
-                    <select class="form-select" id="zona" th:field="*{zonaId}" >
+                    <select class="form-select" id="zona" th:field="*{zonaId}" required >
                         <option value="">Seleccione una zona</option>
                         <option th:each="zona : ${zonas}"
                                 th:value="${zona.id}"
@@ -74,7 +74,7 @@
                 <button type="submit" class="btn btn-primary">Crear Garage</button>
             </form>
         </div>
-
+        <br>
         <div class="col-md-6 mb-4">
             <h1>Garages</h1>
             <table class="table table-striped table-hover">
@@ -87,6 +87,7 @@
                     <th>Socio</th>
                     <th>Vehiculo</th>
                     <th>Zona</th>
+                    <th>Vehiculos Admitidos</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -98,6 +99,11 @@
                     <td th:text="${garage.socio != null ? garage.socio.user.username : 'N/A'}"></td>
                     <td th:text="${garage.vehiculoGuardado != null ? garage.vehiculoGuardado.nombre + ' (' + garage.vehiculoGuardado.matricula + ')' : 'N/A'}"></td>
                     <td th:text="${garage.zona != null ? garage.zona.letra : 'N/A'}"></td>
+                    <td>
+                        <ul th:if="${garage.zona != null}">
+                            <li th:each="tipoVehiculo : ${garage.zona.tipoVehiculoAdminitos}" th:text="${tipoVehiculo.nombre}"></li>
+                        </ul>
+                    </td>
                     <td style="white-space: nowrap">
                         <a th:href="@{/api/garage/edit/{id}(id=${garage.id})}"
                            sec:authorize="hasRole('ROLE_ADMIN')"

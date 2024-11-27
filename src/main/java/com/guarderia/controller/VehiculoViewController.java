@@ -53,4 +53,11 @@ public class VehiculoViewController {
         return "redirect:/api/socio";
     }
 
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Long id){
+        service.deleteById(id);
+
+        return "redirect:/api/vehiculo";
+    }
+
 }

@@ -11,6 +11,7 @@ public interface SocioService {
 
     List<Socio> findAll();
     Socio findById(Long id);
+    Socio findByName(String name);
     Socio save(SocioRequest request);
     Socio save(SocioFrom request);
     Socio update(Long id, SocioRequest request);
