@@ -75,8 +75,8 @@ public class VehiculoServiceImpl implements VehiculoService{
 
     @Override
     public Vehiculo update(Long id, VehiculoRequest request) {
-        var vehiculo = repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("No se encontro vehiculo con ID: " + id));
+        var vehiculo = findById(id);
+
         vehiculo.setNombre(request.getNombre());
         vehiculo.setTipoVehiculo(tipoVehiculoService.findById(request.getTipoVehiculo()));
         vehiculo.setSocio(socioService.findById(request.getIdSocio()));
@@ -93,8 +93,7 @@ public class VehiculoServiceImpl implements VehiculoService{
     @Override
     public Vehiculo findOrCreate(VehiculoRequest request) {
         if(request.getId()!=null) {
-            var v = repository.findById(request.getId())
-                    .orElseThrow(() -> new EntityNotFoundException("No se encontro vehiculo con ID: " + request.getId()));
+            var v = findById(request.getId());
             v.setFechaAsignacion(new Date());
             return v;
         }
@@ -104,11 +103,9 @@ public class VehiculoServiceImpl implements VehiculoService{
 
     @Override
     public Vehiculo removerAsignacion(Long id) {
-        var v = repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("No se encontro vehiculo con ID: " + id));
+        var v = findById(id);
         v.setFechaAsignacion(null);
         return repository.save(v);
     }
-
 
 }

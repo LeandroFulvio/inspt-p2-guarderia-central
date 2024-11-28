@@ -42,23 +42,14 @@
           <td th:text="${vehiculo.tipoVehiculo.nombre}"></td>
           <td th:text="${#dates.format(vehiculo.fechaAsignacion, 'dd-MM-yyyy')}"></td>
           <td style="white-space: nowrap">
-            <a th:href="@{/api/vehiculo/edit/{id}(id=${vehiculo.id})}"
-               sec:authorize="hasRole('ROLE_ADMIN')"
-               class="btn btn-primary btn-sm">Editar</a>
+<!--            <a th:href="@{/api/vehiculo/edit/{id}(id=${vehiculo.id})}"-->
+<!--               sec:authorize="hasRole('ROLE_ADMIN')"-->
+<!--               class="btn btn-primary btn-sm">Editar</a>-->
             <a th:href="@{/api/vehiculo/delete/{id}(id=${vehiculo.id})}"
                onclick="return confirm('Confirmar Eliminacion')"
                sec:authorize="hasRole('ROLE_ADMIN')"
                class="btn btn-danger btn-sm">Borrar</a>
           </td>
-          <td>
-            <a th:href="@{/api/vehiculo/socio/{id}(id=${vehiculo.socio.id})}"
-               sec:authorize="hasRole('ROLE_ADMIN')"
-               class="btn btn-success btn-sm">Asignar Garage</a>
-          </td>
-<!--          el asignar garage va a vehiculo-->
-
-<!--          remover del garage-->
-
         </tr>
         </tbody>
       </table>

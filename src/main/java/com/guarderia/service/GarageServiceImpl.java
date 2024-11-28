@@ -169,6 +169,4 @@ public class GarageServiceImpl implements GarageService {
         return repository.save(garage);
     }
 
-    //getVehicleByZona ?
-
 }

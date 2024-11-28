@@ -29,7 +29,9 @@ public class SecurityConfiguration {
             "/dashboard.html",
             "/main.css",
             "/js/auth.js",
-            "/img/**"
+            "/img/**",
+            "/about.html",
+            "/about"
     };
 
     private final AuthenticationProvider authenticationProvider;

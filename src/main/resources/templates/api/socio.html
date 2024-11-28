@@ -22,6 +22,61 @@
 <div th:replace="~{fragments/header :: header}"/>
 <main class="flex-shrink-0">
     <div class="container mt-4">
+        <div class="col-md-6 mb-4">
+            <h1>Socios</h1>
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>DNI</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Direccion</th>
+                    <th>Telefono</th>
+                    <th>Ingreso</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="socio : ${socios}">
+                    <td th:text="${socio.user.username}"></td>
+                    <td th:text="${socio.dni}"></td>
+                    <td th:text="${socio.user.firstname}"></td>
+                    <td th:text="${socio.user.lastname}"></td>
+                    <td th:text="${socio.direccion}"></td>
+                    <td th:text="${socio.telefono}"></td>
+                    <td th:text="${#dates.format(socio.fechaIngreso, 'dd-MM-yyyy')}"></td>
+                    <td style="white-space: nowrap">
+                        <a th:href="@{/api/vehiculo/socio/{id}(id=${socio.id})}"
+                           sec:authorize="hasRole('ROLE_ADMIN')"
+                           class="btn btn-success btn-sm">Registrar Vehículo</a>
+                    </td>
+                    <td style="white-space: nowrap">
+                        <a th:href="@{/api/vehiculo/vehiculosocio/{id}(id=${socio.id})}"
+                           sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_SOCIO')"
+                           class="btn btn-danger btn-sm">Ver Vehiculos</a>
+                    </td>
+
+                    <!--                    Comprar Garage-->
+
+                    <td style="white-space: nowrap">
+                        <!--                        <div class="action-buttons">-->
+                        <a th:href="@{/api/socio/edit/{id}(id=${socio.id})}"
+                           sec:authorize="hasRole('ROLE_ADMIN')"
+                           class="btn btn-primary btn-sm">Editar</a>
+                        <!--                        </div>-->
+                    </td>
+                    <td style="white-space: nowrap">
+                        <a th:href="@{/api/socio/delete/{id}(id=${socio.id})}"
+                           onclick="return confirm('Confirmar Eliminacion')"
+                           sec:authorize="hasRole('ROLE_ADMIN')"
+                           class="btn btn-danger btn-sm">Borrar</a>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
         <div class="container mt-4"  th:unless="${socio != null}" sec:authorize="hasRole('ROLE_ADMIN')" >
             <form th:action="@{/api/socio}" method="post">
                 <div class="row">
@@ -70,61 +125,6 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Register</button>
             </form>
-        </div>
-
-        <div class="col-md-6 mb-4">
-            <h1>Socio</h1>
-            <table class="table table-striped table-hover">
-                <thead>
-                <tr>
-                    <th>Username</th>
-                    <th>DNI</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Direccion</th>
-                    <th>Telefono</th>
-                    <th>Ingreso</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="socio : ${socios}">
-                    <td th:text="${socio.user.username}"></td>
-                    <td th:text="${socio.dni}"></td>
-                    <td th:text="${socio.user.firstname}"></td>
-                    <td th:text="${socio.user.lastname}"></td>
-                    <td th:text="${socio.direccion}"></td>
-                    <td th:text="${socio.telefono}"></td>
-                    <td th:text="${#dates.format(socio.fechaIngreso, 'dd-MM-yyyy')}"></td>
-                    <td style="white-space: nowrap">
-                        <a th:href="@{/api/vehiculo/socio/{id}(id=${socio.id})}"
-                           sec:authorize="hasRole('ROLE_ADMIN')"
-                           class="btn btn-success btn-sm">Registrar Vehículo</a>
-                    </td>
-                    <td style="white-space: nowrap">
-                        <a th:href="@{/api/vehiculo/vehiculosocio/{id}(id=${socio.id})}"
-                           sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_SOCIO')"
-                           class="btn btn-danger btn-sm">Ver Vehiculos</a>
-                    </td>
-
-<!--                    Comprar Garage-->
-
-                    <td style="white-space: nowrap">
-                        <!--                        <div class="action-buttons">-->
-                        <a th:href="@{/api/socio/edit/{id}(id=${socio.id})}"
-                           sec:authorize="hasRole('ROLE_ADMIN')"
-                           class="btn btn-primary btn-sm">Editar</a>
-                        <!--                        </div>-->
-                    </td>
-                    <td style="white-space: nowrap">
-                        <a th:href="@{/api/socio/delete/{id}(id=${socio.id})}"
-                           onclick="return confirm('Confirmar Eliminacion')"
-                           sec:authorize="hasRole('ROLE_ADMIN')"
-                           class="btn btn-danger btn-sm">Borrar</a>
-                    </td>
-
-                </tr>
-                </tbody>
-            </table>
         </div>
 
     </div>
