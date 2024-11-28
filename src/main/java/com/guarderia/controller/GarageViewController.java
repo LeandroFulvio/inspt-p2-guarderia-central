@@ -1,5 +1,6 @@
 package com.guarderia.controller;
 
+import com.guarderia.modelo.Garage;
 import com.guarderia.modelo.Vehiculo;
 import com.guarderia.request.GarageForm;
 import com.guarderia.service.GarageService;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,10 +28,13 @@ public class GarageViewController {
 
     @GetMapping
     public String findAllGarages(Model model){
+        List<Garage> garages = service.findAll();
+        garages.sort(Comparator.comparing(Garage::getNumero));
+
         model.addAttribute("garageForm", GarageForm.builder().numero(0).build());
         model.addAttribute("socio", null);
         model.addAttribute("AllSocios", socioService.findAll());
-        model.addAttribute("garages", service.findAll() );
+        model.addAttribute("garages", garages );
         model.addAttribute("zonas", zonaService.findAll() );
 
         return "/api/garage";
@@ -79,6 +84,34 @@ public class GarageViewController {
         model.addAttribute("AllSocios", socioService.findAll());
         model.addAttribute("garages", service.findAll() );
         model.addAttribute("zonas", zonaService.findAll() );
+
+        return "redirect:/api/garage";
+    }
+
+    @GetMapping("/comprar/{id}")
+    public String showComprarForm(@PathVariable Long id, Model model) {
+        var socio = socioService.findById(id);
+        List<Garage> garages = service.findAll()
+                        .stream()
+                        .filter(g -> g.getSocio() == null)
+                        .collect(Collectors.toList());
+
+        model.addAttribute("socio", socio);
+        model.addAttribute("garages", garages);
+
+        return "api/comprargarage";
+    }
+
+    @PostMapping("/comprar/{socioId}")
+    public String comprarGarage(@PathVariable Long socioId, @RequestParam Long garageId) {
+        service.garagePurchase(garageId, socioId);
+
+        return "redirect:/api/socio";
+    }
+
+    @PostMapping("/vender/{id}")
+    public String venderGarage(@PathVariable Long id) {
+        service.removerSocio(id);
 
         return "redirect:/api/garage";
     }

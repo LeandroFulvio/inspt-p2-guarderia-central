@@ -25,5 +25,6 @@ public interface GarageService {
     Garage vehicleIngress(Long id, VehiculoRequest vehiculoRequest);
     Garage asignarVehiculo(Long garageId, Long vehicleId);
     Garage vehicleEgress(Long id);
+    Garage removerSocio(Long id);
 
 }

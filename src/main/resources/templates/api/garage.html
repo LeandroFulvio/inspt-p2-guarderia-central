@@ -80,6 +80,15 @@
                         </form>
                     </td>
 
+                    <td style="white-space: nowrap" th:if="${garage.socio != null}">
+                        <form th:action="@{/api/garage/vender/{id}(id=${garage.id})}" method="post" style="display: inline;">
+                            <button type="submit"
+                                    onclick="return confirm('Confirmar Vender Garage - Se removeran Socio y Vehiculo')"
+                                    sec:authorize="hasRole('ROLE_ADMIN')"
+                                    class="btn btn-danger btn-sm">Vender Garage</button>
+                        </form>
+                    </td>
+
                 </tr>
                 </tbody>
             </table>

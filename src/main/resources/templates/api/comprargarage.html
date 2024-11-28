@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Comprar Garage</title>
+    <div th:replace="~{fragments/header :: header-css}"/>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1 0 auto;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"/>
+<main class="flex-shrink-0">
+    <div class="container mt-4">
+        <h2>Asignar Garage para el socio [[${socio.user.username}]]</h2>
+        <form th:action="@{/api/garage/comprar/{id}(id=${socio.id})}" method="post">
+            <div class="mb-3">
+                <label for="garage" class="form-label">Seleccione Garage</label>
+                <select class="form-select" id="garage" name="garageId" required>
+                    <option value="">Seleccione un garage</option>
+                    <option th:each="garage : ${garages}"
+                            th:value="${garage.id}"
+                            th:text="${garage.numero}">
+                    </option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Comprar</button>
+            <a th:href="@{/api/socio}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</main>
+<div th:replace="~{fragments/footer :: footer}"/>
+</body>
+</html>

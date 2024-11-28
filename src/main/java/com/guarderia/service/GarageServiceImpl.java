@@ -169,4 +169,17 @@ public class GarageServiceImpl implements GarageService {
         return repository.save(garage);
     }
 
+    @Override
+    public Garage removerSocio(Long id){
+        var garage = findById(id);
+
+        garage.setSocio(null);
+        garage.setVehiculoGuardado(null);
+        garage.setFechaCompra(null);
+        garage.setContadorLuz(0);
+        garage.setMantenimientoContratado(false);
+
+        return repository.save(garage);
+    }
+
 }

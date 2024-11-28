@@ -57,6 +57,11 @@
                     </td>
 
                     <!--                    Comprar Garage-->
+                    <td style="white-space: nowrap">
+                        <a th:href="@{/api/garage/comprar/{id}(id=${socio.id})}"
+                           sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_SOCIO')"
+                           class="btn btn-danger btn-sm">Comprar Garage</a>
+                    </td>
 
                     <td style="white-space: nowrap">
                         <!--                        <div class="action-buttons">-->
