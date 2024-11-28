@@ -23,6 +23,7 @@ public interface GarageService {
     void deleteById(Long id);
     Garage garagePurchase(Long id, Long socioId);
     Garage vehicleIngress(Long id, VehiculoRequest vehiculoRequest);
+    Garage asignarVehiculo(Long garageId, Long vehicleId);
     Garage vehicleEgress(Long id);
 
 }

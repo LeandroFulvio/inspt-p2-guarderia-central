@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Socios</title>
+    <title>Garages</title>
     <div th:replace="~{fragments/header :: header-css}"/>
     <style>
         body {
@@ -37,10 +37,6 @@
                     <input type="checkbox" class="form-check-input" id="mantenimientoContratado" th:field="*{mantenimientoContratado}">
                     <label class="form-check-label" for="mantenimientoContratado">Mantenimiento Contratado</label>
                 </div>
-<!--                <div class="mb-3">-->
-<!--                    <label for="fechaCompra" class="form-label">Fecha Compra</label>-->
-<!--                    <input type="date" class="form-control" id="fechaCompra" th:field="*{fechaCompra}">-->
-<!--                </div>-->
                 <div class="mb-3">
                     <label for="socio" class="form-label">Socio (opcional)</label>
                     <select class="form-select" id="socio" th:field="*{socioId}">
@@ -51,16 +47,6 @@
                         </option>
                     </select>
                 </div>
-<!--                <div class="mb-3">-->
-<!--                    <label for="vehiculoGuardado" class="form-label">Vehículo Guardado</label>-->
-<!--                    <select class="form-select" id="vehiculoGuardado" th:field="*{vehiculoGuardadoId}">-->
-<!--                        <option value="">Seleccione un vehículo</option>-->
-<!--                        <option th:each="vehiculo : ${vehiculos}"-->
-<!--                                th:value="${vehiculo.id}"-->
-<!--                                th:text="${vehiculo.nombre + ' (' + vehiculo.matricula + ')'}">-->
-<!--                        </option>-->
-<!--                    </select>-->
-<!--                </div>-->
                 <div class="mb-3">
                     <label for="zona" class="form-label">Zona</label>
                     <select class="form-select" id="zona" th:field="*{zonaId}" required >
@@ -88,6 +74,7 @@
                     <th>Vehiculo</th>
                     <th>Zona</th>
                     <th>Vehiculos Admitidos</th>
+                    <th>Fecha ingreso de Vehiculo</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -104,6 +91,9 @@
                             <li th:each="tipoVehiculo : ${garage.zona.tipoVehiculoAdminitos}" th:text="${tipoVehiculo.nombre}"></li>
                         </ul>
                     </td>
+                    <td th:text="${(garage.vehiculoGuardado != null
+                                    && garage.vehiculoGuardado.fechaAsignacion !=null)
+                                    ? #dates.format(garage.vehiculoGuardado.fechaAsignacion, 'dd-MM-yyyy') : 'N/A'}"></td>
                     <td style="white-space: nowrap">
                         <a th:href="@{/api/garage/edit/{id}(id=${garage.id})}"
                            sec:authorize="hasRole('ROLE_ADMIN')"
@@ -120,6 +110,21 @@
                            sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_SOCIO')"
                            class="btn btn-danger btn-sm">Ver Vehiculo</a>
                     </td>
+
+                    <td style="white-space: nowrap" th:if="${garage.socio != null}">
+                        <a th:href="@{/api/garage/asignar/{id}(id=${garage.id})}"
+                           sec:authorize="hasRole('ROLE_ADMIN')"
+                           class="btn btn-primary btn-sm">Asignar Vehiculo</a>
+                    </td>
+
+                    <td style="white-space: nowrap" th:if="${garage.vehiculoGuardado != null}">
+                        <form th:action="@{/api/garage/liberar/{id}(id=${garage.id})}" method="post" style="display: inline;">
+                            <button type="submit" class="btn btn-primary btn-sm"
+                                    onclick="return confirm('¿Está seguro que desea liberar este garage?')"
+                                    sec:authorize="hasRole('ROLE_ADMIN')">Liberar</button>
+                        </form>
+                    </td>
+
                 </tr>
                 </tbody>
             </table>

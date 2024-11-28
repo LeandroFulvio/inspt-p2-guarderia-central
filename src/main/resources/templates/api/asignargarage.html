@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Asignar Vehículo</title>
+    <div th:replace="~{fragments/header :: header-css}"/>
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"/>
+<div class="container mt-4">
+    <h2>Asignar Vehículo al Garage [[${garage.numero}]]</h2>
+    <form th:action="@{/api/garage/asignar/{id}(id=${garage.id})}" method="post">
+        <div class="mb-3">
+            <label for="vehiculo" class="form-label">Seleccione Vehículo</label>
+            <select class="form-select" id="vehiculo" name="vehiculoId" required>
+                <option value="">Seleccione un vehículo</option>
+                <option th:each="vehiculo : ${vehiculos}"
+                        th:value="${vehiculo.id}"
+                        th:text="${vehiculo.nombre + ' (' + vehiculo.matricula + ')'}">
+                </option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Asignar</button>
+        <a th:href="@{/api/garage}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+<div th:replace="~{fragments/footer :: footer}"/>
+</body>
+</html>

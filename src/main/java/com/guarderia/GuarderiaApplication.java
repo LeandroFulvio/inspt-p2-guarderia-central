@@ -33,24 +33,6 @@ public class GuarderiaApplication {
 //					.role(ADMIN)
 //					.build();
 //			System.out.println("Admin token: " + service.register(admin).getAccessToken());
-//
-//			var empleado = RegisterRequest.builder()
-//					.firstname("empleado")
-//					.lastname("empleado")
-//					.username("empleado")
-//					.password("pass")
-//					.role(EMPLEADO)
-//					.build();
-//			System.out.println("Empleado token: " + service.register(empleado).getAccessToken());
-//
-//			var socio = RegisterRequest.builder()
-//					.firstname("socio")
-//					.lastname("socio")
-//					.username("socio")
-//					.password("pass")
-//					.role(SOCIO)
-//					.build();
-//			System.out.println("Socio token: " + service.register(socio).getAccessToken());
 
 		};
 	}

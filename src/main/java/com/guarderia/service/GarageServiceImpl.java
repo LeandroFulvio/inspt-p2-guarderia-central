@@ -125,8 +125,7 @@ public class GarageServiceImpl implements GarageService {
 
     @Override
     public Garage garagePurchase(Long id, Long socioId) {
-        var garage = repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("No se encontro garage con ID: " + id));
+        var garage = findById(id);
         var socio = socioService.findById(socioId);
 
         garage.setSocio(socio);
@@ -137,8 +136,7 @@ public class GarageServiceImpl implements GarageService {
 
     @Override
     public Garage vehicleIngress(Long id, VehiculoRequest vehiculoRequest) {
-        var garage = repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("No se encontro garage con ID: " + id));
+        var garage = findById(id);
 
         var vehiculo = vehiculoService.findOrCreate(vehiculoRequest);
         vehiculo.setFechaAsignacion(new Date());
@@ -150,12 +148,23 @@ public class GarageServiceImpl implements GarageService {
 
     @Override
     public Garage vehicleEgress(Long id) {
-        var garage = repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("No se encontro garage con ID: " + id));
+        var garage = findById(id);
 
         vehiculoService.removerAsignacion(garage.getVehiculoGuardado().getId());
         garage.setVehiculoGuardado(null);
         garage.getZona().setCantidadVehiculos(garage.getZona().getCantidadVehiculos()-1);
+
+        return repository.save(garage);
+    }
+
+    @Override
+    public Garage asignarVehiculo(Long garageId, Long vehicleId){
+        var garage = findById(garageId);
+        var vehicle = vehiculoService.findById(vehicleId);
+
+        vehicle.setFechaAsignacion(new Date());
+        garage.setVehiculoGuardado(vehicle);
+        garage.getZona().setCantidadVehiculos(garage.getZona().getCantidadVehiculos()+1);
 
         return repository.save(garage);
     }

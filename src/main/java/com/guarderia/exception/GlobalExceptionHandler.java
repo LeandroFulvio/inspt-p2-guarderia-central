@@ -55,7 +55,6 @@ public class GlobalExceptionHandler implements ErrorController {
         return acceptHeader != null && acceptHeader.contains("application/json");
     }
 
-    // Helper method to handle frontend error pages
     private ResponseEntity<String> handleErrorPage(HttpStatus status, String message, HttpServletRequest request) {
         request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, status.value());
         request.setAttribute(RequestDispatcher.ERROR_MESSAGE, message);
