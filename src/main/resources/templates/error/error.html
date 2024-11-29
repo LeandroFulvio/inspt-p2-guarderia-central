@@ -3,6 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>Error</title>
+    <div th:replace="~{fragments/header :: header-css}"/>
     <style>
         .error-container {
             text-align: center;
@@ -20,11 +21,13 @@
     </style>
 </head>
 <body>
+<div th:replace="~{fragments/header :: header}"/>
 <div class="error-container">
     <h1>Oops!</h1>
     <h2 th:text="${statusCode}">404</h2>
     <p th:text="${errorMessage}">Error message</p>
-    <button class="back-button" onclick="window.history.back()">Go Back</button>
+    <button class="back-button" onclick="window.history.back()">Volver</button>
 </div>
+<div th:replace="~{fragments/footer :: footer}"/>
 </body>
 </html>
