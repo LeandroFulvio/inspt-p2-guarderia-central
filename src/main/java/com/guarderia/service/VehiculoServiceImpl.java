@@ -1,5 +1,6 @@
 package com.guarderia.service;
 
+import com.guarderia.modelo.TipoVehiculo;
 import com.guarderia.modelo.Vehiculo;
 import com.guarderia.repository.VehiculoRepository;
 import com.guarderia.request.VehiculoForm;
@@ -106,6 +107,11 @@ public class VehiculoServiceImpl implements VehiculoService{
         var v = findById(id);
         v.setFechaAsignacion(null);
         return repository.save(v);
+    }
+
+    @Override
+    public List<TipoVehiculo> findAllTipoVehiculo(){
+        return tipoVehiculoService.findAll();
     }
 
 }

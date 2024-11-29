@@ -1,5 +1,6 @@
 package com.guarderia.service;
 
+import com.guarderia.modelo.TipoVehiculo;
 import com.guarderia.modelo.Vehiculo;
 import com.guarderia.request.VehiculoForm;
 import com.guarderia.request.VehiculoRequest;
@@ -20,5 +21,6 @@ public interface VehiculoService {
     void deleteById(Long id);
     Vehiculo findOrCreate(VehiculoRequest request);
     Vehiculo removerAsignacion(Long id);
+    List<TipoVehiculo> findAllTipoVehiculo();
 
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Controller
@@ -118,6 +119,21 @@ public class GarageViewController {
         service.removerSocio(id);
 
         return "redirect:/api/garage";
+    }
+
+    @GetMapping("/vehiculo/zona/{id}")
+    public String verVehiculosPorZona(@PathVariable Long id, Model model){
+        List<Garage> garagesZona = service.findByZonaId(id);
+        List<Vehiculo> vehiculos = garagesZona.stream()
+                            .map(Garage::getVehiculoGuardado)
+                            .filter(Objects::nonNull)
+                            .collect(Collectors.toList());
+
+        model.addAttribute("socio", null);
+        model.addAttribute("tiposVehiculo", vehiculoService.findAllTipoVehiculo());
+        model.addAttribute("vehiculos", vehiculos );
+
+        return "/api/vehiculos";
     }
 
 }
