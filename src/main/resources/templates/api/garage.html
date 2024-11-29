@@ -66,7 +66,7 @@
                            class="btn btn-danger btn-sm">Borrar</a>
                     </td>
 
-                    <td style="white-space: nowrap" th:if="${garage.socio != null}">
+                    <td style="white-space: nowrap" th:if="${garage.socio != null && garage.vehiculoGuardado==null}">
                         <a th:href="@{/api/garage/asignar/{id}(id=${garage.id})}"
                            sec:authorize="hasRole('ROLE_ADMIN')"
                            class="btn btn-primary btn-sm">Asignar Vehiculo</a>

@@ -19,7 +19,13 @@
 <div th:replace="~{fragments/header :: header}"/>
 <main class="flex-shrink-0">
     <div class="container mt-4">
-        <h2>Asignar Vehículo al Garage [[${garage.numero}]]</h2>
+        <h2>Asignar Vehículo al Garage [[${garage.numero}]] - Perteneciente a Zona [[${garage.zona.letra}]]</h2>
+        <p>Tipos de vehículos admitidos en este Garage:</p>
+        <ul>
+            <li th:each="tipo : ${garage.zona.tipoVehiculoAdminitos}">
+                [[${tipo.nombre}]]
+            </li>
+        </ul>
         <form th:action="@{/api/garage/asignar/{id}(id=${garage.id})}" method="post">
             <div class="mb-3">
                 <label for="vehiculo" class="form-label">Seleccione Vehículo</label>
@@ -27,7 +33,8 @@
                     <option value="">Seleccione un vehículo</option>
                     <option th:each="vehiculo : ${vehiculos}"
                             th:value="${vehiculo.id}"
-                            th:text="${vehiculo.nombre + ' (' + vehiculo.matricula + ')'}">
+                            th:text="${vehiculo.nombre + ' (' + vehiculo.matricula + ')'
+                                                       + ' (' + vehiculo.tipoVehiculo.nombre + ')'}">
                     </option>
                 </select>
             </div>

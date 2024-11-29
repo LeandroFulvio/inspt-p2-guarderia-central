@@ -35,7 +35,9 @@ public class GarageViewController {
         model.addAttribute("socio", null);
         model.addAttribute("AllSocios", socioService.findAll());
         model.addAttribute("garages", garages );
-        model.addAttribute("zonas", zonaService.findAll() );
+        model.addAttribute("zonas", zonaService.findAll().stream()
+                                                .filter(zona -> zona.getCantidadVehiculos() < zona.getCapacidad())
+                                                .collect(Collectors.toList()) );
 
         return "/api/garage";
     }
@@ -62,6 +64,8 @@ public class GarageViewController {
         List<Vehiculo> vehiculos = vehiculoService.findBySocioId(garage.getSocio().getId())
                 .stream()
                 .filter(v -> v.getFechaAsignacion() == null)
+                .filter(v -> garage.getZona().getTipoVehiculoAdminitos()
+                                            .contains(v.getTipoVehiculo()))
                 .collect(Collectors.toList());
         model.addAttribute("garage", garage);
         model.addAttribute("vehiculos", vehiculos);

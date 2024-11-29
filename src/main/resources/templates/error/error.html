@@ -5,6 +5,16 @@
     <title>Error</title>
     <div th:replace="~{fragments/header :: header-css}"/>
     <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1 0 auto;
+        }
+
         .error-container {
             text-align: center;
             margin-top: 50px;

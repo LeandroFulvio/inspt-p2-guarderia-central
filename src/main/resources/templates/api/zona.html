@@ -30,8 +30,8 @@
                     <th>Letra</th>
                     <th>Cantidad de Vehiculos</th>
                     <th>Capacidad</th>
-                    <th>Ancho</th>
-                    <th>Profundidad</th>
+<!--                    <th>Ancho</th>-->
+<!--                    <th>Profundidad</th>-->
                     <th>Tipo Vehiculos Admitidos</th>
                 </tr>
                 </thead>
@@ -39,8 +39,8 @@
                 <tr th:each="zona : ${zonas}">
                     <td th:text="${zona.letra}"></td>
                     <td th:text="${zona.cantidadVehiculos}"></td>
-                    <td th:text="${zona.capacidad}"></td>
-                    <td th:text="${zona.ancho}"></td>
+<!--                    <td th:text="${zona.capacidad}"></td>-->
+<!--                    <td th:text="${zona.ancho}"></td>-->
                     <td th:text="${zona.profundidad}"></td>
                     <td>
                         <ul>
@@ -83,14 +83,14 @@
                                     <label for="capacidad" class="form-label">Capacidad</label>
                                     <input type="number" class="form-control" id="capacidad" name="capacidad" required>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="ancho" class="form-label">Ancho</label>
-                                    <input type="number" class="form-control" id="ancho" name="ancho" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="profundidad" class="form-label">Profundidad</label>
-                                    <input type="number" class="form-control" id="profundidad" name="profundidad" required>
-                                </div>
+<!--                                <div class="mb-3">-->
+<!--                                    <label for="ancho" class="form-label">Ancho</label>-->
+<!--                                    <input type="number" class="form-control" id="ancho" name="ancho" required>-->
+<!--                                </div>-->
+<!--                                <div class="mb-3">-->
+<!--                                    <label for="profundidad" class="form-label">Profundidad</label>-->
+<!--                                    <input type="number" class="form-control" id="profundidad" name="profundidad" required>-->
+<!--                                </div>-->
                                 <div class="mb-3">
                                     <label for="tipoVehiculoAdmitidos" class="form-label">Tipos de Vehículos Admitidos</label>
                                     <select multiple class="form-select" id="tipoVehiculoAdmitidos" name="tipoVehiculoAdmitidos">
