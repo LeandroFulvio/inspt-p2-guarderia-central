@@ -48,10 +48,19 @@ public class SecurityConfiguration {
                 .formLogin(httpForm -> {
                     httpForm.loginPage("/login")
                             .permitAll()
-                            .defaultSuccessUrl("/dashboard", true);
+                            .successHandler((request, response, authentication) -> {
+                                var authorities = authentication.getAuthorities();
+                                if (authorities.stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
+                                    response.sendRedirect("/dashboard");
+                                } else if (authorities.stream().anyMatch(a -> a.getAuthority().equals("ROLE_EMPLEADO"))) {
+                                    response.sendRedirect("/empleado-dashboard");
+                                } else {
+                                    response.sendRedirect("/socio-dashboard");
+                                }
+                            });
+//                            .defaultSuccessUrl("/dashboard", true);
                 })
-                .authenticationProvider(authenticationProvider)
-        ;
+                .authenticationProvider(authenticationProvider);
 
         return httpSecurity.build();
     }

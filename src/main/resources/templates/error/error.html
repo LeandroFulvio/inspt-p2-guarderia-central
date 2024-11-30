@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      class="h-100">
 <head>
     <title>Error</title>
     <div th:replace="~{fragments/header :: header-css}"/>
@@ -30,14 +31,16 @@
         }
     </style>
 </head>
-<body>
+<body class="d-flex flex-column h-100">
 <div th:replace="~{fragments/header :: header}"/>
-<div class="error-container">
-    <h1>Oops!</h1>
-    <h2 th:text="${statusCode}">404</h2>
-    <p th:text="${errorMessage}">Error message</p>
-    <button class="back-button" onclick="window.history.back()">Volver</button>
-</div>
+<main class="flex-shrink-0">
+    <div class="error-container">
+        <h1>Oops!</h1>
+        <h2 th:text="${statusCode}">404</h2>
+        <p th:text="${errorMessage}">Error message</p>
+        <button class="back-button" onclick="window.history.back()">Volver</button>
+    </div>
+</main>
 <div th:replace="~{fragments/footer :: footer}"/>
 </body>
 </html>

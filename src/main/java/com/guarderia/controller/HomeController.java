@@ -26,6 +26,27 @@ public class HomeController {
 
     @GetMapping("dashboard")
     public String dashboard() {
+        //cantidad de garages
+        //cantidad de garages ocupados
+        //lista de zonas con su capacidad y cantidad de vehiculos guardados
+
+        //cantidad de socios
+        //cantidad de vehiculos
+
+        return "dashboard";
+    }
+
+    @GetMapping("socio-dashboard")
+    public String socioDashboard() {
+        //mis datos? cantidad de vehiculos, cantidad de garages, garages libres, vehiculos sin guardar
+
+        return "dashboard";
+    }
+
+    @GetMapping("empleado-dashboard")
+    public String empleadoDashboard() {
+        //cantidad de zonas asignadas
+        //cantidad de autos en zonas asignadas?
         return "dashboard";
     }
 
