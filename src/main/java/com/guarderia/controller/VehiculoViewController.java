@@ -1,13 +1,19 @@
 package com.guarderia.controller;
 
+import com.guarderia.modelo.Garage;
+import com.guarderia.modelo.Vehiculo;
 import com.guarderia.request.VehiculoForm;
 import com.guarderia.service.SocioService;
 import com.guarderia.service.TipoVehiculoService;
 import com.guarderia.service.VehiculoService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/api/vehiculo")
@@ -59,5 +65,17 @@ public class VehiculoViewController {
 
         return "redirect:/api/vehiculo";
     }
+
+    @GetMapping("/socio")
+    public String findVehiculosOfLoggedSocio(@AuthenticationPrincipal UserDetails userDetails, Model model){
+        var socio = socioService.findByName(userDetails.getUsername());
+
+        model.addAttribute("socio", socio);
+        model.addAttribute("vehiculos", service.findBySocioId(socio.getId()));
+        model.addAttribute("tipoVehiculos", tipoVehiculoService.findAll());
+
+        return "/api/vehiculos";
+    }
+
 
 }

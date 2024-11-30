@@ -1,6 +1,7 @@
 package com.guarderia.service;
 
 import com.guarderia.modelo.Empleado;
+import com.guarderia.modelo.Socio;
 import com.guarderia.repository.EmpleadoRepository;
 import com.guarderia.request.EmpleadoForm;
 import com.guarderia.request.EmpleadoRequest;
@@ -27,6 +28,10 @@ public class EmpleadoServiceImpl implements EmpleadoService{
     public Empleado findById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("No se encontro empleado con ID: " + id));
+    }
+
+    public Empleado findByName(String name){
+        return repository.findByUserUsername(name);
     }
 
     @Override

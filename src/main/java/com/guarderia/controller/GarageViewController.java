@@ -8,6 +8,8 @@ import com.guarderia.service.SocioService;
 import com.guarderia.service.VehiculoService;
 import com.guarderia.service.ZonaService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -48,9 +50,6 @@ public class GarageViewController {
         service.create(request);
         return "redirect:/api/garage";
     }
-
-    //edit
-
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Long id){
@@ -134,6 +133,21 @@ public class GarageViewController {
         model.addAttribute("vehiculos", vehiculos );
 
         return "/api/vehiculos";
+    }
+
+    @GetMapping("/socio")
+    public String findGarageOfLoggedSocio(@AuthenticationPrincipal UserDetails userDetails, Model model){
+        var socio = socioService.findByName(userDetails.getUsername());
+
+        model.addAttribute("garageForm", GarageForm.builder().numero(0).build());
+        model.addAttribute("socio", socio);
+        model.addAttribute("AllSocios", socioService.findAll());
+        model.addAttribute("garages", service.findBySocioId(socio.getId()));
+        model.addAttribute("zonas", zonaService.findAll().stream()
+                .filter(zona -> zona.getCantidadVehiculos() < zona.getCapacidad())
+                .collect(Collectors.toList()) );
+
+        return "/api/garage";
     }
 
 }

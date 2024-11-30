@@ -46,8 +46,8 @@ public class ZonaServiceImpl implements ZonaService {
         var zona = Zona.builder()
                 .letra(form.getLetra())
                 .capacidad(form.getCapacidad())
-                .ancho(form.getAncho())
-                .profundidad(form.getProfundidad())
+//                .ancho(form.getAncho())
+//                .profundidad(form.getProfundidad())
                 .cantidadVehiculos(0)
                 .tipoVehiculoAdminitos(tipoVehiculoService.findAll(form.getTipoVehiculoAdmitidos()))
                 .build();

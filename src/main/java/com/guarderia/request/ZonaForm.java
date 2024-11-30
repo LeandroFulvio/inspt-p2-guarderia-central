@@ -18,11 +18,11 @@ public class ZonaForm {
     @Min(value = 1, message = "La capacidad debe ser al menos 1")
     private int capacidad;
 
-    @Min(value = 1, message = "El ancho debe ser al menos 1")
-    private int ancho;
-
-    @Min(value = 1, message = "La profundidad debe ser al menos 1")
-    private int profundidad;
+//    @Min(value = 1, message = "El ancho debe ser al menos 1")
+//    private int ancho;
+//
+//    @Min(value = 1, message = "La profundidad debe ser al menos 1")
+//    private int profundidad;
 
     @NotEmpty(message = "Debe seleccionar al menos un tipo de vehículo admitido")
     private Long[] tipoVehiculoAdmitidos;

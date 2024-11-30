@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      class="h-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <div th:replace="~{fragments/header :: header-css}"/>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1 0 auto;
+        }
+    </style>
+</head>
+<body class="d-flex flex-column h-100">
+<div th:replace="~{fragments/header :: header}"/>
+<main class="flex-shrink-0">
+    <div class="container mt-4">
+        <h1 class="mb-4">Dashboard</h1>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Estadisticas de Garages</h5>
+                        <p class="card-text">Garages Comprados: <span th:text="${misGarages.size()}"></span></p>
+                        <p class="card-text">Garages Vacios: <span th:text="${#lists.size(misGarages.?[vehiculoGuardado == null])}"></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Estadisticas de Vehiculos</h5>
+                        <p class="card-text">Vehiculos Registrados: <span th:text="${misVehiculos.size()}"></span></p>
+                        <p class="card-text">Vehiculos sin Garage: <span th:text="${#lists.size(misVehiculos.?[fechaAsignacion == null])}"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Socio Information</h5>
+                        <p class="card-text">Username: <span th:text="${#authentication.name}"></span></p>
+                        <p class="card-text">Socio ID: <span th:text="${socio.getId()}"></span></p>
+                        <p class="card-text">Nombre: <span th:text="${socio.user.firstname + ' ' + socio.user.lastname}"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<div th:replace="~{fragments/footer :: footer}"/>
+</body>
+</html>

@@ -16,5 +16,6 @@ public interface EmpleadoService {
     Empleado update(Long id, EmpleadoRequest request);
     Empleado update(Empleado empleado);
     void deleteById(Long id);
+    Empleado findByName(String name);
 
 }
