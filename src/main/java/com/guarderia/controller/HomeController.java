@@ -1,9 +1,6 @@
 package com.guarderia.controller;
 
-import com.guarderia.modelo.AsignacionZona;
-import com.guarderia.modelo.Garage;
-import com.guarderia.modelo.Vehiculo;
-import com.guarderia.modelo.Zona;
+import com.guarderia.modelo.*;
 import com.guarderia.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -45,14 +42,24 @@ public class HomeController {
 
     @GetMapping("dashboard")
     public String dashboard() {
-        //cantidad de garages
-        //cantidad de garages ocupados
-        //lista de zonas con su capacidad y cantidad de vehiculos guardados
-
-        //cantidad de socios
-        //cantidad de vehiculos
-
         return "dashboard";
+    }
+
+    @GetMapping("adm-dashboard")
+    public String admDashboard(Model model) {
+        List<Garage> garages = garageService.findAll();
+        List<Vehiculo> vehiculos = vehiculoService.findAll();
+        List<Zona> zonas = zonaService.findAll();
+        List<Empleado> empleados = empleadoService.findAll();
+        List<Socio> socios = socioService.findAll();
+
+        model.addAttribute("garages", garages);
+        model.addAttribute("vehiculos", vehiculos);
+        model.addAttribute("zonas", zonas);
+        model.addAttribute("empleados", empleados);
+        model.addAttribute("socios", socios);
+
+        return "adm-dashboard";
     }
 
     @GetMapping("socio-dashboard")

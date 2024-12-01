@@ -27,18 +27,18 @@
             <div class="col-md-6 mb-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Estadisticas de Garages</h5>
-                        <p class="card-text">Garages Comprados: <span th:text="${misGarages.size()}"></span></p>
-                        <p class="card-text">Garages Vacios: <span th:text="${#lists.size(misGarages.?[vehiculoGuardado == null])}"></span></p>
+                        <h5 class="card-title"><strong>Estadisticas de Garages</strong></h5>
+                        <p class="card-text"><strong>Garages Comprados:</strong> <span th:text="${misGarages.size()}"></span></p>
+                        <p class="card-text"><strong>Garages Vacios:</strong> <span th:text="${#lists.size(misGarages.?[vehiculoGuardado == null])}"></span></p>
                     </div>
                 </div>
             </div>
             <div class="col-md-6 mb-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Estadisticas de Vehiculos</h5>
-                        <p class="card-text">Vehiculos Registrados: <span th:text="${misVehiculos.size()}"></span></p>
-                        <p class="card-text">Vehiculos sin Garage: <span th:text="${#lists.size(misVehiculos.?[fechaAsignacion == null])}"></span></p>
+                        <h5 class="card-title"><strong>Estadisticas de Vehiculos</strong></h5>
+                        <p class="card-text"><strong>Vehiculos Registrados:</strong> <span th:text="${misVehiculos.size()}"></span></p>
+                        <p class="card-text"><strong>Vehiculos sin Garage:</strong> <span th:text="${#lists.size(misVehiculos.?[fechaAsignacion == null])}"></span></p>
                     </div>
                 </div>
             </div>
@@ -47,10 +47,10 @@
             <div class="col-md-12 mb-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Socio Information</h5>
-                        <p class="card-text">Username: <span th:text="${#authentication.name}"></span></p>
-                        <p class="card-text">Socio ID: <span th:text="${socio.getId()}"></span></p>
-                        <p class="card-text">Nombre: <span th:text="${socio.user.firstname + ' ' + socio.user.lastname}"></span></p>
+                        <h5 class="card-title"><strong>Informacion Personal</strong></h5>
+                        <p class="card-text"><strong>Username:</strong> <span th:text="${#authentication.name}"></span></p>
+                        <p class="card-text"><strong>Socio ID:</strong> <span th:text="${socio.getId()}"></span></p>
+                        <p class="card-text"><strong>Nombre:</strong> <span th:text="${socio.user.firstname + ' ' + socio.user.lastname}"></span></p>
                     </div>
                 </div>
             </div>

@@ -7,27 +7,20 @@
     <div th:fragment="header-css">
         <base href="/"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<!--        <link rel="stylesheet" th:href="@{/css/main.css}"-->
-<!--              href="../../css/main.css"/>-->
-<!--        <link rel="icon" type="image/png" href="/img/logo.png" sizes="32x32">-->
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     </div>
 </head>
 <body>
 <div th:fragment="header">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" th:href="@{/dashboard}">
-<!--            <img src="/img/logo.png" width="35" height="40" style="background: none">-->
-        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
                 aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
+        <div class="collapse navbar-collapse justify-content-between" id="navbarNavDropdown">
+            <ul class="navbar-nav ms-3">
                 <li class="nav-item active" sec:authorize="hasAnyRole('ROLE_ADMIN')">
-                    <a class="nav-link" th:href="@{/dashboard}">Inicio <span class="sr-only"></span></a>
+                    <a class="nav-link" th:href="@{/adm-dashboard}">Inicio <span class="sr-only"></span></a>
                 </li>
                 <li class="nav-item active" sec:authorize="hasAnyRole('ROLE_EMPLEADO')">
                     <a class="nav-link" th:href="@{/empleado-dashboard}">Inicio<span class="sr-only"></span></a>
@@ -59,7 +52,6 @@
                             Gestion de Socio
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownSocioMenuLink">
-<!--                            <a class="dropdown-item" th:href="@{/api/socio}">Socio</a>-->
                             <a class="dropdown-item" th:href="@{/api/garage/socio}">Mis Vehiculos</a>
                             <a class="dropdown-item" th:href="@{/api/vehiculo/socio}">Mis Garages</a>
 
@@ -80,8 +72,9 @@
                 </div>
             </ul>
 
-            <a sec:authorize="isAuthenticated()" class="btn btn-outline-light btn-sm ml-auto"
-               th:href="@{/logout}">Cerrar Sesion</a>
+            <div class="navbar-nav me-3">
+                <a sec:authorize="isAuthenticated()" class="btn btn-outline-light btn-sm" th:href="@{/logout}">Cerrar Sesion</a>
+            </div>
         </div>
         </ul>
     </nav>

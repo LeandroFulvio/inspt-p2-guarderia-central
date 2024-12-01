@@ -51,7 +51,7 @@ public class SecurityConfiguration {
                             .successHandler((request, response, authentication) -> {
                                 var authorities = authentication.getAuthorities();
                                 if (authorities.stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
-                                    response.sendRedirect("/dashboard");
+                                    response.sendRedirect("/adm-dashboard");
                                 } else if (authorities.stream().anyMatch(a -> a.getAuthority().equals("ROLE_EMPLEADO"))) {
                                     response.sendRedirect("/empleado-dashboard");
                                 } else {

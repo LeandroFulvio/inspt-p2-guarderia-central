@@ -27,20 +27,20 @@
             <div class="col-md-6 mb-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Estadisticas de Zona a Cargo</h5>
-                        <p class="card-text">Total Zonas asignadas: <span th:text="${asignaciones.size()}"></span></p>
-                        <p class="card-text">Total Vehiculos en Zonas: <span th:text="${#aggregates.sum(asignaciones.![zona.cantidadVehiculos])}"></span></p>
-                        <p class="card-text">Total Vehiculos Asignados: <span th:text="${#aggregates.sum(asignaciones.![vehiculosACargo])}"></span></p>
+                        <h5 class="card-title"><strong>Estadisticas de Zona a Cargo</strong></h5>
+                        <p class="card-text"><strong>Total Zonas asignadas:</strong> <span th:text="${asignaciones.size()}"></span></p>
+                        <p class="card-text"><strong>Total Vehiculos en Zonas:</strong> <span th:text="${#aggregates.sum(asignaciones.![zona.cantidadVehiculos])}"></span></p>
+                        <p class="card-text"><strong>Total Vehiculos Asignados:</strong> <span th:text="${#aggregates.sum(asignaciones.![vehiculosACargo])}"></span></p>
                     </div>
                 </div>
             </div>
             <div class="col-md-6 mb-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Informacion del Empleado</h5>
-                        <p class="card-text">Nombre: <span th:text="${empleado.user.firstname + ' ' + empleado.user.lastname}"></span></p>
-                        <p class="card-text">Codigo: <span th:text="${empleado.codigo}"></span></p>
-                        <p class="card-text">Especialidad: <span th:text="${empleado.especialidad}"></span></p>
+                        <h5 class="card-title"><strong>Informacion del Empleado</strong></h5>
+                        <p class="card-text"><strong>Nombre:</strong> <span th:text="${empleado.user.firstname + ' ' + empleado.user.lastname}"></span></p>
+                        <p class="card-text"><strong>Codigo:</strong> <span th:text="${empleado.codigo}"></span></p>
+                        <p class="card-text"><strong>Especialidad:</strong> <span th:text="${empleado.especialidad}"></span></p>
                     </div>
                 </div>
             </div>
