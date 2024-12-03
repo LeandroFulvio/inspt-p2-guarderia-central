@@ -54,11 +54,11 @@
                     <td th:text="${(garage.vehiculoGuardado != null
                                     && garage.vehiculoGuardado.fechaAsignacion !=null)
                                     ? #dates.format(garage.vehiculoGuardado.fechaAsignacion, 'dd-MM-yyyy') : 'N/A'}"></td>
-                    <td style="white-space: nowrap">
-                        <a th:href="@{/api/garage/edit/{id}(id=${garage.id})}"
-                           sec:authorize="hasRole('ROLE_ADMIN')"
-                           class="btn btn-primary btn-sm">Editar</a>
-                    </td>
+<!--                    <td style="white-space: nowrap">-->
+<!--                        <a th:href="@{/api/garage/edit/{id}(id=${garage.id})}"-->
+<!--                           sec:authorize="hasRole('ROLE_ADMIN')"-->
+<!--                           class="btn btn-primary btn-sm">Editar</a>-->
+<!--                    </td>-->
                     <td style="white-space: nowrap">
                         <a th:href="@{/api/garage/delete/{id}(id=${garage.id})}"
                            onclick="return confirm('Confirmar Eliminacion')"

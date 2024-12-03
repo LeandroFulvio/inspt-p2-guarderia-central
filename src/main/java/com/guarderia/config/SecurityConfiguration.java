@@ -34,6 +34,11 @@ public class SecurityConfiguration {
             "/about"
     };
 
+    private static final String[] ADMIN_LIST_URL = {
+            "/api/garage/asignar/**",
+
+    };
+
     private final AuthenticationProvider authenticationProvider;
 //    private final LogoutHandler logoutHandler;
 
@@ -42,8 +47,11 @@ public class SecurityConfiguration {
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req ->{
-                        req.requestMatchers(WHITE_LIST_URL).permitAll();
-                        req.anyRequest().authenticated();
+                        req.requestMatchers(WHITE_LIST_URL).permitAll()
+                        .requestMatchers(ADMIN_LIST_URL).hasRole("ADMIN")
+//                        .requestMatchers("/empleado-dashboard/**").hasRole("EMPLEADO")
+//                        .requestMatchers("/socio-dashboard/**").hasRole("SOCIO")
+                        .anyRequest().authenticated();
                     })
                 .formLogin(httpForm -> {
                     httpForm.loginPage("/login")
